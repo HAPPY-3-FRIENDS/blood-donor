@@ -1,0 +1,70 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Campaign</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Campaign.Id" />
+            <div class="form-group">
+                <label asp-for="Campaign.Name" class="control-label"></label>
+                <input asp-for="Campaign.Name" class="form-control" />
+                <span asp-validation-for="Campaign.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.Description" class="control-label"></label>
+                <input asp-for="Campaign.Description" class="form-control" />
+                <span asp-validation-for="Campaign.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.AddressDetails" class="control-label"></label>
+                <input asp-for="Campaign.AddressDetails" class="form-control" />
+                <span asp-validation-for="Campaign.AddressDetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.District" class="control-label"></label>
+                <input asp-for="Campaign.District" class="form-control" />
+                <span asp-validation-for="Campaign.District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.City" class="control-label"></label>
+                <input asp-for="Campaign.City" class="form-control" />
+                <span asp-validation-for="Campaign.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.StartDate" class="control-label"></label>
+                <input asp-for="Campaign.StartDate" class="form-control" />
+                <span asp-validation-for="Campaign.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.EndDate" class="control-label"></label>
+                <input asp-for="Campaign.EndDate" class="form-control" />
+                <span asp-validation-for="Campaign.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.OrganizationId" class="control-label"></label>
+                <select asp-for="Campaign.OrganizationId" class="form-control" asp-items="ViewBag.OrganizationId"></select>
+                <span asp-validation-for="Campaign.OrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

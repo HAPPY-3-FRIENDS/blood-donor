@@ -1,0 +1,78 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].AddressDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].District)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization[0].IsRedCross)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Organization) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.District)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRedCross)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

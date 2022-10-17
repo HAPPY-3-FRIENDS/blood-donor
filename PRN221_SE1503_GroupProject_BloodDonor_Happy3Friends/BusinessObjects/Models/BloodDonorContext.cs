@@ -95,7 +95,7 @@ namespace BusinessObjects.Models
                     .IsRequired()
                     .HasMaxLength(30);
 
-                entity.Property(e => e.Discription).HasColumnType("ntext");
+                entity.Property(e => e.Description).HasColumnType("ntext");
 
                 entity.Property(e => e.District)
                     .IsRequired()
@@ -135,7 +135,7 @@ namespace BusinessObjects.Models
                     .IsRequired()
                     .HasMaxLength(30);
 
-                entity.Property(e => e.Discription).HasColumnType("ntext");
+                entity.Property(e => e.Description).HasColumnType("ntext");
 
                 entity.Property(e => e.District)
                     .IsRequired()

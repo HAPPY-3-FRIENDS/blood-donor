@@ -17,7 +17,7 @@ namespace BusinessObjects.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
         public string AddressDetails { get; set; }
         public string District { get; set; }
         public string City { get; set; }
