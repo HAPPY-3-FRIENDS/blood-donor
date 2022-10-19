@@ -14,6 +14,7 @@ namespace BusinessObjects.Models
         public string Description { get; set; }
         public string ReceiverName { get; set; }
         public string ReceiverIdentityNumber { get; set; }
+        public string ReceiverPhone { get; set; }
         public string Status { get; set; }
 
         public virtual Organization Organization { get; set; }

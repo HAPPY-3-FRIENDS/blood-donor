@@ -22,7 +22,7 @@ namespace BusinessObjects.Models
         public string District { get; set; }
         public string City { get; set; }
         public string BloodType { get; set; }
-        public DateTime? LastDonationDate { get; set; }
+        public DateTime? LastDonatedDate { get; set; }
 
         public virtual ICollection<BloodRequest> BloodRequests { get; set; }
         public virtual ICollection<VolunteerInCampaign> VolunteerInCampaigns { get; set; }

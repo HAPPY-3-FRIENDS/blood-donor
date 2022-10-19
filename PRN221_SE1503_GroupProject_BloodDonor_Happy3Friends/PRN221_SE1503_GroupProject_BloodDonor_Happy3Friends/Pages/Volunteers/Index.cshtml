@@ -38,7 +38,7 @@
                 @Html.DisplayNameFor(model => model.Volunteer[0].BloodType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Volunteer[0].LastDonationDate)
+                @Html.DisplayNameFor(model => model.Volunteer[0].LastDonatedDate)
             </th>
             <th></th>
         </tr>
@@ -71,7 +71,7 @@
                 @Html.DisplayFor(modelItem => item.BloodType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastDonationDate)
+                @Html.DisplayFor(modelItem => item.LastDonatedDate)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Phone">Edit</a> |

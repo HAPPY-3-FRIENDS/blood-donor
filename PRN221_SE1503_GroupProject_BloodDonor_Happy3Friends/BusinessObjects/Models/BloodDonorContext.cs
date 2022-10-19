@@ -21,7 +21,6 @@ namespace BusinessObjects.Models
 
         public virtual DbSet<BloodRequest> BloodRequests { get; set; }
         public virtual DbSet<Campaign> Campaigns { get; set; }
-        public virtual DbSet<DonatedBlood> DonatedBloods { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerHealth> VolunteerHealths { get; set; }
@@ -59,6 +58,12 @@ namespace BusinessObjects.Models
                 entity.Property(e => e.ReceiverName)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.ReceiverPhone)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.RequestDate).HasColumnType("date");
 
@@ -114,15 +119,6 @@ namespace BusinessObjects.Models
                     .HasForeignKey(d => d.OrganizationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Campaign_Organization");
-            });
-
-            modelBuilder.Entity<DonatedBlood>(entity =>
-            {
-                entity.ToTable("DonatedBlood");
-
-                entity.Property(e => e.Type)
-                    .IsRequired()
-                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<Organization>(entity =>
@@ -191,7 +187,7 @@ namespace BusinessObjects.Models
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.LastDonationDate).HasColumnType("date");
+                entity.Property(e => e.LastDonatedDate).HasColumnType("date");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -212,15 +208,23 @@ namespace BusinessObjects.Models
                 entity.Property(e => e.DiseaseName)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(30);
             });
 
             modelBuilder.Entity<VolunteerInCampaign>(entity =>
             {
                 entity.ToTable("VolunteerInCampaign");
 
-                entity.Property(e => e.DonatedDate).HasColumnType("date");
+                entity.Property(e => e.BloodType)
+                    .IsRequired()
+                    .HasMaxLength(10);
 
-                entity.Property(e => e.RegistrationDate).HasColumnType("date");
+                entity.Property(e => e.DonatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RegistrationDate).HasColumnType("datetime");
 
                 entity.Property(e => e.VolunteerId)
                     .IsRequired()
@@ -234,15 +238,9 @@ namespace BusinessObjects.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VolunteerInCampaign_Campaign");
 
-                entity.HasOne(d => d.DonatedBlood)
-                    .WithMany(p => p.VolunteerInCampaigns)
-                    .HasForeignKey(d => d.DonatedBloodId)
-                    .HasConstraintName("FK_VolunteerInCampaign_DonatedBlood");
-
                 entity.HasOne(d => d.VolunteerHealth)
                     .WithMany(p => p.VolunteerInCampaigns)
                     .HasForeignKey(d => d.VolunteerHealthId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VolunteerInCampaign_VolunteerHealth");
 
                 entity.HasOne(d => d.Volunteer)

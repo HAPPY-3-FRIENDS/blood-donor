@@ -21,6 +21,6 @@ namespace Repositories
 
         public void UpdateOrganization(Organization organization) => OrganizationDAO.Instance.UpdateOrganization(organization);
 
-        public void DeleteOrganization(Organization organization) => OrganizationDAO.Instance.DeleteOrganization(organization);
+        //public void DeleteOrganization(Organization organization) => OrganizationDAO.Instance.DeleteOrganization(organization);
     }
 }

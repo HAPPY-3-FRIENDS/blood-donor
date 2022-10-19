@@ -1,6 +1,8 @@
 -- CREATE DATABASE BloodDonor
 -- GO
 
+-- DROP DATABASE BloodDonor
+
 -- USE BloodDonor
 -- GO
 
@@ -10,7 +12,7 @@ CREATE TABLE [Organization](
 	[Username] VARCHAR(20) NOT NULL,
 	[Password] VARCHAR(16) NOT NULL,
 	[Name] NVARCHAR(100) NOT NULL,
-	[Discription] NTEXT NULL,
+	[Description] NTEXT NULL,
 	[AddressDetails] NVARCHAR(100) NULL,
     [District] NVARCHAR(30) NOT NULL,
     [City] NVARCHAR(30) NOT NULL,
@@ -21,7 +23,7 @@ GO
 CREATE TABLE [Campaign](
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[Name] NVARCHAR(100) NOT NULL,
-	[Discription] NTEXT NULL,
+	[Description] NTEXT NULL,
 	[AddressDetails] NVARCHAR(100) NULL,
     [District] NVARCHAR(30) NOT NULL,
     [City] NVARCHAR(30) NOT NULL,
@@ -41,14 +43,7 @@ CREATE TABLE [Volunteer](
     [District] NVARCHAR(30) NOT NULL,
     [City] NVARCHAR(30) NOT NULL,
     [BloodType] NVARCHAR(10) NOT NULL,
-	[LastDonationDate] DATE NULL
-);
-GO
-
-CREATE TABLE [DonatedBlood](
-	[Id] INT IDENTITY(1,1) NOT NULL,
-	[Type] NVARCHAR(10) NOT NULL,
-    [Amount] INT NOT NULL
+	[LastDonatedDate] DATE NULL
 );
 GO
 
@@ -56,6 +51,7 @@ CREATE TABLE [VolunteerHealth](
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[DiseaseName] NVARCHAR(100) NOT NULL,
     [DiseaseDescription] NTEXT NULL,
+    [Status] NVARCHAR(30) NOT NULL
 );
 GO
 
@@ -63,10 +59,11 @@ CREATE TABLE [VolunteerInCampaign](
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[VolunteerId] CHAR(10) NOT NULL,
 	[CampaignId] INT NOT NULL,
-	[DonatedBloodId] INT NULL,
-	[VolunteerHealthId] INT NOT NULL,
-	[RegistrationDate] DATE NOT NULL,
-    [DonatedDate] DATE NOT NULL
+	[BloodType] NVARCHAR(10) NOT NULL,
+	[BloodAmount] INT NULL,
+	[VolunteerHealthId] INT NULL,
+	[RegistrationDate] DATETIME NOT NULL,
+    [DonatedDate] DATETIME NULL
 );
 GO
 
@@ -78,6 +75,7 @@ CREATE TABLE [BloodRequest](
     [Description] NTEXT NOT NULL,
     [ReceiverName] NVARCHAR(100) NOT NULL,
     [ReceiverIdentityNumber] CHAR(12) NOT NULL,
+    [ReceiverPhone] CHAR(10) NOT NULL,
     [Status] NVARCHAR(20) NOT NULL
 );
 GO
@@ -91,9 +89,6 @@ ALTER TABLE [Campaign] ADD CONSTRAINT [PK_Campaign] PRIMARY KEY (Id);
 GO
 
 ALTER TABLE [Volunteer] ADD CONSTRAINT [PK_Volunteer] PRIMARY KEY (Phone);
-GO
-
-ALTER TABLE [DonatedBlood] ADD CONSTRAINT [PK_DonatedBlood] PRIMARY KEY (Id);
 GO
 
 ALTER TABLE [VolunteerHealth] ADD CONSTRAINT [PK_VolunteerHealth] PRIMARY KEY (Id);
@@ -122,12 +117,6 @@ ALTER TABLE [VolunteerInCampaign]
 ADD CONSTRAINT FK_VolunteerInCampaign_Campaign
     FOREIGN KEY ([CampaignId])
     REFERENCES [Campaign]([Id]);
-GO
-
-ALTER TABLE [VolunteerInCampaign]
-ADD CONSTRAINT FK_VolunteerInCampaign_DonatedBlood
-    FOREIGN KEY ([DonatedBloodId])
-    REFERENCES [DonatedBlood]([Id]);
 GO
 
 ALTER TABLE [VolunteerInCampaign]

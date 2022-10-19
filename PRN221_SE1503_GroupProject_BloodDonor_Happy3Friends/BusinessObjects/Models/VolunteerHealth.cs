@@ -15,6 +15,7 @@ namespace BusinessObjects.Models
         public int Id { get; set; }
         public string DiseaseName { get; set; }
         public string DiseaseDescription { get; set; }
+        public string Status { get; set; }
 
         public virtual ICollection<VolunteerInCampaign> VolunteerInCampaigns { get; set; }
     }
