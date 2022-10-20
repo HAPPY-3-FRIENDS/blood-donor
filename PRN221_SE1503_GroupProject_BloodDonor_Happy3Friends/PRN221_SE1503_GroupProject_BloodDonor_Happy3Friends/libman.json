@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "glightbox@3.2.0",
+      "destination": "wwwroot/lib/glightbox/"
+    },
+    {
+      "library": "remixicon@2.5.0",
+      "destination": "wwwroot/lib/remixicon/"
+    },
+    {
+      "library": "swiper@8.4.4",
+      "destination": "wwwroot/lib/swiper/",
+      "files": [
+        "swiper-bundle.js",
+        "swiper-bundle.js.map",
+        "swiper-bundle.min.css"
+      ]
+    },
+    {
+      "library": "boxicons@2.1.4",
+      "destination": "wwwroot/lib/boxicons/",
+      "files": [
+        "css/animations.css",
+        "css/boxicons.css",
+        "css/boxicons.min.css",
+        "css/transformations.css",
+        "fonts/boxicons.eot",
+        "fonts/boxicons.svg",
+        "fonts/boxicons.ttf",
+        "fonts/boxicons.woff",
+        "fonts/boxicons.woff2"
+      ]
+    },
+    {
+      "library": "bootstrap@5.2.2",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap-grid.css",
+        "dist/css/bootstrap-grid.css.map",
+        "dist/css/bootstrap-grid.min.css",
+        "dist/css/bootstrap-grid.min.css.map",
+        "dist/css/bootstrap-grid.rtl.css",
+        "dist/css/bootstrap-grid.rtl.css.map",
+        "dist/css/bootstrap-grid.rtl.min.css",
+        "dist/css/bootstrap-grid.rtl.min.css.map",
+        "dist/css/bootstrap-reboot.css",
+        "dist/css/bootstrap-reboot.css.map",
+        "dist/css/bootstrap-reboot.min.css",
+        "dist/css/bootstrap-reboot.min.css.map",
+        "dist/css/bootstrap-reboot.rtl.css",
+        "dist/css/bootstrap-reboot.rtl.css.map",
+        "dist/css/bootstrap-reboot.rtl.min.css",
+        "dist/css/bootstrap-reboot.rtl.min.css.map",
+        "dist/css/bootstrap-utilities.css",
+        "dist/css/bootstrap-utilities.css.map",
+        "dist/css/bootstrap-utilities.min.css",
+        "dist/css/bootstrap-utilities.min.css.map",
+        "dist/css/bootstrap-utilities.rtl.css",
+        "dist/css/bootstrap-utilities.rtl.css.map",
+        "dist/css/bootstrap-utilities.rtl.min.css",
+        "dist/css/bootstrap-utilities.rtl.min.css.map",
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.css.map",
+        "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map",
+        "dist/css/bootstrap.rtl.css",
+        "dist/css/bootstrap.rtl.css.map",
+        "dist/css/bootstrap.rtl.min.css",
+        "dist/css/bootstrap.rtl.min.css.map",
+        "dist/js/bootstrap.bundle.js",
+        "dist/js/bootstrap.bundle.js.map",
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map",
+        "dist/js/bootstrap.esm.js",
+        "dist/js/bootstrap.esm.js.map",
+        "dist/js/bootstrap.esm.min.js",
+        "dist/js/bootstrap.esm.min.js.map",
+        "dist/js/bootstrap.js",
+        "dist/js/bootstrap.js.map",
+        "dist/js/bootstrap.min.js",
+        "dist/js/bootstrap.min.js.map"
+      ]
+    },
+    {
+      "library": "bootstrap-icons@1.9.1",
+      "destination": "wwwroot/lib/bootstrap-icons/",
+      "files": [
+        "font/fonts/bootstrap-icons.woff",
+        "font/fonts/bootstrap-icons.woff2",
+        "font/bootstrap-icons.css",
+        "font/bootstrap-icons.json",
+        "font/bootstrap-icons.scss",
+        "font/index.html"
+      ]
+    },
+    {
+      "library": "aos@2.3.1",
+      "destination": "wwwroot/lib/aos/"
+    },
+    {
+      "library": "aos@2.3.4",
+      "destination": "wwwroot/lib/aos/"
+    }
+  ]
+}

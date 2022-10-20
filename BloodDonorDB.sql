@@ -1,10 +1,10 @@
--- CREATE DATABASE BloodDonor
--- GO
+CREATE DATABASE BloodDonor
+GO
 
--- DROP DATABASE BloodDonor
+--DROP DATABASE BloodDonor
 
--- USE BloodDonor
--- GO
+USE BloodDonor
+GO
 
 -- ****** CREATE TABLE ***** --
 CREATE TABLE [Organization](
