@@ -16,6 +16,7 @@ namespace BusinessObjects.Models
         public DateTime RegistrationDate { get; set; }
         public DateTime? DonatedDate { get; set; }
         public string Status { get; set; }
+        public string RejectedReason { get; set; }
 
         public virtual Campaign Campaign { get; set; }
         public virtual Volunteer Volunteer { get; set; }

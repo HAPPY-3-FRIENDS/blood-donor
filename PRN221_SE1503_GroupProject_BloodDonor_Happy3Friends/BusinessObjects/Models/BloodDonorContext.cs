@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -221,6 +219,8 @@ namespace BusinessObjects.Models
                 entity.Property(e => e.DonatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RegistrationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RejectedReason).HasColumnType("ntext");
 
                 entity.Property(e => e.Status)
                     .IsRequired()

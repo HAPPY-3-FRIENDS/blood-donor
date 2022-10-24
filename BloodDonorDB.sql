@@ -67,7 +67,8 @@ CREATE TABLE [VolunteerInCampaign](
 	[VolunteerHealthId] INT NULL,
 	[RegistrationDate] DATETIME NOT NULL,
     [DonatedDate] DATETIME NULL,
-    [Status] NVARCHAR(30) NOT NULL
+    [Status] NVARCHAR(30) NOT NULL,
+    [RejectedReason] NTEXT NULL
 );
 GO
 
