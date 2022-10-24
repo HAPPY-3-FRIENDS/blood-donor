@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends", "PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends\PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.csproj", "{01F6C8C6-FCD5-4C21-8AA7-3546C6FA6EC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "BusinessObjects\BusinessObjects.csproj", "{615188C6-9A77-403A-9C09-988A4ABA8E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjects", "BusinessObjects\BusinessObjects.csproj", "{615188C6-9A77-403A-9C09-988A4ABA8E79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObjects", "DataAccessObjects\DataAccessObjects.csproj", "{4525BA33-6676-42A5-8B56-DCBDFA50791B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObjects", "DataAccessObjects\DataAccessObjects.csproj", "{4525BA33-6676-42A5-8B56-DCBDFA50791B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{F8F26AE8-9F10-4B56-8452-1CFD287D2ACD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{F8F26AE8-9F10-4B56-8452-1CFD287D2ACD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

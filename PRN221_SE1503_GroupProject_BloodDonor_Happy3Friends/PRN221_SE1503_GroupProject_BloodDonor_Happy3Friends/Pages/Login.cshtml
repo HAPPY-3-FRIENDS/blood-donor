@@ -1,0 +1,25 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Đăng nhập</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Phone">Số điện thoại</label>
+        <input class="form-control" asp-for="Phone" type="tel" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Mật khẩu</label>
+        <input class="form-control" asp-for="Password" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+    </div>
+    <a href="/SignUp">Đăng ký tài khoản mới</a>
+</form>

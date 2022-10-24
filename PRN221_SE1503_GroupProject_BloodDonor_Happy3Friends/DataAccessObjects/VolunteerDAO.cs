@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,44 @@ namespace DataAccessObjects
                     return instance;
                 }
             }
+        }
+
+        public bool CheckLogin(string phone, string password)
+        {
+            Volunteer volunteer = null;
+            try
+            {
+                var bloodDonorContext = new BloodDonorContext();
+                volunteer = bloodDonorContext.Volunteers.SingleOrDefault(x => x.Phone == phone && x.Password == password);
+                if (volunteer != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Volunteer GetCustomerByPhone(string phone)
+        {
+            Volunteer volunteer = null;
+            try
+            {
+                var bloodDonorContext = new BloodDonorContext();
+                volunteer = bloodDonorContext.Volunteers.SingleOrDefault(x => x.Phone == phone);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return volunteer;
         }
     }
 }

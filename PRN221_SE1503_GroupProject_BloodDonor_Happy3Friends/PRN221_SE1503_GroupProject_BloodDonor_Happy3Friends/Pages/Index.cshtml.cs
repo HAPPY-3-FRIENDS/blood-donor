@@ -21,5 +21,11 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
         {
 
         }
+
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
+        }
     }
 }

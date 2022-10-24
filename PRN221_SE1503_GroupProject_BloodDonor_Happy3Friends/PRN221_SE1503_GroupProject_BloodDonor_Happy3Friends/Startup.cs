@@ -30,6 +30,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
             services.AddScoped<IOrganizationRepository, OrganizationRepository>();
             services.AddScoped<IVolunteerRepository, VolunteerRepository>();
             services.AddScoped<ICampaignRepository, CampaignRepository>();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddRazorPages();
         }
 
@@ -46,6 +50,8 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
             }
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
