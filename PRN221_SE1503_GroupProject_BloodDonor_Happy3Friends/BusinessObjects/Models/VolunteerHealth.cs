@@ -13,9 +13,11 @@ namespace BusinessObjects.Models
         }
 
         public int Id { get; set; }
-        public string DiseaseName { get; set; }
-        public string DiseaseDescription { get; set; }
-        public string Status { get; set; }
+        public int? Height { get; set; }
+        public double? Weight { get; set; }
+        public bool? HaveHepatitisBvirus { get; set; }
+        public bool? HaveHivvirus { get; set; }
+        public string OtherDiseases { get; set; }
 
         public virtual ICollection<VolunteerInCampaign> VolunteerInCampaigns { get; set; }
     }

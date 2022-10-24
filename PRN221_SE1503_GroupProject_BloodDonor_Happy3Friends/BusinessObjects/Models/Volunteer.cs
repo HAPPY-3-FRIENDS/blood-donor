@@ -18,6 +18,7 @@ namespace BusinessObjects.Models
         public string IdentityNumber { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string AddressDetails { get; set; }
         public string District { get; set; }
         public string City { get; set; }

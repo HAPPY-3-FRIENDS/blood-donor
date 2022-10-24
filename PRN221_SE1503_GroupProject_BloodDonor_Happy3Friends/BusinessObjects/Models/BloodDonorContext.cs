@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -30,10 +28,8 @@ namespace BusinessObjects.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string connectionString;
-                IConfiguration config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", true, true).Build();
-                connectionString = config["ConnectionStrings:DefaultConnection"];
-                optionsBuilder.UseSqlServer(connectionString);
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=(local);database=BloodDonor;uid=sa;pwd=1234567890;");
             }
         }
 
@@ -173,6 +169,8 @@ namespace BusinessObjects.Models
                     .IsRequired()
                     .HasMaxLength(30);
 
+                entity.Property(e => e.DateOfBirth).HasColumnType("date");
+
                 entity.Property(e => e.District)
                     .IsRequired()
                     .HasMaxLength(30);
@@ -203,28 +201,26 @@ namespace BusinessObjects.Models
             {
                 entity.ToTable("VolunteerHealth");
 
-                entity.Property(e => e.DiseaseDescription).HasColumnType("ntext");
+                entity.Property(e => e.HaveHepatitisBvirus).HasColumnName("haveHepatitisBVirus");
 
-                entity.Property(e => e.DiseaseName)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.HaveHivvirus).HasColumnName("haveHIVVirus");
 
-                entity.Property(e => e.Status)
-                    .IsRequired()
-                    .HasMaxLength(30);
+                entity.Property(e => e.OtherDiseases).HasColumnType("ntext");
             });
 
             modelBuilder.Entity<VolunteerInCampaign>(entity =>
             {
                 entity.ToTable("VolunteerInCampaign");
 
-                entity.Property(e => e.BloodType)
-                    .IsRequired()
-                    .HasMaxLength(10);
+                entity.Property(e => e.BloodType).HasMaxLength(10);
 
                 entity.Property(e => e.DonatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RegistrationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.VolunteerId)
                     .IsRequired()

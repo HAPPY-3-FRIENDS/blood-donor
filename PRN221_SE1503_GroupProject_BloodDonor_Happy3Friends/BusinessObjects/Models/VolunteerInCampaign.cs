@@ -15,6 +15,7 @@ namespace BusinessObjects.Models
         public int? VolunteerHealthId { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime? DonatedDate { get; set; }
+        public string Status { get; set; }
 
         public virtual Campaign Campaign { get; set; }
         public virtual Volunteer Volunteer { get; set; }
