@@ -1,7 +1,7 @@
 CREATE DATABASE BloodDonor
 GO
 
---DROP DATABASE BloodDonor
+-- DROP DATABASE BloodDonor
 
 USE BloodDonor
 GO
@@ -39,6 +39,7 @@ CREATE TABLE [Volunteer](
 	[IdentityNumber] CHAR(12) NOT NULL,
 	[Password] VARCHAR(16) NOT NULL,
 	[Email] VARCHAR(50) NULL,
+    [DateOfBirth] DATE NOT NULL,
 	[AddressDetails] NVARCHAR(100) NULL,
     [District] NVARCHAR(30) NOT NULL,
     [City] NVARCHAR(30) NOT NULL,
@@ -49,9 +50,11 @@ GO
 
 CREATE TABLE [VolunteerHealth](
 	[Id] INT IDENTITY(1,1) NOT NULL,
-	[DiseaseName] NVARCHAR(100) NOT NULL,
-    [DiseaseDescription] NTEXT NULL,
-    [Status] NVARCHAR(30) NOT NULL
+	[Height] INT NULL,
+    [Weight] FLOAT NULL,
+    [haveHepatitisBVirus] BIT NULL,
+    [haveHIVVirus] BIT NULL,
+    [OtherDiseases] NTEXT NULL
 );
 GO
 
@@ -59,11 +62,12 @@ CREATE TABLE [VolunteerInCampaign](
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[VolunteerId] CHAR(10) NOT NULL,
 	[CampaignId] INT NOT NULL,
-	[BloodType] NVARCHAR(10) NOT NULL,
+	[BloodType] NVARCHAR(10) NULL,
 	[BloodAmount] INT NULL,
 	[VolunteerHealthId] INT NULL,
 	[RegistrationDate] DATETIME NOT NULL,
-    [DonatedDate] DATETIME NULL
+    [DonatedDate] DATETIME NULL,
+    [Status] NVARCHAR(30) NOT NULL
 );
 GO
 
