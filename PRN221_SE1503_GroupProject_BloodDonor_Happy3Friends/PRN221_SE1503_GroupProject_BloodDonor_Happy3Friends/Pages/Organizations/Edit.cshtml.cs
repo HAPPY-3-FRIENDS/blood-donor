@@ -7,51 +7,43 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations
 {
     public class EditModel : PageModel
     {
-        private readonly BusinessObjects.Models.BloodDonorContext _context;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public EditModel(BusinessObjects.Models.BloodDonorContext context)
+        public EditModel(IOrganizationRepository organizationRepository)
         {
-            _context = context;
+            _organizationRepository = organizationRepository;
         }
 
         [BindProperty]
         public Organization Organization { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Organization = await _context.Organizations.FirstOrDefaultAsync(m => m.Id == id);
-
+            Organization = _organizationRepository.GetOrganizationById(id);
             if (Organization == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Organization).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _organizationRepository.UpdateOrganization(Organization);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,7 +62,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
 
         private bool OrganizationExists(int id)
         {
-            return _context.Organizations.Any(e => e.Id == id);
+            return _organizationRepository.GetOrganizationById(id) != null;
         }
     }
 }

@@ -6,29 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations
 {
     public class DeleteModel : PageModel
     {
-        private readonly BusinessObjects.Models.BloodDonorContext _context;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public DeleteModel(BusinessObjects.Models.BloodDonorContext context)
+        public DeleteModel(IOrganizationRepository organizationRepository)
         {
-            _context = context;
+            _organizationRepository = organizationRepository;
         }
 
         [BindProperty]
         public Organization Organization { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Organization = await _context.Organizations.FirstOrDefaultAsync(m => m.Id == id);
+            Organization = _organizationRepository.GetOrganizationById(id);
 
             if (Organization == null)
             {
@@ -37,19 +33,13 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Organization = await _context.Organizations.FindAsync(id);
+            Organization = _organizationRepository.GetOrganizationById(id);
 
             if (Organization != null)
             {
-                _context.Organizations.Remove(Organization);
-                await _context.SaveChangesAsync();
+                _organizationRepository.DeleteOrganization(Organization);
             }
 
             return RedirectToPage("./Index");

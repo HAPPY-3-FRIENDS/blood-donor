@@ -111,5 +111,27 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        public void DeleteOrganization(Organization organization)
+        {
+            try
+            {
+                Organization _organization = GetOrganizationById(organization.Id);
+                if (_organization != null)
+                {
+                    var bloodDonorContext = new BloodDonorContext();
+                    bloodDonorContext.Organizations.Remove(organization);
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("The organization does not exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

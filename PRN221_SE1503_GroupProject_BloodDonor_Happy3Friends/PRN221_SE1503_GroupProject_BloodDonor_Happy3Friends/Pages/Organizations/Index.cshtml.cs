@@ -26,6 +26,12 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
             Organization = _organizationRepository.GetOrganizations();
         }
 
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
+        }
+
         /*public async Task OnGetAsync()
         {
             Organization = await _context.Organizations.ToListAsync();

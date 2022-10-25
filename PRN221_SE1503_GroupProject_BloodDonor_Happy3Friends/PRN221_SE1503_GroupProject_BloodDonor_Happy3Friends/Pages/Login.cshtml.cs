@@ -40,7 +40,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                 HttpContext.Session.SetString("phone", phoneAdmin);
                 HttpContext.Session.SetString("role", roleAdmin);
                 isAdmin = true;
-                return RedirectToPage("/Admins/Index");
+                return RedirectToPage("/Organizations/Index");
             }
 
             if (!isAdmin)

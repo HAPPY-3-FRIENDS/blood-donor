@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations
 {
     public class CreateModel : PageModel
     {
-        private readonly BusinessObjects.Models.BloodDonorContext _context;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public CreateModel(BusinessObjects.Models.BloodDonorContext context)
+        public CreateModel(IOrganizationRepository organizationRepository)
         {
-            _context = context;
+            _organizationRepository = organizationRepository;
         }
 
         public IActionResult OnGet()
@@ -26,16 +27,14 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
         [BindProperty]
         public Organization Organization { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Organizations.Add(Organization);
-            await _context.SaveChangesAsync();
+            _organizationRepository.CreateOrganization(Organization);
 
             return RedirectToPage("./Index");
         }

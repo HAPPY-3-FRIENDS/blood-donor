@@ -14,6 +14,6 @@ namespace Repositories.IRepositories
         public Organization GetOrganizationByName(string name);
         public void CreateOrganization(Organization organization);  
         public void UpdateOrganization(Organization organization);
-        //public void DeleteOrganization(Organization organization);
+        public void DeleteOrganization(Organization organization);
     }
 }
