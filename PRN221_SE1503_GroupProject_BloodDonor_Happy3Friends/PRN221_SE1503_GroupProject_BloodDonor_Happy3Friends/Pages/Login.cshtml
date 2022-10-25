@@ -4,9 +4,7 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Đăng nhập</h1>
-
-<form method="post">
+@*<form method="post">
     <div class="form-group">
         <label asp-for="Phone">Số điện thoại</label>
         <input class="form-control" asp-for="Phone" type="tel" />
@@ -23,4 +21,115 @@
     </div>
     <a href="/SignUp">Đăng ký tài khoản mới</a>
     <a href="/Index">Về trang home</a>
-</form>
+</form>*@
+
+<section style="padding: 0; margin: 0" class="background-radial-gradient overflow-hidden">
+  <style>
+    .background-radial-gradient {
+        height: 100vh;
+      background-color: hsl(218, 41%, 15%);
+      background-image: radial-gradient(650px circle at 0% 0%,
+          hsl(218, 41%, 35%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+          hsl(218, 41%, 45%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%);
+    }
+    
+
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-4 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          Hiến máu 
+          <span style="color: hsl(218, 81%, 75%)">nhân đạo</span>
+        </h1>
+        <p class="mb-2 opacity-70" style="color: hsl(218, 81%, 85%)">
+          "Một giọt máu cho đi - Một cuộc đời ở lại". <br /> Hiến máu nhân đạo là một trong những nghĩa cử cao đẹp mang đậm giá trị nhân văn. 
+        </p>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+        <div class="card bg-glass" style="width: 500px; opacity: 88%">
+          <div class="card-body px-4 py-5 px-md-5">
+            <form method="post">
+                <h2 style="color: hsl(218, 41%, 24%);" class="text-center py-4" >Đăng nhập</h2>
+@*              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="form3Example1" class="form-control" />
+                    <label class="form-label" for="form3Example1">First name</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="form3Example2" class="form-control" />
+                    <label class="form-label" for="form3Example2">Last name</label>
+                  </div>
+                </div>
+              </div>*@
+
+              <!-- Phone input -->
+              <div class="form-outline m-4">
+                <label asp-for="Phone" style="color: hsl(218, 41%, 24%);" class="form-label" for="form3Example3">Số điện thoại</label>
+                <input asp-for="Phone" type="tel" id="form3Example3" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline m-4">
+                <label asp-for="Password" style="color: hsl(218, 41%, 24%);" class="form-label" for="form3Example4">Mật khẩu</label>
+                <input asp-for="Password" type="password" id="form3Example4" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" style="padding: 8px 24px ;margin-left: 34%;margin-top: 24px;margin-bottom: 24px;" class="btn btn-primary btn-block btn-login">
+                Đăng nhập
+              </button>
+
+              <!-- Register buttons -->
+              <div class="text-center">
+                <p style="color: hsl(218, 41%, 24%);">Hoặc <a href="/SignUp">đăng ký</a> ở đây.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
