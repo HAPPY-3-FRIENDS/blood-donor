@@ -6,7 +6,175 @@
     ViewData["Title"] = "Admin";
 }
 
+
 @if (HttpContext.Session.GetString("role") == "Admin")
+{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Vendor CSS Files -->
+    @*<link href="~/lib/aos/dist/aos.css" rel="stylesheet">*@
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/lib/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
+</head>
+<body style="height: 100vh">
+    <style>
+        .header-row {
+            color: #FFF;
+            font-weight: 500;
+        }
+        .btn-action {
+            text-decoration: none;
+        }
+        .btn-edit {
+            color: #f2da02;
+            padding: 4px 16px;
+            border-radius: 16px;
+            font-size: 16px;
+        }
+        .btn-details {
+            color: #37517e;
+            padding: 4px 16px;
+            border-radius: 16px;
+        }
+        .btn-delete {
+            color: #f50707;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 16px;
+        }
+
+    </style>
+    <nav class="navbar" style="position: relative; background-color: #37517e;">
+        <div class="container-fluid justify-content-start">
+            <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
+            <form style="padding-left: 4%" class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <p style="text-decoration: none; margin: 0; margin-left: 48%; color: #fff">Xin chào, Admin</p>
+            <form method="post" asp-page-handler="Logout">
+                <div class="form-group">
+                    <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div style="margin: auto" class="col-10 mt-5">
+                <a style="text-decoration: none; background-color: #37517e; color: #FFF; padding: 8px 16px; border-radius: 12px" asp-page="Create">Create New</a>
+                <table class="table table-bordered table-striped rounded-3 w-100 mt-4">
+                    <thead style="background-color: #37517e; ">
+                        <tr>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].Username)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].Password)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].Name)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].Description)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].AddressDetails)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].District)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].City)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organization[0].IsRedCross)
+                            </th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Organization)
+                        {
+                            <tr>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Password)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.AddressDetails)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.District)
+                                </td>
+                                <td class="body-row"> 
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsRedCross)
+                                </td>
+                                <td>
+                                    <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="btn-action btn-delete" asp-page="./Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                                <td>
+                                    <a class="btn-action btn-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>BloodDonor</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by Happy 3 Friends
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+</body>
+</html>
+} else {
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
+}
+@*@if (HttpContext.Session.GetString("role") == "Admin")
 {
     <a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Xin chào tớ là Admin nè cậu</a>
 
@@ -95,5 +263,8 @@
     </table>
 } else {
     <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
-}
+}*@
+
+
+
 
