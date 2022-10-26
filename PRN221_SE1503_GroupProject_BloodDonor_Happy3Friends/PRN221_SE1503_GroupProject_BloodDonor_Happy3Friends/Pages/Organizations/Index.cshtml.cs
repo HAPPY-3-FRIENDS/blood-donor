@@ -14,22 +14,37 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
     {
         private readonly IOrganizationRepository _organizationRepository;
 
+        [BindProperty]
+        public Organization Organization { get; set; }
+
         public IndexModel(IOrganizationRepository organizationRepository)
         {
             _organizationRepository = organizationRepository;
         }
 
-        public IList<Organization> Organization { get;set; }
+        public IList<Organization> Organizations { get;set; }
 
         public void OnGet()
         {
-            Organization = _organizationRepository.GetOrganizations();
+            Organizations = _organizationRepository.GetOrganizations();
         }
 
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();
             return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            Organization = _organizationRepository.GetOrganizationById(id);
+
+            if (Organization != null)
+            {
+                _organizationRepository.DeleteOrganization(Organization);
+            }
+
+            return RedirectToPage("./Index");
         }
 
         /*public async Task OnGetAsync()
