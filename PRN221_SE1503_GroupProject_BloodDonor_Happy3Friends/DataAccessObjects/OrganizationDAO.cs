@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
@@ -33,7 +31,7 @@ namespace DataAccessObjects
             List<Organization> organizations;
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 organizations = bloodDonorContext.Organizations.ToList();
             } 
             catch (Exception ex)
@@ -49,7 +47,7 @@ namespace DataAccessObjects
             Organization organization = null;
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 organization = bloodDonorContext.Organizations.SingleOrDefault(x => x.Id == organizationId);
             }
             catch (Exception ex)
@@ -65,8 +63,24 @@ namespace DataAccessObjects
             Organization organization = null;
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 organization = bloodDonorContext.Organizations.SingleOrDefault(x => x.Name == name);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return organization;
+        }
+
+        public Organization GetOrganizationByUserName(string userName)
+        {
+            Organization organization = null;
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                organization = bloodDonorContext.Organizations.SingleOrDefault(x => x.Username == userName);
             }
             catch (Exception ex)
             {
@@ -80,7 +94,7 @@ namespace DataAccessObjects
         {
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 bloodDonorContext.Organizations.Add(organization);
                 bloodDonorContext.SaveChanges();
             }
@@ -97,7 +111,7 @@ namespace DataAccessObjects
                 Organization _organization = GetOrganizationById(organization.Id);
                 if (_organization != null)
                 {
-                    var bloodDonorContext = new BloodDonorContext();
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                     bloodDonorContext.Entry<Organization>(organization).State = EntityState.Modified;
                     bloodDonorContext.SaveChanges();
                 }
@@ -119,7 +133,7 @@ namespace DataAccessObjects
                 Organization _organization = GetOrganizationById(organization.Id);
                 if (_organization != null)
                 {
-                    var bloodDonorContext = new BloodDonorContext();
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                     bloodDonorContext.Organizations.Remove(organization);
                     bloodDonorContext.SaveChanges();
                 }
@@ -132,6 +146,44 @@ namespace DataAccessObjects
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public void DeleteOrganizationById(int id)
+        {
+            try
+            {
+                Organization _organization = GetOrganizationById(id);
+                if (_organization != null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    bloodDonorContext.Organizations.Remove(_organization);
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("The organization does not exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool CheckLogin(string userName, string password)
+        {
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                Organization organization = bloodDonorContext.Organizations.Where(o => o.Username.Equals(userName) && o.Password.Equals(password)).FirstOrDefault();
+                if (organization != null)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return false;
         }
     }
 }

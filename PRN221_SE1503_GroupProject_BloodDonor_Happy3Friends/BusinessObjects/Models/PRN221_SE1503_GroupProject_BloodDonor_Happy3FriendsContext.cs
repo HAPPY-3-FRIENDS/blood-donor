@@ -1,20 +1,16 @@
-﻿using System;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
-#nullable disable
+using System.IO;
 
 namespace BusinessObjects.Models
 {
-    public partial class BloodDonorContext : DbContext
+    public partial class PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext : DbContext
     {
-        public BloodDonorContext()
+        public PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext()
         {
         }
 
-        public BloodDonorContext(DbContextOptions<BloodDonorContext> options)
+        public PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext(DbContextOptions<PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext> options)
             : base(options)
         {
         }
@@ -95,6 +91,10 @@ namespace BusinessObjects.Models
                 entity.ToTable("Campaign");
 
                 entity.Property(e => e.AddressDetails).HasMaxLength(100);
+
+                entity.Property(e => e.BloodTypeRequired)
+                    .IsRequired()
+                    .HasMaxLength(10);
 
                 entity.Property(e => e.City)
                     .IsRequired()

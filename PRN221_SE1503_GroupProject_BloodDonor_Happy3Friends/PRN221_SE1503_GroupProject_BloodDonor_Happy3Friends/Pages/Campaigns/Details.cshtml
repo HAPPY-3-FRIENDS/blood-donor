@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.Campaign.Description)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Campaign.BloodTypeRequired)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Campaign.BloodTypeRequired)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Campaign.AddressDetails)
         </dt>
         <dd class="col-sm-10">
@@ -57,7 +63,7 @@
             @Html.DisplayNameFor(model => model.Campaign.Organization)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Campaign.Organization.City)
+            @Html.DisplayFor(model => model.Campaign.Organization.Name)
         </dd>
     </dl>
 </div>

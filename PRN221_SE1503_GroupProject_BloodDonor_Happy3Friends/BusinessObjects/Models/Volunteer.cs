@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace BusinessObjects.Models
 {
     public partial class Volunteer

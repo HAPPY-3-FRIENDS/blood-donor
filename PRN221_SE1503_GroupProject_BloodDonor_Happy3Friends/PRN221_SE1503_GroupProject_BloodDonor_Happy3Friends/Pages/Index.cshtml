@@ -42,11 +42,14 @@
           @if (HttpContext.Session.GetString("role") == "Volunteer") {
             <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
             <li>
-                <form method="post" asp-page-handler="Logout">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Đăng xuất (or lồng vào trong tên)</button>
-                    </div>
-                </form>
+                @if (HttpContext.Session.GetString("role") != null)
+                {
+                    <form method="post" asp-page-handler="Logout">
+                        <div class="form-group">
+                            <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất (or lồng vào trong tên)</button>
+                        </div>
+                    </form>
+                }
             </li>
           }
           else

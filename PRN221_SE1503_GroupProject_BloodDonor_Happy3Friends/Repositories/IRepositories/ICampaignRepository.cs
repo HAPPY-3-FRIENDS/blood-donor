@@ -1,12 +1,12 @@
-﻿using System;
+﻿using BusinessObjects.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories.IRepositories
 {
     public interface ICampaignRepository
     {
+        public List<Campaign> GetCampaigns();
+        public List<Campaign> GetCampaignsByOrganizationId(int organizationId);
+        public void CreateCampaign(Campaign campaign);
     }
 }

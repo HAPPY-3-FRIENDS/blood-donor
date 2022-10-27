@@ -1,11 +1,7 @@
 ﻿using BusinessObjects.Models;
 using DataAccessObjects;
 using Repositories.IRepositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -17,10 +13,16 @@ namespace Repositories
 
         public Organization GetOrganizationByName(string name) => OrganizationDAO.Instance.GetOrganizationByName(name);
 
+        public Organization GetOrganizationByUserName(string userName) => OrganizationDAO.Instance.GetOrganizationByUserName(userName);
+
         public void CreateOrganization(Organization organization) => OrganizationDAO.Instance.CreateOrganization(organization);
 
         public void UpdateOrganization(Organization organization) => OrganizationDAO.Instance.UpdateOrganization(organization);
 
         public void DeleteOrganization(Organization organization) => OrganizationDAO.Instance.DeleteOrganization(organization);
+        
+        public void DeleteOrganizationById(int id) => OrganizationDAO.Instance.DeleteOrganizationById(id);
+
+        public bool CheckLogin(string userName, string password) => OrganizationDAO.Instance.CheckLogin(userName, password);
     }
 }

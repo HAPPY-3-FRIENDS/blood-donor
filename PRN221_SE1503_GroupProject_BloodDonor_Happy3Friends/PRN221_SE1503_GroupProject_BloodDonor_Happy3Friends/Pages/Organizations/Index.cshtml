@@ -3,11 +3,9 @@
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations.IndexModel
 
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Home - Admin";
 }
 
-
-@if (HttpContext.Session.GetString("role") == "Admin") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,111 +85,123 @@
             <form style="padding-left: 4%" class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <p style="text-decoration: none; margin: 0; margin-left: 48%; color: #fff">Xin chào, Admin</p>
-            <form method="post" asp-page-handler="Logout">
-                <div class="form-group">
-                    <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
-                </div>
-            </form>
+            <p style="text-decoration: none; margin: 0; margin-left: 48%; color: #fff">Xin chào, @HttpContext.Session.GetString("name")</p>
+            @if (HttpContext.Session.GetString("role") != null)
+            {
+                <form method="post" asp-page-handler="Logout">
+                    <div class="form-group">
+                        <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+                    </div>
+                </form>
+            }
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-            <div style="margin: auto" class="col-10 mt-5">
-                <a style="text-decoration: none; background-color: #37517e; color: #FFF; padding: 8px 16px; border-radius: 12px" asp-page="Create">Create New</a>
 
-                <div id="table-container">
-                    <table class="table table-bordered table-striped rounded-3 w-100 ">
-                        <thead style="background-color: #37517e; color: #FFF;">
-                            <tr>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].Username)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].Password)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].Name)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].Description)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].AddressDetails)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].District)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].City)
-                                </th>
-                                <th class="header-row">
-                                    @Html.DisplayNameFor(model => model.Organizations[0].IsRedCross)
-                                </th>
-                                <th colspan="2"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Organizations)
-                            {
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteModel" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content" style="border: none;">
-                                            <div class="modal-header" style="background-color: #37517e; color: #FFF;">
-                                                <h5 class="modal-title" id="deleteModelLabel">Delete Account</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                                            </div>
-                                            <div class="modal-body" style="padding: 24px 24px;">
-                                                Bạn có chắc chắn xóa tổ chức này?<br />
-                                                Hành động này sẽ không thể hoàn tác!
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border: none; background-color: #37517e77;">Đóng</button>
-                                                <form method="post" asp-page-handler="Delete">
-                                                    <input type="submit" asp-for="@item.Id" value="Delete" class="btn btn-danger" />
-                                                </form>
+    @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
+    {
+        <div class="container">
+            <div class="row">
+                <div style="margin: auto" class="col-10 mt-5">
+                    <a style="text-decoration: none; background-color: #37517e; color: #FFF; padding: 8px 16px; border-radius: 12px" asp-page="Create">Create New</a>
+
+                    <div id="table-container">
+                        <table class="table table-bordered table-striped rounded-3 w-100 ">
+                            <thead style="background-color: #37517e; color: #FFF;">
+                                <tr>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].Username)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].Password)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].Name)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].Description)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].AddressDetails)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].District)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].City)
+                                    </th>
+                                    <th class="header-row">
+                                        @Html.DisplayNameFor(model => model.Organizations[0].IsRedCross)
+                                    </th>
+                                    <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Organizations)
+                                {
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModel" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content" style="border: none;">
+                                                <div class="modal-header" style="background-color: #37517e; color: #FFF;">
+                                                    <h5 class="modal-title" id="deleteModelLabel">Delete Account</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                                </div>
+                                                <div class="modal-body" style="padding: 24px 24px;">
+                                                    Bạn có chắc chắn xóa tổ chức này?<br />
+                                                    Hành động này sẽ không thể hoàn tác!
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border: none; background-color: #37517e77;">Đóng</button>
+                                                    <form method="post" asp-page-handler="Delete">
+                                                        <input type="hidden" id="Id" value="@item.Id" asp-for="Organization.Id"/>
+                                                        <input type="submit" value="Delete" class="btn btn-danger"/>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <tr>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.Username)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.Password)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.AddressDetails)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.District)
-                                    </td>
-                                    <td class="body-row">
-                                        @Html.DisplayFor(modelItem => item.City)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IsRedCross)
-                                    </td>
-                                    <td>
-                                        <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                        <a asp-area="@item.Id" class="btn-action btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModel"><i class="bi bi-trash-fill"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+                                    <tr>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.Password)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.AddressDetails)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.District)
+                                        </td>
+                                        <td class="body-row">
+                                            @Html.DisplayFor(modelItem => item.City)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsRedCross)
+                                        </td>
+                                        <td>
+                                            <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                            <a asp-area="@item.Id" class="btn-action btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModel"><i class="bi bi-trash-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    }
+    else
+    {
+        <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+    }
     <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
         <div class="footer-newsletter">
             <div class="container">
@@ -218,9 +228,6 @@
     </footer><!-- End Footer -->
 </body>
 </html>
-} else {
-    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
-}
 
 @*@if (HttpContext.Session.GetString("role") == "Admin")
 {
@@ -312,7 +319,3 @@
 } else {
     <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
 }*@
-
-
-
-

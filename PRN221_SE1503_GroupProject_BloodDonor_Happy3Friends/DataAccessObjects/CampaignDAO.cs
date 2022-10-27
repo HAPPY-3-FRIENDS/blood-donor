@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
@@ -23,6 +23,51 @@ namespace DataAccessObjects
                     }
                     return instance;
                 }
+            }
+        }
+
+        public List<Campaign> GetCampaigns()
+        {
+            List<Campaign> campaigns;
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                campaigns = bloodDonorContext.Campaigns.Include(c => c.Organization).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return campaigns;
+        }
+
+        public List<Campaign> GetCampaignsByOrganizationId(int organizationId)
+        {
+            List<Campaign> campaigns;
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                campaigns = bloodDonorContext.Campaigns.Include(c => c.Organization).Where(c => c.Organization.Id == organizationId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return campaigns;
+        }
+
+        public void CreateCampaign(Campaign campaign)
+        {
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                bloodDonorContext.Campaigns.Add(campaign);
+                bloodDonorContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

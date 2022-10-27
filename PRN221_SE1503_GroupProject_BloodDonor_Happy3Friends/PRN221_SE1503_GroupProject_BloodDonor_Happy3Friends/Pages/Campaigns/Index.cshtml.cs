@@ -1,29 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
+using Microsoft.AspNetCore.Http;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
     public class IndexModel : PageModel
     {
-        private readonly BusinessObjects.Models.BloodDonorContext _context;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public IndexModel(BusinessObjects.Models.BloodDonorContext context)
+        public IndexModel(ICampaignRepository campaignRepository)
         {
-            _context = context;
+            _campaignRepository = campaignRepository;
         }
 
-        public IList<Campaign> Campaign { get;set; }
+        public IList<Campaign> Campaigns { get;set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Campaign = await _context.Campaigns
-                .Include(c => c.Organization).ToListAsync();
+            string organizationId = HttpContext.Session.GetString("phone");
+            if (organizationId != null)
+            {
+                Campaigns = _campaignRepository.GetCampaignsByOrganizationId(int.Parse(organizationId));
+            } 
+            else
+            {
+                Campaigns = _campaignRepository.GetCampaigns();
+            }
+        }
+
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Repositories.IRepositories;
 
@@ -35,15 +31,9 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
             return RedirectToPage("/Index");
         }
 
-        public IActionResult OnPostDelete(int id)
+        public IActionResult OnPostDelete()
         {
-            Organization = _organizationRepository.GetOrganizationById(id);
-
-            if (Organization != null)
-            {
-                _organizationRepository.DeleteOrganization(Organization);
-            }
-
+            _organizationRepository.DeleteOrganizationById(Organization.Id);
             return RedirectToPage("./Index");
         }
 

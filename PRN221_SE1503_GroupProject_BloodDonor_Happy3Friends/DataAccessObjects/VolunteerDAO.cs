@@ -1,9 +1,6 @@
 ﻿using BusinessObjects.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
@@ -32,16 +29,13 @@ namespace DataAccessObjects
             Volunteer volunteer = null;
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 volunteer = bloodDonorContext.Volunteers.SingleOrDefault(x => x.Phone == phone && x.Password == password);
                 if (volunteer != null)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -54,7 +48,7 @@ namespace DataAccessObjects
             Volunteer volunteer = null;
             try
             {
-                var bloodDonorContext = new BloodDonorContext();
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 volunteer = bloodDonorContext.Volunteers.SingleOrDefault(x => x.Phone == phone);
             }
             catch (Exception ex)

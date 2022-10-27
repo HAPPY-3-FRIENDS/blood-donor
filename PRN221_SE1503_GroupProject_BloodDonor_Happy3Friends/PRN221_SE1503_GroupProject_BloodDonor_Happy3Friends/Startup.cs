@@ -8,9 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Repositories;
 using Repositories.IRepositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
 {
@@ -23,10 +20,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BloodDonorContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));/**/
+            services.AddDbContext<PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IOrganizationRepository, OrganizationRepository>();
             services.AddScoped<IVolunteerRepository, VolunteerRepository>();
             services.AddScoped<ICampaignRepository, CampaignRepository>();
@@ -37,7 +34,6 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
             services.AddRazorPages();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

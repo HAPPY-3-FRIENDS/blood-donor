@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +8,9 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
     public class DeleteModel : PageModel
     {
-        private readonly BusinessObjects.Models.BloodDonorContext _context;
+        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
 
-        public DeleteModel(BusinessObjects.Models.BloodDonorContext context)
+        public DeleteModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
         {
             _context = context;
         }

@@ -11,23 +11,25 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
     public class LoginModel : PageModel
     {
         private readonly IVolunteerRepository _volunteerRepository;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public LoginModel(IVolunteerRepository volunteerRepository)
+        public LoginModel(IVolunteerRepository volunteerRepository, IOrganizationRepository organizationRepository)
         {
             _volunteerRepository = volunteerRepository;
+            _organizationRepository = organizationRepository;
         }
 
         [BindProperty, Required]
         public string Phone { get; set; }
+
         [BindProperty, Required]
         public string Password { get; set; }
 
         public IActionResult OnPost()
         {
             string fileName = "appsettings.json";
-            string json = System.IO.File.ReadAllText(fileName);  // đọc text từ tập tin JSON
+            string json = System.IO.File.ReadAllText(fileName);
 
-            // deserialize từ chuỗi đọc ở tập tin JSOn --> đối tượng DefaultAccount
             var adminAccount = JsonSerializer.Deserialize<Admin>(json, null);
 
             string phoneAdmin = adminAccount.Phone;
@@ -39,6 +41,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
             {
                 HttpContext.Session.SetString("phone", phoneAdmin);
                 HttpContext.Session.SetString("role", roleAdmin);
+                HttpContext.Session.SetString("name", "Admin");
                 isAdmin = true;
                 return RedirectToPage("/Organizations/Index");
             }
@@ -50,8 +53,20 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                 {
                     Volunteer volunteer = _volunteerRepository.GetVolunteerByPhone(Phone);
                     HttpContext.Session.SetString("phone", volunteer.Phone);
-                    HttpContext.Session.SetString("name", volunteer.Name);
                     HttpContext.Session.SetString("role", "Volunteer");
+                    HttpContext.Session.SetString("name", volunteer.Name);
+                }
+                else
+                {
+                    bool isOrganization = _organizationRepository.CheckLogin(Phone, Password);
+                    if (isOrganization)
+                    {
+                        Organization organization = _organizationRepository.GetOrganizationByUserName(Phone);
+                        HttpContext.Session.SetString("phone", organization.Id.ToString());
+                        HttpContext.Session.SetString("role", "Organization");
+                        HttpContext.Session.SetString("name", organization.Name);
+                        return RedirectToPage("/Campaigns/Index");
+                    }
                 }
             }
 

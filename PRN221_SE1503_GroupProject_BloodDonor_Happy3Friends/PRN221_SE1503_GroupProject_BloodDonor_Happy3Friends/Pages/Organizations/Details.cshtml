@@ -6,7 +6,7 @@
     ViewData["Title"] = "Details";
 }
 
-@if (HttpContext.Session.GetString("role") == "Admin")
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
 {
     <h1>Details</h1>
 
@@ -68,8 +68,8 @@
         <a asp-page="./Edit" asp-route-id="@Model.Organization.Id">Edit</a> |
         <a asp-page="./Index">Back to List</a>
     </div>
-} 
-else 
+}
+else
 {
-    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
 }

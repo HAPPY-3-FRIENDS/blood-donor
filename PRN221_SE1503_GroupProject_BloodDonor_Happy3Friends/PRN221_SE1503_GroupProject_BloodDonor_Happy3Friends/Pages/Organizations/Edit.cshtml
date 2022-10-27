@@ -6,8 +6,6 @@
     ViewData["Title"] = "Edit";
 }
 
-@*@if (HttpContext.Session.GetString("role") == "Admin")
-{*@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,17 +25,18 @@
     <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 </head>
-<body id="body-container" style="height: 100vh; position: relative;">
+<body id="body-container" style="height: 100vh; position: relative;"> 
     <style>
         #body-container::-webkit-scrollbar {
-                width: 12px;
-                background-color: #F5F5F5;
-            }
+            width: 12px;
+            background-color: #F5F5F5;
+        }
 
-            #body-container::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-            }
+        #body-container::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+        }
+
         #table-container {
             height: 300px;
             overflow-y: scroll;
@@ -103,110 +102,117 @@
             font-size: 24px;
             color: #375e7e;
         }
-        .btn-back:hover {
-            color: #37517e;
-        }
+
+            .btn-back:hover {
+                color: #37517e;
+            }
 
         .btn-save {
             background-color: #375e7e;
         }
-        .btn-save:hover{
-            background-color: #37517e;
-        }
+
+            .btn-save:hover {
+                background-color: #37517e;
+            }
 
     </style>
-    <nav class="navbar" style="position: relative; background-color: #37517e;">
-        <div class="container-fluid justify-content-start">
-            <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
-            <p style="text-decoration: none; margin: 0; margin-left: 68%; color: #fff">Xin chào, Admin</p>
-            <form method="post" asp-page-handler="Logout">
-                <div class="form-group">
-                    <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+
+    @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
+    {
+        <nav class="navbar" style="position: relative; background-color: #37517e;">
+            <div class="container-fluid justify-content-start">
+                <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
+                <p style="text-decoration: none; margin: 0; margin-left: 68%; color: #fff">Xin chào, Admin</p>
+                @if (HttpContext.Session.GetString("role") != null)
+                {
+                    <form method="post" asp-page-handler="Logout">
+                        <div class="form-group">
+                            <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </nav>
+        <div class="header-btn-back">
+            <a asp-page="./Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
+            <h3 class="header-back">Edit Organization</h3>
+        </div>
+        <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
+            <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Organization.Id" />
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Username" class="control-label">Tài khoản</label>
+                    <input asp-for="Organization.Username" class="form-control" />
+                    <span asp-validation-for="Organization.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Password" class="control-label">Mật khẩu</label>
+                    <input asp-for="Organization.Password" class="form-control" />
+                    <span asp-validation-for="Organization.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Name" class="control-label">Họ tên</label>
+                    <input asp-for="Organization.Name" class="form-control" />
+                    <span asp-validation-for="Organization.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Organization.Description" class="control-label">Mô tả</label>
+                    <input asp-for="Organization.Description" class="form-control" />
+                    <span asp-validation-for="Organization.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Organization.AddressDetails" class="control-label">Địa chỉ</label>
+                    <input asp-for="Organization.AddressDetails" class="form-control" />
+                    <span asp-validation-for="Organization.AddressDetails" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.District" class="control-label">Quận</label>
+                    <input asp-for="Organization.District" class="form-control" />
+                    <span asp-validation-for="Organization.District" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="Organization.City" class="control-label">Thành phố</label>
+                    <input asp-for="Organization.City" class="form-control" />
+                    <span asp-validation-for="Organization.City" class="text-danger"></span>
+                </div>
+                <div style="margin-left: 8px" class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Organization.IsRedCross" /> @Html.DisplayNameFor(model => model.Organization.IsRedCross)
+                    </label>
+                </div>
+                <div style="text-align: center; margin-bottom: 16px" class="form-group">
+                    <input style="padding: 8px 16px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
                 </div>
             </form>
         </div>
-    </nav>
-    <div class="header-btn-back">
-        <a asp-page="./Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
-        <h3 class="header-back">Edit Organization</h3>
-    </div>
-    <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
-        <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Organization.Id" />
-            <div class="form-group col-md-4">
-                <label asp-for="Organization.Username" class="control-label">Tài khoản</label>
-                <input asp-for="Organization.Username" class="form-control" />
-                <span asp-validation-for="Organization.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-4">
-                <label asp-for="Organization.Password" class="control-label">Mật khẩu</label>
-                <input asp-for="Organization.Password" class="form-control" />
-                <span asp-validation-for="Organization.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-4">
-                <label asp-for="Organization.Name" class="control-label">Họ tên</label>
-                <input asp-for="Organization.Name" class="form-control" />
-                <span asp-validation-for="Organization.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-6">
-                <label asp-for="Organization.Description" class="control-label">Mô tả</label>
-                <input asp-for="Organization.Description" class="form-control" />
-                <span asp-validation-for="Organization.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-6">
-                <label asp-for="Organization.AddressDetails" class="control-label">Địa chỉ</label>
-                <input asp-for="Organization.AddressDetails" class="form-control" />
-                <span asp-validation-for="Organization.AddressDetails" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-4">
-                <label asp-for="Organization.District" class="control-label">Quận</label>
-                <input asp-for="Organization.District" class="form-control" />
-                <span asp-validation-for="Organization.District" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-8">
-                <label asp-for="Organization.City" class="control-label">Thành phố</label>
-                <input asp-for="Organization.City" class="form-control" />
-                <span asp-validation-for="Organization.City" class="text-danger"></span>
-            </div>
-            <div style="margin-left: 8px" class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Organization.IsRedCross" /> @Html.DisplayNameFor(model => model.Organization.IsRedCross)
-                </label>
-            </div>
-            <div style="text-align: center; margin-bottom: 16px" class="form-group">
-                <input style="padding: 8px 16px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
-            </div>
-        </form>
-    </div>
-
+    }
+    else
+    {
+        <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+    }
     <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
-        <div class="container footer-bottom clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>BloodDonor</h3>
+            <div class="container footer-bottom clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h3>BloodDonor</h3>
+                        </div>
                     </div>
                 </div>
+                <div class="copyright">
+                    &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Designed by Happy 3 Friends
+                </div>
             </div>
-            <div class="copyright">
-                &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                Designed by Happy 3 Friends
-            </div>
-        </div>
-    </footer><!-- End Footer -->
+        </footer><!-- End Footer -->
 </body>
 </html>
-@*}*@
-@*else
-{
-    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
-}*@
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

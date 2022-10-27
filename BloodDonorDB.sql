@@ -24,6 +24,7 @@ CREATE TABLE [Campaign](
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[Name] NVARCHAR(100) NOT NULL,
 	[Description] NTEXT NULL,
+	[BloodTypeRequired] NVARCHAR(10) NOT NULL,
 	[AddressDetails] NVARCHAR(100) NULL,
     [District] NVARCHAR(30) NOT NULL,
     [City] NVARCHAR(30) NOT NULL,
