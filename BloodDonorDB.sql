@@ -1,9 +1,9 @@
-CREATE DATABASE BloodDonor
+CREATE DATABASE PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
 GO
 
--- DROP DATABASE BloodDonor
+-- DROP DATABASE PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
 
-USE BloodDonor
+USE PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
 GO
 
 -- ****** CREATE TABLE ***** --
