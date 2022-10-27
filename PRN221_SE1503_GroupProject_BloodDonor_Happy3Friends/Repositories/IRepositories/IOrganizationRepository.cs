@@ -11,7 +11,6 @@ namespace Repositories.IRepositories
         public Organization GetOrganizationByUserName(string userName);
         public void CreateOrganization(Organization organization);  
         public void UpdateOrganization(Organization organization);
-        public void DeleteOrganization(Organization organization);
         public void DeleteOrganizationById(int id);
         bool CheckLogin(string userName, string password);
     }

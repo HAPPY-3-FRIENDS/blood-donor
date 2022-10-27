@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns.DetailsModel
 
 @{
@@ -59,15 +60,21 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Campaign.EndDate)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Campaign.Organization)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Campaign.Organization.Name)
-        </dd>
+        @if(HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer") {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Campaign.Organization)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Campaign.Organization.Name)
+            </dd>
+        }
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Campaign.Id">Edit</a> |
+    @if (HttpContext.Session.GetString("role") == "Organization")
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.Campaign.Id">Edit</a>
+    }
+    <span> | </span>
     <a asp-page="./Index">Back to List</a>
 </div>

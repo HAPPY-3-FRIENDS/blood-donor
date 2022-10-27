@@ -43,21 +43,21 @@
             margin-top: 24px;
         }
 
-            #table-container::-webkit-scrollbar {
-                width: 6px;
-                background-color: #F5F5F5;
-            }
+        #table-container::-webkit-scrollbar {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
 
-            #table-container::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-            }
+        #table-container::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+        }
 
-            #table-container::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                background-color: #F5F5F5;
-                border-radius: 10px;
-            }
+        #table-container::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+            border-radius: 10px;
+        }
 
         .header-row {
             color: #FFF;
@@ -103,36 +103,35 @@
             color: #375e7e;
         }
 
-            .btn-back:hover {
-                color: #37517e;
-            }
+        .btn-back:hover {
+            color: #37517e;
+        }
 
         .btn-save {
             background-color: #375e7e;
         }
 
-            .btn-save:hover {
-                background-color: #37517e;
-            }
-
+        .btn-save:hover {
+            background-color: #37517e;
+        }
     </style>
-
+    
+    <nav class="navbar" style="position: relative; background-color: #37517e;">
+        <div class="container-fluid justify-content-start">
+            <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
+            <p style="text-decoration: none; margin: 0; margin-left: 68%; color: #fff">Xin chào, Admin</p>
+            @if (HttpContext.Session.GetString("role") != null)
+            {
+                <form method="post" asp-page-handler="Logout">
+                    <div class="form-group">
+                        <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </nav>
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
     {
-        <nav class="navbar" style="position: relative; background-color: #37517e;">
-            <div class="container-fluid justify-content-start">
-                <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
-                <p style="text-decoration: none; margin: 0; margin-left: 68%; color: #fff">Xin chào, Admin</p>
-                @if (HttpContext.Session.GetString("role") != null)
-                {
-                    <form method="post" asp-page-handler="Logout">
-                        <div class="form-group">
-                            <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
-                        </div>
-                    </form>
-                }
-            </div>
-        </nav>
         <div class="header-btn-back">
             <a asp-page="./Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
             <h3 class="header-back">Edit Organization</h3>

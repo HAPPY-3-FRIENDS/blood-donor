@@ -11,6 +11,12 @@ namespace Repositories
 
         public List<Campaign> GetCampaignsByOrganizationId(int organizationId) => CampaignDAO.Instance.GetCampaignsByOrganizationId(organizationId);
 
+        public Campaign GetCampaignById(int id) => CampaignDAO.Instance.GetCampaignById(id);
+
         public void CreateCampaign(Campaign campaign) => CampaignDAO.Instance.CreateCampaign(campaign);
+
+        public void UpdateCampaign(Campaign campaign) => CampaignDAO.Instance.UpdateCampaign(campaign);
+
+        public void DeleteCampaignById(int id) => CampaignDAO.Instance.DeleteCampaignById(id);
     }
 }

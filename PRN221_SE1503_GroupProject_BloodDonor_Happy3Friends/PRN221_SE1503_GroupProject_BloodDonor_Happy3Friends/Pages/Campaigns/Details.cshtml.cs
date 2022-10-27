@@ -3,29 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
     public class DetailsModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public DetailsModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public DetailsModel(ICampaignRepository campaignRepository)
         {
-            _context = context;
+            _campaignRepository = campaignRepository;
         }
 
         public Campaign Campaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Campaign = await _context.Campaigns
-                .Include(c => c.Organization).FirstOrDefaultAsync(m => m.Id == id);
+            Campaign = _campaignRepository.GetCampaignById(id);
 
             if (Campaign == null)
             {

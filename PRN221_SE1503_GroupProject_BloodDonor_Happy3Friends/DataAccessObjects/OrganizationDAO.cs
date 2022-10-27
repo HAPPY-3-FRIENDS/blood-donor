@@ -126,28 +126,6 @@ namespace DataAccessObjects
             }
         }
 
-        public void DeleteOrganization(Organization organization)
-        {
-            try
-            {
-                Organization _organization = GetOrganizationById(organization.Id);
-                if (_organization != null)
-                {
-                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                    bloodDonorContext.Organizations.Remove(organization);
-                    bloodDonorContext.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("The organization does not exist.");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         public void DeleteOrganizationById(int id)
         {
             try

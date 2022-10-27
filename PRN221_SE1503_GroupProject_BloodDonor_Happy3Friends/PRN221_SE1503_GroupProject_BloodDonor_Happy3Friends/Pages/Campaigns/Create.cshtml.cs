@@ -20,7 +20,6 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 
         public IActionResult OnGet()
         {
-            ViewData["OrganizationId"] = new SelectList(_organizationRepository.GetOrganizations(), "Id", "Name");
             return Page();
         }
 

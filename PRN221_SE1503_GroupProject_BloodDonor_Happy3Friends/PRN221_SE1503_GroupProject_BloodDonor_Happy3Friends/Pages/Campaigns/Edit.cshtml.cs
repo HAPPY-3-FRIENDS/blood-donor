@@ -5,51 +5,43 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
     public class EditModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public EditModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public EditModel(ICampaignRepository campaignRepository)
         {
-            _context = context;
+            _campaignRepository = campaignRepository;
         }
 
         [BindProperty]
         public Campaign Campaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Campaign = await _context.Campaigns
-                .Include(c => c.Organization).FirstOrDefaultAsync(m => m.Id == id);
+            Campaign = _campaignRepository.GetCampaignById(id);
 
             if (Campaign == null)
             {
                 return NotFound();
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Name");
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Campaign).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _campaignRepository.UpdateCampaign(Campaign);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -68,7 +60,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 
         private bool CampaignExists(int id)
         {
-            return _context.Campaigns.Any(e => e.Id == id);
+            return (_campaignRepository.GetCampaignById(id) != null); 
         }
     }
 }

@@ -24,8 +24,9 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
             if (organizationId != null)
             {
                 Campaigns = _campaignRepository.GetCampaignsByOrganizationId(int.Parse(organizationId));
-            } 
-            else
+            }
+
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
             {
                 Campaigns = _campaignRepository.GetCampaigns();
             }

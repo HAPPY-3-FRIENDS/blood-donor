@@ -3,30 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
     public class DeleteModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public DeleteModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public DeleteModel(ICampaignRepository campaignRepository)
         {
-            _context = context;
+            _campaignRepository = campaignRepository;
         }
 
         [BindProperty]
         public Campaign Campaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Campaign = await _context.Campaigns
-                .Include(c => c.Organization).FirstOrDefaultAsync(m => m.Id == id);
+            Campaign = _campaignRepository.GetCampaignById(id);
 
             if (Campaign == null)
             {
@@ -35,20 +30,9 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Campaign = await _context.Campaigns.FindAsync(id);
-
-            if (Campaign != null)
-            {
-                _context.Campaigns.Remove(Campaign);
-                await _context.SaveChangesAsync();
-            }
+            _campaignRepository.DeleteCampaignById(id);
 
             return RedirectToPage("./Index");
         }
