@@ -4,7 +4,8 @@ namespace Repositories.IRepositories
 {
     public interface IVolunteerRepository
     {
-        bool CheckLogin(string phone, string password);
-        Volunteer GetVolunteerByPhone(string phone);
+        public bool CheckLogin(string phone, string password);
+        public Volunteer GetVolunteerByPhone(string phone);
+        public void CreateVolunteer(Volunteer volunteer);
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
+    [Display(Name = "Tổ chức")]
     public partial class Organization
     {
         public Organization()
@@ -15,9 +16,13 @@ namespace BusinessObjects.Models
 
         [Required(ErrorMessage = "Tên đăng nhập là bắt buộc!")]
         [Display(Name = "Tên đăng nhập")]
+        [RegularExpression(@"^[a-z0-9_-]{8,20}$", ErrorMessage = "Tên đăng nhập có thể bao gồm chữ cái, _ và - có độ dài từ 8 đến 20 ký tự!")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Mật khẩu là bắt buộc!")]
+        [Required(ErrorMessage = "Mật khẩu là bắt buộc")]
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một số")]
+        [StringLength(16, ErrorMessage = "Mật khẩu không dài hơn 16 ký tự!")]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
