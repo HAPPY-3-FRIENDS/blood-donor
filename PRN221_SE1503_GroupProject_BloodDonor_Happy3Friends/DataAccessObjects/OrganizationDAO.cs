@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace DataAccessObjects
 {
@@ -134,8 +135,15 @@ namespace DataAccessObjects
                 if (_organization != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                    bloodDonorContext.Organizations.Remove(_organization);
-                    bloodDonorContext.SaveChanges();
+                    if (bloodDonorContext.Organizations.Include(o => o.Campaigns).Where(o => o.Id == id).First() == null)
+                    {
+                        bloodDonorContext.Organizations.Remove(_organization);
+                        bloodDonorContext.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Can not remove organization which have campaigns");
+                    }
                 }
                 else
                 {

@@ -67,5 +67,11 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
         {
             return _context.Volunteers.Any(e => e.Phone == id);
         }
+
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
+        }
     }
 }

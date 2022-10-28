@@ -1,0 +1,23 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns.RegisterModel
+@{
+    ViewData["Title"] = "Register Campaign";
+}
+
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer") 
+{
+    @if (HttpContext.Session.GetString("role") != null)
+    {
+        <form method="post" asp-page-handler="Logout">
+            <div class="form-group">
+                <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
+            </div>
+        </form>
+    }
+    <h1>Volunteer đăng ký campaigns</h1>
+}
+else
+{
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+}

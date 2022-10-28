@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessObjects.Models;
 using Repositories.IRepositories;
+using System;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations
 {
@@ -33,7 +34,14 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
 
         public IActionResult OnPostDelete()
         {
-            _organizationRepository.DeleteOrganizationById(Organization.Id);
+            try
+            {
+                _organizationRepository.DeleteOrganizationById(Organization.Id);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+            }
             return RedirectToPage("./Index");
         }
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
+    [Display(Name = "Chiến dịch")]
     public partial class Campaign
     {
         public Campaign()
@@ -38,10 +39,12 @@ namespace BusinessObjects.Models
 
         [Required(ErrorMessage = "Ngày bắt đầu của chiến dịch là bắt buộc")]
         [Display(Name = "Ngày bắt đầu")]
+        [DataType(DataType.DateTime, ErrorMessage = "Ngày bắt đầu không hợp lệ!")]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "Ngày kết thúc chiến dịch là bắt buộc")]
         [Display(Name = "Ngày kết thúc")]
+        [DataType(DataType.DateTime, ErrorMessage = "Ngày kết thúc không hợp lệ!")]
         public DateTime EndDate { get; set; }
 
         public int OrganizationId { get; set; }

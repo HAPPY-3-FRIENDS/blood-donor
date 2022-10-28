@@ -27,6 +27,11 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             string fileName = "appsettings.json";
             string json = System.IO.File.ReadAllText(fileName);
 
@@ -55,6 +60,14 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                     HttpContext.Session.SetString("phone", volunteer.Phone);
                     HttpContext.Session.SetString("role", "Volunteer");
                     HttpContext.Session.SetString("name", volunteer.Name);
+                    if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaign")
+                    {
+                        return RedirectToPage("/Campaigns/Register");
+                    } 
+                    else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaignsList")
+                    {
+                        return RedirectToPage("/Campaigns/Index");
+                    }
                 }
                 else
                 {
