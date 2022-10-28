@@ -43,7 +43,7 @@ namespace DataAccessObjects
             }
         }
 
-        public Volunteer GetCustomerByPhone(string phone)
+        public Volunteer GetVolunteerByPhone(string phone)
         {
             Volunteer volunteer = null;
             try
@@ -57,6 +57,28 @@ namespace DataAccessObjects
             }
 
             return volunteer;
+        }
+
+        public void CreateVolunteer(Volunteer volunteer)
+        {
+            try
+            {
+                Volunteer _volunteer = GetVolunteerByPhone(volunteer.Phone);
+                if (_volunteer == null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    bloodDonorContext.Volunteers.Add(volunteer);
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("The Volunteer is already exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

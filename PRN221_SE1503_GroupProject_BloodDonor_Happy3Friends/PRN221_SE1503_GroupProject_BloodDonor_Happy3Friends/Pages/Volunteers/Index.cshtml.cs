@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
 {
@@ -20,6 +21,12 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
         public async Task OnGetAsync()
         {
             Volunteer = await _context.Volunteers.ToListAsync();
+        }
+
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -6,6 +6,9 @@
     ViewData["Title"] = "Home";
 }
 
+<h1>Nav Bar giống trang home ở đây (active đặt lịch hiến máu)</h1>
+<h2>Đổi giao diện cho xinh, làm bảng thấy ghê lắm</h2>
+<h2>Thông tin chiến dịch có thể rút gọn các thông tin quan trọng, sau khi bấm vào details của chiến dịch sẽ hiện chi tiết hơn, và trong tổng quát hay chi tiết đều có nút đăng kí (Đặt lịch) cho người dùng</h2>
 <p>
     •	Đóng/mở 1 chiến dịch
     •	Quản lý tình trạng tình nguyện viên tham gia 1 chiến dịch: đã đăng ký, đã tham gia (tình nguyện viên có thể tự do đến tham gia mà không cần đăng kí trước, bệnh viện/hội chữ thập đỏ sẽ đăng kí giúp)
@@ -20,21 +23,17 @@
 </p>
 
 @if(HttpContext.Session.GetString("role") != null) {
+    <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
     <form method="post" asp-page-handler="Logout">
         <div class="form-group">
             <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
         </div>
     </form>
-}
-
-@if(HttpContext.Session.GetString("role") == "Organization") {
-    <h1>Tao là bệnh viện (hội chữ thập đỏ) tên là: @HttpContext.Session.GetString("name")</h1>
-
-    <br />
-
-    <p>
-        <a asp-page="Create">Create New</a>
-    </p>
+} else {
+    {
+        HttpContext.Session.SetString("action", "RegisterCampaignsList");
+    }
+    <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
 }
 
 @if(HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin") {
@@ -115,6 +114,9 @@
                     {
                         <td>
                             <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        </td>
+                        <td>
+                            <a asp-page="./Register" asp-route-id="@item.Id">Đặt lịch</a>
                         </td>
                     }
                     @if (HttpContext.Session.GetString("role") == "Organization")

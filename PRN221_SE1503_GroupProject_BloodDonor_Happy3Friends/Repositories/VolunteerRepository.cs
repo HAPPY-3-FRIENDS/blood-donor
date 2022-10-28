@@ -8,6 +8,8 @@ namespace Repositories
     {
         bool IVolunteerRepository.CheckLogin(string phone, string password) => VolunteerDAO.Instance.CheckLogin(phone, password);
 
-        Volunteer IVolunteerRepository.GetVolunteerByPhone(string phone) => VolunteerDAO.Instance.GetCustomerByPhone(phone);
+        Volunteer IVolunteerRepository.GetVolunteerByPhone(string phone) => VolunteerDAO.Instance.GetVolunteerByPhone(phone);
+
+        public void CreateVolunteer(Volunteer volunteer) => VolunteerDAO.Instance.CreateVolunteer(volunteer);
     }
 }
