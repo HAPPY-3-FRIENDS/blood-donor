@@ -1,0 +1,77 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organizations.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@if (HttpContext.Session.GetString("role") == "Admin")
+{ 
+    <h1>Delete</h1>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Organization</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.Username)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.Username)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.Password)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.Password)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.AddressDetails)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.AddressDetails)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.District)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.District)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.City)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.City)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Organization.IsRedCross)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Organization.IsRedCross)
+            </dd>
+        </dl>
+    
+        <form method="post">
+            <input type="hidden" asp-for="Organization.Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-page="./Index">Back to List</a>
+        </form>
+    </div>
+}
+else {
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a></h6>
+}
