@@ -16,7 +16,7 @@ namespace BusinessObjects.Models
 
         [Required(ErrorMessage = "Tên đăng nhập là bắt buộc!")]
         [Display(Name = "Tên đăng nhập")]
-        [RegularExpression(@"^[a-z0-9_-]{8,20}$", ErrorMessage = "Tên đăng nhập có thể bao gồm chữ cái, _ và - có độ dài từ 8 đến 20 ký tự!")]
+        [RegularExpression(@"^[a-zA-Z0-9_-]{8,20}$", ErrorMessage = "Tên đăng nhập chỉ có thể bao gồm chữ cái, _ và - có độ dài từ 8 đến 20 ký tự!")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu là bắt buộc")]

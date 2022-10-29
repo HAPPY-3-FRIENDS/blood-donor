@@ -11,15 +11,6 @@
       "destination": "wwwroot/lib/remixicon/"
     },
     {
-      "library": "swiper@8.4.4",
-      "destination": "wwwroot/lib/swiper/",
-      "files": [
-        "swiper-bundle.js",
-        "swiper-bundle.js.map",
-        "swiper-bundle.min.css"
-      ]
-    },
-    {
       "library": "boxicons@2.1.4",
       "destination": "wwwroot/lib/boxicons/",
       "files": [
@@ -103,6 +94,22 @@
     {
       "library": "aos@2.3.4",
       "destination": "wwwroot/lib/aos/"
+    },
+    {
+      "library": "swiper@8.4.4",
+      "destination": "wwwroot/lib/swiper/",
+      "files": [
+        "swiper-bundle.min.js"
+      ]
+    },
+    {
+      "library": "waypoints@4.0.1",
+      "destination": "wwwroot/lib/waypoints/",
+      "files": [
+        "lib/noframework.waypoints.js",
+        "lib/noframework.waypoints.min.js",
+        "src/waypoint.js"
+      ]
     }
   ]
 }

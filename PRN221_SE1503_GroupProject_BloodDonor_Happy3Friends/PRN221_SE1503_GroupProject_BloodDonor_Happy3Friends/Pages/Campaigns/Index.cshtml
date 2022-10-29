@@ -6,133 +6,245 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>Nav Bar giống trang home ở đây (active đặt lịch hiến máu)</h1>
-<h2>Đổi giao diện cho xinh, làm bảng thấy ghê lắm</h2>
-<h2>Thông tin chiến dịch có thể rút gọn các thông tin quan trọng, sau khi bấm vào details của chiến dịch sẽ hiện chi tiết hơn, và trong tổng quát hay chi tiết đều có nút đăng kí (Đặt lịch) cho người dùng</h2>
-<p>
-    •	Đóng/mở 1 chiến dịch
-    •	Quản lý tình trạng tình nguyện viên tham gia 1 chiến dịch: đã đăng ký, đã tham gia (tình nguyện viên có thể tự do đến tham gia mà không cần đăng kí trước, bệnh viện/hội chữ thập đỏ sẽ đăng kí giúp)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
 
-    •	Quản lý lượng máu (ml) của 1 tình nguyện viên trong từng lần hiến máu
+    <!-- Vendor CSS Files -->
+    @*<link href="~/lib/aos/dist/aos.css" rel="stylesheet">*@
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/lib/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .btn-action {
+            color: #31a9e1;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-    •	Quản lý danh sách chiến dịch (search, view, history, những tình nguyện viên đã tham gia, thông tin cá nhân của mỗi lần hiến máu, lượng máu (ml) được hiến, lượng máu (ml) mỗi loại)
+        .btn-action:hover {
+            background-color: #31a9e1 !important;
+            color: #FFF !important;
+        }
 
-    •	CRUD tài khoản cho tình nguyện viên (View, search, điều chỉnh nhóm máu)
+        .btn-details {
+            text-decoration: none;
+            color: #31a9e1;
+            padding: 8px 12px;
+            display: block;
+            text-align: center;
+            margin-right: 16px;
+            border-radius: 16px;
+        }
 
-    •	Nhận thông báo, chấp nhận/từ chối yêu cầu nhận máu cho bản thân – người thân của tình nguyện viên
-</p>
+        .btn-edit {
+            text-decoration: none;
+            color: #FFF;
+            background-color: #ffc107;
+            padding: 8px 12px;
+            display: block;
+            text-align: center;
+            margin-left: 8px;
+            border-radius: 16px;
+            width: 80px;
+        }
 
-@if(HttpContext.Session.GetString("role") != null) {
-    <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
-    <form method="post" asp-page-handler="Logout">
-        <div class="form-group">
-            <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
-        </div>
-    </form>
-} else {
-    {
-        HttpContext.Session.SetString("action", "RegisterCampaignsList");
-    }
-    <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
-}
+        .btn-edit:hover {
+            color: #FFF !important;
+            background-color: #ffcd36;
+        }
 
-@if(HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin") {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].BloodTypeRequired)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].AddressDetails)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].District)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Campaigns[0].EndDate)
-                </th>
-                @if (HttpContext.Session.GetString("role") != "Organization")
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => model.Campaigns[0].Organization.Name)
-                    </th>
-                }
-                @if (HttpContext.Session.GetString("role") == "Organization")
-                {
-                    <th></th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Campaigns)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodTypeRequired)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AddressDetails)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.District)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    @if (HttpContext.Session.GetString("role") != "Organization")
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Organization.Name)
-                        </td>
-                    }
+        .btn-delete {
+            text-decoration: none;
+            color: #FFF;
+            padding: 8px 12px;
+            background-color: #dc3545;
+            display: block;
+            text-align: center;
+            margin-left: 8px;
+            border-radius: 16px;
+            margin-top: 8px;
+            width: 80px;
+        }
+
+        .btn-delete:hover {
+            color: #FFF !important;
+            background-color: #f7374a;
+        }
+
+        .btn-create {
+            text-decoration: none;
+            padding: 8px 16px;
+            padding-right: 24px;
+            background: #31a9e1;
+            color: #fff;
+            border-radius: 12px;
+        }
+
+        .btn-create:hover {
+            background: #37517E;
+            color: #fff;
+        }
+
+        .btn-booking {
+            text-decoration: none;
+            color: #FFF;
+            background-color: #31a9e1;
+            padding: 8px 12px;
+            display: block;
+            text-align: center;
+            margin-right: 16px;
+            border-radius: 16px;
+            font-weight: 500;
+        }
+
+        .btn-booking:hover {
+            background-color: #37517E;
+            color: #FFF;
+        }
+    </style>
+    <header id="header" class="fixed-top " style="background-color: #37517e;">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <nav id="navbar" class="navbar">
+                <ul>
                     @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
                     {
-                        <td>
-                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                        </td>
-                        <td>
-                            <a asp-page="./Register" asp-route-campaignId="@item.Id">Đặt lịch</a>
-                        </td>
+                        <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
                     }
-                    @if (HttpContext.Session.GetString("role") == "Organization")
+
+                    @if (HttpContext.Session.GetString("role") != null)
                     {
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
+                        <li>
+                            <div class="form-group">
+                                <div class="dropdown">
+                                    <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
+                                        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+                                        {
+                                            <li><button class="dropdown-item btn-action" type="submit">Thông tin cá nhân</button></li>
+                                            <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
+                                        }
+                                        <form method="post" asp-page-handler="Logout">
+                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                        </form>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                     }
-                </tr>
+                    else
+                    {
+                        HttpContext.Session.SetString("action", "RegisterCampaignsList");
+                        <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
+                    }
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
+
+    <!-- End Header -->
+    <main id="main" style="margin-top: 120px; margin-bottom: 48px; padding: 0 40px; ">
+        <h3 style="text-align: left; margin-bottom: 24px; color: #37517E; ">Thông tin chiến dịch hiến máu</h3><hr />
+        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Organization")
+        {
+            <p style="margin-top: 24px">
+                <a class="btn-create" asp-page="Create"><i class="bi bi-plus-lg"></i> Tạo mới</a>
+            </p>
+        }
+
+        <section style="padding: 0">
+            @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
+            {
+                @foreach (var item in Model.Campaigns)
+                {
+                    <div class="card mb-3 mt-2" style="max-width: 680px; display: inline-table; margin-right: 24px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./img/hienmau.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                                    <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Loại máu cần: @Html.DisplayFor(modelItem => item.BloodTypeRequired)</p>
+                                    <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Địa chỉ: @Html.DisplayFor(modelItem => item.AddressDetails), Quận @Html.DisplayFor(modelItem => item.District), Thành phố/Tỉnh @Html.DisplayFor(modelItem => item.City)</p>
+                                    @if (HttpContext.Session.GetString("role") != "Organization")
+                                    {
+                                        <p class="card-text"  style="margin-bottom: 8px; font-size: 14px">
+                                            Tên tổ chức: @Html.DisplayFor(modelItem => item.Organization.Name)
+                                        </p>
+                                    }
+                                    <p class="card-text"><small class="text-muted">Thời gian: Từ @Html.DisplayFor(modelItem => item.StartDate) đến @Html.DisplayFor(modelItem => item.EndDate)</small></p>
+                                </div>
+                            </div>
+                            <div style="margin: auto;" class="col-md-2 d-block">
+                                @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
+                                {
+                                    <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Details ></a>
+                                    <a class="btn-booking" asp-page="./Register" asp-route-id="@item.Id">Đặt lịch</a>
+                                }
+                                @if (HttpContext.Session.GetString("role") == "Organization")
+                                {
+                                    <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn-edit" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn-delete" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <h6>Bạn không có quyền truy cập trang này! Trở về <a asp-page="/Organizations/Index">Trang chủ</a></h6>
-}
+            else
+            {
+                <h6>Bạn không có quyền truy cập trang này! Trở về <a asp-page="/Organizations/Index">Trang chủ</a></h6>
+            }
+        </section>
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>BloodDonor</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by Happy 3 Friends
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</body>
+</html>
