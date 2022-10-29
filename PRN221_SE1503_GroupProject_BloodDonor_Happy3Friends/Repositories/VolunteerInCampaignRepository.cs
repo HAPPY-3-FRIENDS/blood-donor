@@ -17,6 +17,8 @@ namespace Repositories
 
         public VolunteerInCampaign GetVolunteerInCampaignById(int volunteerInCampaignId) => VolunteerInCampaignDAO.Instance.GetVolunteerInCampaignById(volunteerInCampaignId);
 
+        public List<VolunteerInCampaign> GetVolunteerInCampaignsByVolunteerId(string volunteerId) => VolunteerInCampaignDAO.Instance.GetVolunteerInCampaignsByVolunteerId(volunteerId);
+
         public List<VolunteerInCampaign> GetVolunteerInCampaignsByCampaignId(int campaignId) => VolunteerInCampaignDAO.Instance.GetVolunteerInCampaignsByCampaignId(campaignId);
 
         public void UpdateVolunteerInCampaign(VolunteerInCampaign volunteerInCampaign) => VolunteerInCampaignDAO.Instance.UpdateVolunteerInCampaign(volunteerInCampaign);

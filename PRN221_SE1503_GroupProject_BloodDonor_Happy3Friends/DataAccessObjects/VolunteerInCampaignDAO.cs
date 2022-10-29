@@ -77,6 +77,30 @@ namespace DataAccessObjects
             return volunteerInCampaigns;
         }
 
+        public List<VolunteerInCampaign> GetVolunteerInCampaignsByVolunteerId(string volunteerId)
+        {
+            List<VolunteerInCampaign> volunteerInCampaigns;
+            try
+            {
+                var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).Where(v => v.VolunteerId == volunteerId).ToList();
+                if (volunteerInCampaigns.Count > 0)
+                {
+                    volunteerInCampaigns.ForEach(v =>
+                    {
+                        v.BloodType = EnumExtensions.GetDisplayName(v.BloodType.ToEnum<BloodType>());
+                        v.Status = EnumExtensions.GetDisplayName(v.Status.ToEnum<VolunteerInCampaignStatus>());
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return volunteerInCampaigns;
+        }
+
         public VolunteerInCampaign GetVolunteerInCampaignById(int volunteerInCampaignId)
         {
             VolunteerInCampaign volunteerInCampaign = null;

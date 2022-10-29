@@ -11,6 +11,7 @@ namespace Repositories.IRepositories
     {
         public List<VolunteerInCampaign> GetVolunteerInCampaigns();
         public List<VolunteerInCampaign> GetVolunteerInCampaignsByCampaignId(int campaignId);
+        public List<VolunteerInCampaign> GetVolunteerInCampaignsByVolunteerId(string volunteerId);
         public VolunteerInCampaign GetVolunteerInCampaignById(int volunteerInCampaignId);
         public void CreateVolunteerInCampaign(VolunteerInCampaign volunteerInCampaign);
         public void UpdateVolunteerInCampaign(VolunteerInCampaign volunteerInCampaign);
