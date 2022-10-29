@@ -39,23 +39,30 @@
           <li><a class="nav-link scrollto" href="#rule">Tiêu chuẩn</a></li>
           <li><a class="nav-link scrollto" href="#benefit">Quyền lợi</a></li>
           <li><a class="nav-link scrollto" href="#about">Về chúng tôi</a></li>
-          @if (HttpContext.Session.GetString("role") == "Volunteer") {
-            <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
-            <li>
-                @if (HttpContext.Session.GetString("role") != null)
-                {
-                    <form method="post" asp-page-handler="Logout">
-                        <div class="form-group">
-                            <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất (Xổ xuống từ tên + volun info + donated his + ...)</button>
+            @if (HttpContext.Session.GetString("role") != null)
+            {
+                <li>
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: none;">
+                                @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+                                {
+                                    <li><a class="btn-action dropdown-item" style="color: #FFF" href="#">Thông tin cá nhân</a></li>
+                                    <li><a class="btn-action dropdown-item" style="color: #FFF" href="#">Lịch sử hiến máu</a></li>
+                                }
+                                <form method="post" asp-page-handler="Logout">
+                                    <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                </form>
+                            </ul>
                         </div>
-                    </form>
-                }
-            </li>
-          }
-          else
-          {
-            <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
-          }
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
+            }
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

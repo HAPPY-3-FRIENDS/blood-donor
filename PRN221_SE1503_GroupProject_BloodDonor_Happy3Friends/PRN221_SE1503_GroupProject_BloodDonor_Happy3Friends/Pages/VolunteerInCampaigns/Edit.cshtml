@@ -1,0 +1,75 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>VolunteerInCampaign</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VolunteerInCampaign.Id" />
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.VolunteerId" class="control-label"></label>
+                <select asp-for="VolunteerInCampaign.VolunteerId" class="form-control" asp-items="ViewBag.VolunteerId"></select>
+                <span asp-validation-for="VolunteerInCampaign.VolunteerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.CampaignId" class="control-label"></label>
+                <select asp-for="VolunteerInCampaign.CampaignId" class="form-control" asp-items="ViewBag.CampaignId"></select>
+                <span asp-validation-for="VolunteerInCampaign.CampaignId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.BloodType" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.BloodType" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.BloodType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.BloodAmount" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.BloodAmount" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.BloodAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.VolunteerHealthId" class="control-label"></label>
+                <select asp-for="VolunteerInCampaign.VolunteerHealthId" class="form-control" asp-items="ViewBag.VolunteerHealthId"></select>
+                <span asp-validation-for="VolunteerInCampaign.VolunteerHealthId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.RegistrationDate" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.RegistrationDate" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.RegistrationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.DonatedDate" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.DonatedDate" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.DonatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.Status" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.Status" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerInCampaign.RejectedReason" class="control-label"></label>
+                <input asp-for="VolunteerInCampaign.RejectedReason" class="form-control" />
+                <span asp-validation-for="VolunteerInCampaign.RejectedReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

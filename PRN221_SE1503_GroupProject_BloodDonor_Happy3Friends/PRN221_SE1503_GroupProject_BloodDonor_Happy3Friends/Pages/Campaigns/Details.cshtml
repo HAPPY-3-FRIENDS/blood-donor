@@ -73,8 +73,9 @@
 <div>
     @if (HttpContext.Session.GetString("role") == "Organization")
     {
-        <a asp-page="./Edit" asp-route-id="@Model.Campaign.Id">Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.Campaign.Id">Edit</a> <span> | </span>
+    } else if (HttpContext.Session.GetString("role") == "Volunteer") {
+        <a asp-page="./Register" asp-route-campaignId="@Model.Campaign.Id">Đặt lịch</a> <span> | </span>
     }
-    <span> | </span>
     <a asp-page="./Index">Back to List</a>
 </div>

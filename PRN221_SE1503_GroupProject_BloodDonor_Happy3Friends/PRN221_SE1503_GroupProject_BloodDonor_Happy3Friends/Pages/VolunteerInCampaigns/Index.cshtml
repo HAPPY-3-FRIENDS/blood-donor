@@ -1,0 +1,84 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].BloodType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].BloodAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].DonatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].RejectedReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Campaign)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Volunteer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].VolunteerHealth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.VolunteerInCampaign) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RejectedReason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.BloodTypeRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerHealth.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

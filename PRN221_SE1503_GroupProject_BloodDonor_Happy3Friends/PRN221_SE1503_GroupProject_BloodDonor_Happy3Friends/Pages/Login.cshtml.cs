@@ -25,7 +25,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
         [BindProperty, Required]
         public string Password { get; set; }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int campaignId)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +62,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                     HttpContext.Session.SetString("name", volunteer.Name);
                     if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaign")
                     {
-                        return RedirectToPage("/Campaigns/Register");
+                        return RedirectToPage("/Campaigns/Register", new
+                        {
+                            campaignId = campaignId
+                        });
                     } 
                     else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaignsList")
                     {

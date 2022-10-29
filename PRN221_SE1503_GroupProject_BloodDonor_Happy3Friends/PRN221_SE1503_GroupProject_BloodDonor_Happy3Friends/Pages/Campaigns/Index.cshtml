@@ -116,7 +116,7 @@
                             <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
                         </td>
                         <td>
-                            <a asp-page="./Register" asp-route-id="@item.Id">Đặt lịch</a>
+                            <a asp-page="./Register" asp-route-campaignId="@item.Id">Đặt lịch</a>
                         </td>
                     }
                     @if (HttpContext.Session.GetString("role") == "Organization")

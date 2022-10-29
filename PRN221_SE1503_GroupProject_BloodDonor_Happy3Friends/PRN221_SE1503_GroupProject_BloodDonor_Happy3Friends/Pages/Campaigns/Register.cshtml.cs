@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepositories;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
@@ -25,14 +24,40 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
         [BindProperty, Required]
         public string Password { get; set; }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public Volunteer Volunteer { get; set; }
+
+        [BindProperty]
+        public Campaign Campaign { get; set; }
+
+        [BindProperty]
+        public VolunteerInCampaign VolunteerInCampaign { get; set; }
+
+        public IActionResult OnGet(int campaignId)
         {
-            if (HttpContext.Session.GetString("role") == null && HttpContext.Session.GetString("role") != "Volunteer")
+            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Volunteer")
             {
                 HttpContext.Session.SetString("action", "RegisterCampaign");
-                return RedirectToPage("/Login");
+                return RedirectToPage("/Login", new
+                {
+                    campaignId = campaignId
+                });
+            }
+            else
+            {
+                Volunteer = _volunteerRepository.GetVolunteerByPhone(HttpContext.Session.GetString("phone"));
+
+                if (Volunteer == null)
+                {
+                    return NotFound();
+                }
             }
 
+            return Page();
+        }
+
+        public IActionResult OnPostCampaignRegister()
+        {
             return Page();
         }
 
