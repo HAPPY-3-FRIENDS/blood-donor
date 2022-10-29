@@ -36,11 +36,14 @@ namespace DataAccessObjects
                     .Include(v => v.Campaign)
                     .Include(v => v.Volunteer)
                     .ToList();
-                volunteerInCampaigns.ForEach(v =>
+                if (volunteerInCampaigns.Count > 0)
                 {
-                    v.BloodType = EnumExtensions.GetDisplayName(v.BloodType.ToEnum<BloodType>());
-                    v.Status = EnumExtensions.GetDisplayName(v.Status.ToEnum<VolunteerInCampaignStatus>());
-                });
+                    volunteerInCampaigns.ForEach(v =>
+                    {
+                        v.BloodType = EnumExtensions.GetDisplayName(v.BloodType.ToEnum<BloodType>());
+                        v.Status = EnumExtensions.GetDisplayName(v.Status.ToEnum<VolunteerInCampaignStatus>());
+                    });
+                }
             } 
             catch (Exception ex)
             {
@@ -57,11 +60,14 @@ namespace DataAccessObjects
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).Where(v => v.CampaignId == campaignId).ToList();
-                volunteerInCampaigns.ForEach(v =>
+                if (volunteerInCampaigns.Count > 0)
                 {
-                    v.BloodType = EnumExtensions.GetDisplayName(v.BloodType.ToEnum<BloodType>());
-                    v.Status = EnumExtensions.GetDisplayName(v.Status.ToEnum<VolunteerInCampaignStatus>());
-                });
+                    volunteerInCampaigns.ForEach(v =>
+                    {
+                        v.BloodType = EnumExtensions.GetDisplayName(v.BloodType.ToEnum<BloodType>());
+                        v.Status = EnumExtensions.GetDisplayName(v.Status.ToEnum<VolunteerInCampaignStatus>());
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -78,9 +84,11 @@ namespace DataAccessObjects
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 volunteerInCampaign = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).SingleOrDefault(v => v.Id == volunteerInCampaignId);
-                volunteerInCampaign.Status = EnumExtensions.GetDisplayName(volunteerInCampaign.Status.ToEnum<VolunteerInCampaignStatus>());
-                volunteerInCampaign.BloodType = EnumExtensions.GetDisplayName(volunteerInCampaign.BloodType.ToEnum<BloodType>());
-                
+                if (volunteerInCampaign != null)
+                {
+                    volunteerInCampaign.Status = EnumExtensions.GetDisplayName(volunteerInCampaign.Status.ToEnum<VolunteerInCampaignStatus>());
+                    volunteerInCampaign.BloodType = EnumExtensions.GetDisplayName(volunteerInCampaign.BloodType.ToEnum<BloodType>());
+                }
             }
             catch (Exception ex)
             {

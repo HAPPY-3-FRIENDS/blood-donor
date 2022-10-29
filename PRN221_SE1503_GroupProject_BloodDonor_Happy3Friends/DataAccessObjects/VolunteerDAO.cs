@@ -50,7 +50,10 @@ namespace DataAccessObjects
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 volunteer = bloodDonorContext.Volunteers.SingleOrDefault(x => x.Phone == phone);
-                volunteer.BloodType = EnumExtensions.GetDisplayName(volunteer.BloodType.ToEnum<BloodType>());
+                if (volunteer != null)
+                {
+                    volunteer.BloodType = EnumExtensions.GetDisplayName(volunteer.BloodType.ToEnum<BloodType>());
+                }
             }
             catch (Exception ex)
             {
