@@ -1,84 +1,152 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "History";
 }
-
-<h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+Đây là trang lịch sử đăng ký hiến máu (Đừng xóa note này, hãy comment lại nhé bạn Phượng)
+    Hiển thị:
+        - Role volunteer: hiện lịch sử đăng ký hiến máu của tất cả các chiến dịch [Done]
+        - Role organization: quản lý danh sách volunteer trong 1 campaign cụ thể (Từ trang list campaign => nhấn details => qua trang này) [Done]
+        - Role Admin hoặc không đăng nhập: không có quyền truy cập trang này [Done]
+
+    Action trong trang này:
+    1. Detail: 
+        - Role volunteer: Xem thông tin sức khỏe, chiến dịch nào đã tham gia, lượng máu, nhóm máu
+        - Role organization: Xem thông tin sức khỏe của volunteer đó, edit được nhóm máu, sức khỏe của volunteer
+
+    2. Edit:
+        - Role volunteer: Không có quyền này
+        - Role organization: 
+            + Edit status của tình nguyện viên [Done]
+            + Edit nhóm máu của tình nguyện viên [Done]
+            + Edit lượng máu hiến
+            + Edit thông tin sức khỏe,...
+            + ...
+
+    3. Delete:
+        - Role volunteer: Hủy đăng kí chiến dịch (status thành hủy đăng ký)
+        - Role organization: ...
+
+    4. Create:
+        - Role volunteer: Khi bấm create sẽ được chuyển sang trang list các campaign để chọn campaign đăng ký [Done]
+        - Role organization: Đăng ký campaign giúp volunteer
+
+    5. Search:
+        - Dĩ nhiên là có rồi, mà từ từ làm :))))
+
+    Constraint/Validation:
+    1. Volunteer hiến máu cách nhau 3 tháng
+    2. Volunteer khi đã đăng ký một chiến dịch => Không thể đăng ký một chiến dịch khác
+    3. Ngày sinh của volunteer không hợp lệ (chưa đủ 18 tuổi)
+    4. Sau khi organization cập nhật bloodType => cập nhật lại cho info Volunteer
+    5. ...
+
+    Status của volunteer trong 1 campaign:
+    1. NEW: Mới đăng ký
+    2. JOINED: Đã tham gia
+    3. CANCEL: Hủy đăng ký
+    4. OVERDUE: Quá hạn đăng ký(Đã đăng ký nhưng đến ngày không tham gia)
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].BloodType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].BloodAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].RegistrationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].DonatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].RejectedReason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Campaign)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].Volunteer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign[0].VolunteerHealth)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.VolunteerInCampaign) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RejectedReason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Campaign.BloodTypeRequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volunteer.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolunteerHealth.Id)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin") {
+    <form method="post" asp-page-handler="Logout">
+        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+    </form>
+    @if (HttpContext.Session.GetString("role") == "Volunteer") {
+        <p>
+            <a asp-page="/Campaigns/Index">Tìm và đăng ký một chiến dịch mới</a>
+        </p>
+    } else if (HttpContext.Session.GetString("role") == "Organization") {
+        <p>
+            <a asp-page="" asp-route-campaignId="@Request.Query["campaignId"]">Đăng ký giúp Volunteer chiến dịch này</a>
+        </p>
+        @*<p>
+            Nếu volunteer đã có tài khoản: đăng nhập giúp volunteer => đăng ký chiến dịch này
+            Nếu volunteer chưa có tài khoản: tạo tài khoản giúp volunteer => đăng ký chiến dịch này
+        </p>*@
+    }
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Volunteer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].BloodType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].BloodAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].RegistrationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].DonatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].RejectedReason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Campaign)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].VolunteerHealth)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.VolunteerInCampaigns)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Volunteer.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DonatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RejectedReason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Campaign.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VolunteerHealth.Id)
+                    </td>
+                    <td>
+                        @if (HttpContext.Session.GetString("role") == "Organization") {
+                            <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Edit</a> <span>|</span>
+                        }
+                        <a asp-page="./Details" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+}

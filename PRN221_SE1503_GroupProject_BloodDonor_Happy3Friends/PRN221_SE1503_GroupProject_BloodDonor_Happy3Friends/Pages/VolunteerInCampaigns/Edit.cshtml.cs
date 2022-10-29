@@ -1,61 +1,52 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns
 {
     public class EditModel : PageModel
     {
-        private readonly BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public EditModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public EditModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
             _context = context;
+            _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 
         [BindProperty]
         public VolunteerInCampaign VolunteerInCampaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            VolunteerInCampaign = await _context.VolunteerInCampaigns
-                .Include(v => v.Campaign)
-                .Include(v => v.Volunteer)
-                .Include(v => v.VolunteerHealth).FirstOrDefaultAsync(m => m.Id == id);
+            VolunteerInCampaign = _volunteerInCampaignRepository.GetVolunteerInCampaignById(id);
 
             if (VolunteerInCampaign == null)
             {
                 return NotFound();
             }
-           ViewData["CampaignId"] = new SelectList(_context.Campaigns, "Id", "BloodTypeRequired");
-           ViewData["VolunteerId"] = new SelectList(_context.Volunteers, "Phone", "Phone");
-           ViewData["VolunteerHealthId"] = new SelectList(_context.VolunteerHealths, "Id", "Id");
+
+            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "Id", "Name");
+            ViewData["VolunteerId"] = new SelectList(_context.Volunteers, "Phone", "Name");
+            ViewData["VolunteerHealthId"] = new SelectList(_context.VolunteerHealths, "Id", "Id");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(VolunteerInCampaign).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _volunteerInCampaignRepository.UpdateVolunteerInCampaign(VolunteerInCampaign);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,12 +60,21 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/VolunteerInCampaigns/Index", new
+            {
+                campaignId = VolunteerInCampaign.CampaignId
+            });
         }
 
         private bool VolunteerInCampaignExists(int id)
         {
-            return _context.VolunteerInCampaigns.Any(e => e.Id == id);
+            return _volunteerInCampaignRepository.GetVolunteerInCampaignById(id) != null;
+        }
+
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -23,8 +23,8 @@
     <link href="~/lib/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
     <link href="~/lib/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
-
 </head>
+
 <body id="body-container" style="height: 100vh; position: relative;"> 
     <style>
         #body-container::-webkit-scrollbar {
@@ -133,6 +133,7 @@
             }
         </div>
     </nav>
+
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
     {
         <div class="header-btn-back">
@@ -193,23 +194,24 @@
     {
         <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
     }
+
     <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
-            <div class="container footer-bottom clearfix">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 footer-contact">
-                            <h3>BloodDonor</h3>
-                        </div>
+        <div class="container footer-bottom clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>BloodDonor</h3>
                     </div>
                 </div>
-                <div class="copyright">
-                    &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    Designed by Happy 3 Friends
-                </div>
             </div>
-        </footer><!-- End Footer -->
+            <div class="copyright">
+                &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by Happy 3 Friends
+            </div>
+        </div>
+    </footer><!-- End Footer -->
 </body>
 </html>
 

@@ -197,11 +197,11 @@
                                 @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
                                 {
                                     <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Details ></a>
-                                    <a class="btn-booking" asp-page="./Register" asp-route-id="@item.Id">Đặt lịch</a>
+                                    <a class="btn-booking" asp-page="./Register" asp-route-campaignId="@item.Id">Đặt lịch</a>
                                 }
                                 @if (HttpContext.Session.GetString("role") == "Organization")
                                 {
-                                    <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn-details" asp-page="/VolunteerInCampaigns/Index" asp-route-campaignId="@item.Id">Details</a>
                                     <a class="btn-edit" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                                     <a class="btn-delete" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                                 }

@@ -6,7 +6,6 @@
     ViewData["Title"] = "Create";
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,21 +43,21 @@
             margin-top: 24px;
         }
 
-            #table-container::-webkit-scrollbar {
-                width: 6px;
-                background-color: #F5F5F5;
-            }
+        #table-container::-webkit-scrollbar {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
 
-            #table-container::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-            }
+        #table-container::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+        }
 
-            #table-container::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                background-color: #F5F5F5;
-                border-radius: 10px;
-            }
+        #table-container::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+            border-radius: 10px;
+        }
 
         .header-row {
             color: #FFF;
@@ -104,80 +103,73 @@
             color: #375e7e;
         }
 
-            .btn-back:hover {
-                color: #37517e;
-            }
+        .btn-back:hover {
+            color: #37517e;
+        }
 
         .btn-save {
             background-color: #375e7e;
         }
 
-            .btn-save:hover {
-                background-color: #37517e;
-            }
+        .btn-save:hover {
+            background-color: #37517e;
+        }
     </style>
 
+    <header id="header" class="fixed-top " style="background-color: #37517e;">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <nav id="navbar" class="navbar">
+                <ul>
+                    @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
+                    {
+                        <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
+                    }
 
-    @if (HttpContext.Session.GetString("role") != null
-    && HttpContext.Session.GetString("role") == "Organization")
-    {
-        <header id="header" class="fixed-top " style="background-color: #37517e;">
-            <div class="container d-flex align-items-center">
-                <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-                <nav id="navbar" class="navbar">
-                    <ul>
-                        @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
-                        {
-                            <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
-                            <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
-                            <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
-                        }
+                    @if (HttpContext.Session.GetString("role") != null)
+                    {
+                        <li>
+                            <div class="form-group">
+                                <div class="dropdown">
+                                    <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
+                                        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+                                        {
+                                            <li><button class="dropdown-item btn-action" type="submit">Thông tin cá nhân</button></li>
+                                            <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
+                                        }
 
-                        @if (HttpContext.Session.GetString("role") != null)
-                        {
-                            <li>
-                                <div class="form-group">
-                                    <div class="dropdown">
-                                        <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
-                                            @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
-                                            {
-                                                <li><button class="dropdown-item btn-action" type="submit">Thông tin cá nhân</button></li>
-                                                <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
-                                            }
-
-                                            <form method="post" asp-page-handler="Logout">
+                                        <form method="post" asp-page-handler="Logout">
                                             <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
-                                            </form>
-                                        </ul>
-                                    </div>
+                                        </form>
+                                    </ul>
                                 </div>
-                            </li>
-                        }
-                        else
-                        {
-                            HttpContext.Session.SetString("action", "RegisterCampaignsList");
-                            <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
-                        }
-                    </ul>
-                </nav>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("action", "RegisterCampaignsList");
+                        <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
+                    }
+                </ul>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
 
-                <!-- .navbar -->
-
-            </div>
-        </header>
+    @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Organization")
+    {
         <div class="header-btn-back" style="margin-top: 120px;">
             <a asp-page="./Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
-            <h3 class="header-back">Create Organization</h3>
+            <h3 class="header-back">Tạo chiến dịch</h3>
         </div>
 
-        @*    <p>
-    Nhóm máu yêu cầu xổ dropbox, fix cứng các loại: A, B, O, AB
-    </p>*@
         <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
-
             <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group col-md-4">
@@ -226,7 +218,6 @@
                 </div>
             </form>
         </div>
-
     }
     else
     {
@@ -250,7 +241,6 @@
             </div>
         </div>
     </footer><!-- End Footer -->
-
 </body>
 </html>
 
@@ -258,4 +248,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

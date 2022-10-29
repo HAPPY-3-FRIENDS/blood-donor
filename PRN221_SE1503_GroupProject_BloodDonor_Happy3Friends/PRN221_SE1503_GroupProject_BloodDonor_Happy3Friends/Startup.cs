@@ -27,6 +27,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
             services.AddScoped<IOrganizationRepository, OrganizationRepository>();
             services.AddScoped<IVolunteerRepository, VolunteerRepository>();
             services.AddScoped<ICampaignRepository, CampaignRepository>();
+            services.AddScoped<IVolunteerInCampaignRepository, VolunteerInCampaignRepository>();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

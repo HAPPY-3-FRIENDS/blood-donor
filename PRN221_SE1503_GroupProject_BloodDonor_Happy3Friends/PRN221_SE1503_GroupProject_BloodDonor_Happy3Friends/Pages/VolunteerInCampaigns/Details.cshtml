@@ -1,73 +1,86 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin") {
+    <form method="post" asp-page-handler="Logout">
+        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+    </form>
 
-<div>
-    <h4>VolunteerInCampaign</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.BloodType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodAmount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.BloodAmount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.RegistrationDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.RegistrationDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.DonatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.DonatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.RejectedReason)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.RejectedReason)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.Campaign)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.Campaign.BloodTypeRequired)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.VolunteerInCampaign.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+    <h1>Details</h1>
+
+    <div>
+        <h4>VolunteerInCampaign</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.BloodType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodAmount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.BloodAmount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.RegistrationDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.RegistrationDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.DonatedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.DonatedDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.RejectedReason)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.RejectedReason)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Campaign)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.Campaign.BloodTypeRequired)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Id)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @if (HttpContext.Session.GetString("role") == "Organization") {
+            <a asp-page="./Edit" asp-route-id="@Model.VolunteerInCampaign.Id" asp-route-campaignId="@Model.VolunteerInCampaign.CampaignId">Edit</a> <span>|</span>
+        }
+        <a asp-page="./Index" asp-route-campaignId="@Model.VolunteerInCampaign.CampaignId">Back to List</a>
+    </div>
+}
+else
+{
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+}

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories.IRepositories;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
@@ -10,12 +11,14 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
     public class RegisterModel : PageModel
     {
         private readonly IVolunteerRepository _volunteerRepository;
-        private readonly IOrganizationRepository _organizationRepository;
+        private readonly ICampaignRepository _campaignRepository;
+        private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public RegisterModel(IVolunteerRepository volunteerRepository, IOrganizationRepository organizationRepository)
+        public RegisterModel(IVolunteerRepository volunteerRepository, ICampaignRepository campaignRepository, IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
             _volunteerRepository = volunteerRepository;
-            _organizationRepository = organizationRepository;
+            _campaignRepository = campaignRepository;
+            _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 
         [BindProperty, Required]
@@ -58,7 +61,21 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 
         public IActionResult OnPostCampaignRegister()
         {
-            return Page();
+            string volunteerId = HttpContext.Session.GetString("phone");
+            DateTime registrationDate = DateTime.Now;
+            string bloodType = _volunteerRepository.GetVolunteerByPhone(volunteerId).BloodType;
+
+            VolunteerInCampaign volunteerInCampaign = new VolunteerInCampaign
+            {
+                VolunteerId = volunteerId,
+                CampaignId = Campaign.Id,
+                RegistrationDate = registrationDate,
+                BloodType = bloodType
+            };
+
+            _volunteerInCampaignRepository.CreateVolunteerInCampaign(volunteerInCampaign);
+
+            return RedirectToPage("/VolunteerInCampaigns/Index");
         }
 
         public IActionResult OnPostLogout()

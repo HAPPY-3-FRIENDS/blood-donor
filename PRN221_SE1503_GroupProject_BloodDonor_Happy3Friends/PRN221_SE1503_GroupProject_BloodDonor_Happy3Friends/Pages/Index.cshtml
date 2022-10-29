@@ -63,10 +63,10 @@
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
                                             <li><a class="btn-action dropdown-item" style="color: #FFF" href="#">Thông tin cá nhân</a></li>
-                                            <li><a class="btn-action dropdown-item" style="color: #FFF" href="#">Lịch sử hiến máu</a></li>
+                                            <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
-                                        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
                                         </form>
                                     </ul>
                                 </div>
