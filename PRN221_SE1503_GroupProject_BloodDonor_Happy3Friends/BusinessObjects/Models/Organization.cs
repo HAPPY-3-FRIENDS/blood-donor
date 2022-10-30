@@ -19,9 +19,8 @@ namespace BusinessObjects.Models
         [RegularExpression(@"^[a-zA-Z0-9_-]{8,20}$", ErrorMessage = "Tên đăng nhập chỉ có thể bao gồm chữ cái, _ và - có độ dài từ 8 đến 20 ký tự!")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Mật khẩu là bắt buộc")]
-        [DataType(DataType.Password)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một số")]
+        [Required(ErrorMessage = "Mật khẩu là bắt buộc!")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một số!")]
         [StringLength(16, ErrorMessage = "Mật khẩu không dài hơn 16 ký tự!")]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }

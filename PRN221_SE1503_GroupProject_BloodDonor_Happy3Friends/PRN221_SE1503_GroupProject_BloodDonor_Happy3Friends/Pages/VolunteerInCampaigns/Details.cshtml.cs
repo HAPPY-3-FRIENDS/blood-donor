@@ -3,31 +3,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns
 {
     public class DetailsModel : PageModel
     {
         private readonly BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public DetailsModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public DetailsModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
             _context = context;
+            _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 
         public VolunteerInCampaign VolunteerInCampaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            VolunteerInCampaign = await _context.VolunteerInCampaigns
-                .Include(v => v.Campaign)
-                .Include(v => v.Volunteer)
-                .Include(v => v.VolunteerHealth).FirstOrDefaultAsync(m => m.Id == id);
+            VolunteerInCampaign = _volunteerInCampaignRepository.GetVolunteerInCampaignById(id);
 
             if (VolunteerInCampaign == null)
             {

@@ -14,7 +14,6 @@ namespace BusinessObjects.Models
         }
 
         [Required(ErrorMessage = "Số điện thoại là bắt buộc!")]
-        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Số điện thoại")]
         [RegularExpression(@"(0[3|5|7|8|9])+([0-9]{8})\b", ErrorMessage = "Số điện thoại không hợp lệ!")]
         public string Phone { get; set; }
@@ -23,18 +22,17 @@ namespace BusinessObjects.Models
         [Display(Name = "Họ và tên")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Số CMND/CCCD/Hộ Chiếu là bắt buộc")]
+        [Required(ErrorMessage = "Số CMND/CCCD/Hộ Chiếu là bắt buộc!")]
         [Display(Name = "Số CMND/CCCD/Hộ Chiếu")]
         public string IdentityNumber { get; set; }
 
-        [Required(ErrorMessage = "Mật khẩu là bắt buộc")]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Mật khẩu là bắt buộc!")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", ErrorMessage = "Tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một số")]
         [StringLength(16, ErrorMessage = "Mật khẩu không dài hơn 16 ký tự!")]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email không hợp lệ!")]
+        [RegularExpression(@"^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$", ErrorMessage = "Địa chỉ email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -50,11 +48,11 @@ namespace BusinessObjects.Models
         [Display(Name = "Quận, Huyện, Thành phố")]
         public string District { get; set; }
 
-        [Required(ErrorMessage = "Tỉnh, Thành phố là bắt buộc")]
+        [Required(ErrorMessage = "Tỉnh, Thành phố là bắt buộc!")]
         [Display(Name = "Tỉnh, Thành phố")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Nhóm máu là bắt buộc")]
+        [Required(ErrorMessage = "Nhóm máu là bắt buộc!")]
         [Display(Name = "Nhóm máu")]
         public string BloodType { get; set; }
 

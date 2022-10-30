@@ -11,13 +11,11 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
     public class RegisterModel : PageModel
     {
         private readonly IVolunteerRepository _volunteerRepository;
-        private readonly ICampaignRepository _campaignRepository;
         private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public RegisterModel(IVolunteerRepository volunteerRepository, ICampaignRepository campaignRepository, IVolunteerInCampaignRepository volunteerInCampaignRepository)
+        public RegisterModel(IVolunteerRepository volunteerRepository, IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
             _volunteerRepository = volunteerRepository;
-            _campaignRepository = campaignRepository;
             _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 
@@ -38,13 +36,22 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 
         public IActionResult OnGet(int campaignId)
         {
-            if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Volunteer")
+            if (HttpContext.Session.GetString("role") == null)
             {
                 HttpContext.Session.SetString("action", "RegisterCampaign");
                 return RedirectToPage("/Login", new
                 {
                     campaignId = campaignId
                 });
+            }
+            else if (HttpContext.Session.GetString("role") == "Organization")
+            {
+                Volunteer = _volunteerRepository.GetVolunteerByPhone(HttpContext.Session.GetString("volunteerPhone"));
+
+                if (Volunteer == null)
+                {
+                    return NotFound();
+                }
             }
             else
             {
@@ -59,23 +66,29 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
             return Page();
         }
 
-        public IActionResult OnPostCampaignRegister()
+        public IActionResult OnPostCampaignRegister(int campaignId)
         {
-            string volunteerId = HttpContext.Session.GetString("phone");
-            DateTime registrationDate = DateTime.Now;
-            string bloodType = _volunteerRepository.GetVolunteerByPhone(volunteerId).BloodType;
+            string volunteerId = "";
+            if (HttpContext.Session.GetString("role") == "Organization")
+            {
+                volunteerId = HttpContext.Session.GetString("volunteerPhone");
+            } else if (HttpContext.Session.GetString("role") == "Volunteer")
+            {
+                volunteerId = HttpContext.Session.GetString("phone");
+            }
 
             VolunteerInCampaign volunteerInCampaign = new VolunteerInCampaign
             {
                 VolunteerId = volunteerId,
                 CampaignId = Campaign.Id,
-                RegistrationDate = registrationDate,
-                BloodType = bloodType
             };
 
             _volunteerInCampaignRepository.CreateVolunteerInCampaign(volunteerInCampaign);
 
-            return RedirectToPage("/VolunteerInCampaigns/Index");
+            return RedirectToPage("/VolunteerInCampaigns/Index", new
+            {
+                campaignId = volunteerInCampaign.CampaignId,
+            });
         }
 
         public IActionResult OnPostLogout()

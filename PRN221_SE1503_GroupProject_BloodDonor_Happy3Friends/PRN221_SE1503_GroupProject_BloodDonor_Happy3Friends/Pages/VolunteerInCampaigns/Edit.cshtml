@@ -175,15 +175,11 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="VolunteerInCampaign.Id" />
                 <div class="form-group col-md-4">
-                    <label asp-for="VolunteerInCampaign.VolunteerId" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.VolunteerId" class="form-control" />
+                    <label asp-for="VolunteerInCampaign.Volunteer.Name" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.Volunteer.Name" disabled class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.VolunteerId" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-4">
-                    <label asp-for="VolunteerInCampaign.CampaignId" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.CampaignId" class="form-control" />
-                    <span asp-validation-for="VolunteerInCampaign.CampaignId" class="text-danger"></span>
-                </div>
+                <input asp-for="VolunteerInCampaign.CampaignId" class="form-control" hidden/>
                 @*<p>
             Blood Type xổ dropdown gồm 5 values: A, B, O, AB, Chưa xác định
             </p>*@
@@ -207,9 +203,9 @@
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.BloodAmount" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.BloodAmount" asp-items="ViewBag.VolunteerBloodAmount" class="form-select" aria-label="Default select example">
-                        <option asp-for="VolunteerInCampaign.BloodAmount" value="250">250ml</option>
-                        <option asp-for="VolunteerInCampaign.BloodAmount" value="350">350ml</option>
-                        <option asp-for="VolunteerInCampaign.BloodAmount" value="450">450ml</option>
+                        <option asp-for="VolunteerInCampaign.BloodAmount" value="250">250 ml</option>
+                        <option asp-for="VolunteerInCampaign.BloodAmount" value="350">350 ml</option>
+                        <option asp-for="VolunteerInCampaign.BloodAmount" value="450">450 ml</option>
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.BloodAmount" class="text-danger"></span>
                 </div>

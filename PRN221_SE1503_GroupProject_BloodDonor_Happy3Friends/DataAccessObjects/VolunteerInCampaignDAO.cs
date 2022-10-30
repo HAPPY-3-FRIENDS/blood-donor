@@ -59,7 +59,13 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).Where(v => v.CampaignId == campaignId).ToList();
+                volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns
+                    .Include(v => v.Campaign)
+                    .Include(v => v.Volunteer)
+                    .Where(v => v.CampaignId == campaignId)
+                    .OrderByDescending(v => v.DonatedDate)
+                    .ThenByDescending(v => v.RegistrationDate)
+                    .ToList();
                 if (volunteerInCampaigns.Count > 0)
                 {
                     volunteerInCampaigns.ForEach(v =>
@@ -83,7 +89,13 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).Where(v => v.VolunteerId == volunteerId).ToList();
+                volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns
+                    .Include(v => v.Campaign)
+                    .Include(v => v.Volunteer)
+                    .Where(v => v.VolunteerId == volunteerId)
+                    .OrderByDescending(v => v.DonatedDate)
+                    .ThenByDescending(v => v.RegistrationDate)
+                    .ToList();
                 if (volunteerInCampaigns.Count > 0)
                 {
                     volunteerInCampaigns.ForEach(v =>
@@ -127,8 +139,15 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+
+                volunteerInCampaign.BloodType = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId).BloodType;
                 volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
+
+                DateTime registrationDate = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"));
+                volunteerInCampaign.RegistrationDate = registrationDate;
+
                 volunteerInCampaign.Status = VolunteerInCampaignStatus.NEW.ToString();
+
                 bloodDonorContext.VolunteerInCampaigns.Add(volunteerInCampaign);
                 bloodDonorContext.SaveChanges();
             }

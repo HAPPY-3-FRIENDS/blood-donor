@@ -9,16 +9,17 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
 {
     public class IndexModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
         private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public IndexModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IVolunteerInCampaignRepository volunteerInCampaignRepository)
+        public IndexModel(IVolunteerInCampaignRepository volunteerInCampaignRepository, ICampaignRepository campaignRepository)
         {
-            _context = context;
             _volunteerInCampaignRepository = volunteerInCampaignRepository;
+            _campaignRepository = campaignRepository;
         }
 
         public IList<VolunteerInCampaign> VolunteerInCampaigns { get;set; }
+        public Campaign Campaign { get; set; }
 
         public void OnGet(int campaignId)
         {
@@ -29,6 +30,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
             if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Organization")
             {
                 VolunteerInCampaigns = _volunteerInCampaignRepository.GetVolunteerInCampaignsByCampaignId(campaignId);
+                Campaign = _campaignRepository.GetCampaignById(campaignId);
             }
         }
 

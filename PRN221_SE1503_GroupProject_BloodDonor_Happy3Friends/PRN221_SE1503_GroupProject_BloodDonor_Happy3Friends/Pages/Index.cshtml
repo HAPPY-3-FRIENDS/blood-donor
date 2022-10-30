@@ -62,7 +62,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: none;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><a class="btn-action dropdown-item" style="color: #FFF" href="#">Thông tin cá nhân</a></li>
+                                            <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="">Thông tin cá nhân</a></li>
                                             <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
@@ -91,7 +91,7 @@
                     <h1>Hiến máu vì cộng đồng</h1>
                     <h2>Chúng tôi rất trân trọng những đóng góp của bạn đến cộng đồng</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a style="text-decoration: none" href="#about" class="btn-get-started scrollto">Đặt lịch hẹn</a>
+                        <a style="text-decoration: none" class="btn-get-started scrollto" asp-page="/Campaigns/Index">Đặt lịch hẹn</a>
                         <a style="text-decoration: none" href="https://youtu.be/_evmdF4IAsY" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Quy trình</span></a>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
         [BindProperty]
         public Volunteer Volunteer { get; set; }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int campaignId)
         {
             if (!ModelState.IsValid)
             {
@@ -50,15 +50,27 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
             if (ModelState.IsValid)
             {
                 _volunteerRepository.CreateVolunteer(Volunteer);
-                if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaign")
+                if (HttpContext.Session.GetString("role") == null)
                 {
-                    return RedirectToPage("/Campaigns/Register");
-                } else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaignsList") {
-                    return RedirectToPage("/Campaigns/Index");
-                }
-                if (HttpContext.Session.GetString("role") == "Organization")
+                    if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaign")
+                    {
+                        return RedirectToPage("/Campaigns/Register", new
+                        {
+                            campaignId = campaignId
+                        });
+                    }
+                    else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaignsList")
+                    {
+                        return RedirectToPage("/Campaigns/Index");
+                    }
+                } 
+                else if (HttpContext.Session.GetString("role") == "Organization")
                 {
-                    return RedirectToPage("/Campaigns/Index");
+                    HttpContext.Session.SetString("volunteerPhone", Volunteer.Phone);
+                    return RedirectToPage("/Campaigns/Register", new
+                    {
+                        campaignId = campaignId
+                    });
                 }
             }
 

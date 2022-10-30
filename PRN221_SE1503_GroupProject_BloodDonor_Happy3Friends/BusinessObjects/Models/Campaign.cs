@@ -22,7 +22,7 @@ namespace BusinessObjects.Models
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Nhóm máu của chiến dịch là bắt buộc")]
+        [Required(ErrorMessage = "Nhóm máu của chiến dịch là bắt buộc!")]
         [Display(Name = "Nhóm máu yêu cầu")]
         public string BloodTypeRequired { get; set; }
 
@@ -33,16 +33,16 @@ namespace BusinessObjects.Models
         [Display(Name = "Quận, Huyện, Thành phố")]
         public string District { get; set; }
 
-        [Required(ErrorMessage = "Tỉnh, Thành phố là bắt buộc")]
+        [Required(ErrorMessage = "Tỉnh, Thành phố là bắt buộc!")]
         [Display(Name = "Tỉnh, Thành phố")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Ngày bắt đầu của chiến dịch là bắt buộc")]
+        [Required(ErrorMessage = "Ngày bắt đầu của chiến dịch là bắt buộc!")]
         [Display(Name = "Ngày bắt đầu")]
         [DataType(DataType.DateTime, ErrorMessage = "Ngày bắt đầu không hợp lệ!")]
         public DateTime StartDate { get; set; }
 
-        [Required(ErrorMessage = "Ngày kết thúc chiến dịch là bắt buộc")]
+        [Required(ErrorMessage = "Ngày kết thúc chiến dịch là bắt buộc!")]
         [Display(Name = "Ngày kết thúc")]
         [DataType(DataType.DateTime, ErrorMessage = "Ngày kết thúc không hợp lệ!")]
         public DateTime EndDate { get; set; }

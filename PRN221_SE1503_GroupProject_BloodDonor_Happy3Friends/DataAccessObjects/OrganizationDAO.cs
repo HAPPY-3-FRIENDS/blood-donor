@@ -49,7 +49,7 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                organization = bloodDonorContext.Organizations.SingleOrDefault(x => x.Id == organizationId);
+                organization = bloodDonorContext.Organizations.Include(x => x.Campaigns).SingleOrDefault(x => x.Id == organizationId);
             }
             catch (Exception ex)
             {
@@ -135,7 +135,7 @@ namespace DataAccessObjects
                 if (_organization != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                    if (bloodDonorContext.Organizations.Include(o => o.Campaigns).Where(o => o.Id == id).First() == null)
+                    if (_organization.Campaigns.Count == 0)
                     {
                         bloodDonorContext.Organizations.Remove(_organization);
                         bloodDonorContext.SaveChanges();

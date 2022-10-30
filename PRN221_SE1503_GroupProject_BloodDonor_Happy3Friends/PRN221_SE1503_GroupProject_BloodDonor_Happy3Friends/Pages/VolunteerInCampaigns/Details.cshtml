@@ -182,6 +182,18 @@
     <div>
         <dl class="row g-2 col-md-8 vw-25" style="padding: 24px 36px; margin: auto; border: 4px solid #37517e; border-radius: 8px; width: 50%;">
             <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Campaign)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.Campaign.Name)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Name)
+            </dd>
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodType)
             </dt>
             <dd class="col-sm-8">
@@ -216,18 +228,6 @@
             </dt>
             <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.VolunteerInCampaign.RejectedReason)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Campaign)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.VolunteerInCampaign.Campaign.BloodTypeRequired)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Phone)
             </dd>
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth)

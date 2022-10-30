@@ -11,9 +11,6 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
     {
         private readonly IOrganizationRepository _organizationRepository;
 
-        [BindProperty]
-        public Organization Organization { get; set; }
-
         public IndexModel(IOrganizationRepository organizationRepository)
         {
             _organizationRepository = organizationRepository;
@@ -32,15 +29,15 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Organization
             return RedirectToPage("/Index");
         }
 
-        public IActionResult OnPostDelete()
+        public IActionResult OnPostDelete(int itemId)
         {
             try
             {
-                _organizationRepository.DeleteOrganizationById(Organization.Id);
+                _organizationRepository.DeleteOrganizationById(itemId);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("Error", ex.Message);
+                TempData["Error"] = ex.Message;
             }
             return RedirectToPage("./Index");
         }

@@ -104,7 +104,7 @@
     </header>
 
     <section style="margin-top: 48px">
-        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+        @if (HttpContext.Session.GetString("role") == "Volunteer" || HttpContext.Session.GetString("role") == "Organization")
         {
             @*            @if (HttpContext.Session.GetString("role") != null)
         {

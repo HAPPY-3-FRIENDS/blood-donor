@@ -96,7 +96,7 @@
             }
         </div>
     </nav>
-
+    <p>@TempData["Error"]</p>
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
     {
         <div class="container">
@@ -138,28 +138,6 @@
                             <tbody>
                                 @foreach (var item in Model.Organizations)
                                 {
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="deleteModel" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content" style="border: none;">
-                                                <div class="modal-header" style="background-color: #37517e; color: #FFF;">
-                                                    <h5 class="modal-title" id="deleteModelLabel">Xóa tổ chức</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                                                </div>
-                                                <div class="modal-body" style="padding: 24px 24px;">
-                                                    Bạn có chắc chắn xóa tổ chức này?<br />
-                                                    Hành động này sẽ không thể hoàn tác!
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border: none; background-color: #37517e77;">Đóng</button>
-                                                    <form method="post" asp-page-handler="Delete">
-                                                        <input type="hidden" id="Id" value="@item.Id" asp-for="Organization.Id"/>
-                                                        <input type="submit" value="Delete" class="btn btn-danger"/>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <tr>
                                         <td class="body-row">
                                             @Html.DisplayFor(modelItem => item.Username)
@@ -186,13 +164,36 @@
                                             @Html.DisplayFor(modelItem => item.IsRedCross)
                                         </td>
                                         <td>
-                                            <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                            <a class="btn-action btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModel"><i class="bi bi-trash-fill"></i></a>
+                                            <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>                                          
+                                            <a class="btn-action btn-delete" data-id=@item.Id data-bs-toggle="modal" data-bs-target="#deleteModel"><i class="bi bi-trash-fill"></i></a>
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                     </table>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModel" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="border: none;">
+                            <div class="modal-header" style="background-color: #37517e; color: #FFF;">
+                                <h5 class="modal-title" id="deleteModelLabel">Xóa tổ chức</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                            </div>
+                            <div class="modal-body" style="padding: 24px 24px;">
+                                Bạn có chắc chắn xóa tổ chức này?<br />
+                                Hành động này sẽ không thể hoàn tác!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border: none; background-color: #37517e77;">Đóng</button>
+                                <form method="post" asp-page-handler="Delete">
+                                    <input name="itemId" type="hidden" id="itemId"/>
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -230,6 +231,15 @@
 </body>
 </html>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).on("click", ".btn-delete", function () {
+        var id = $(this).data('id');
+        console.log(id);
+        $("#itemId").val(id);
+    });
+</script>
 @*@if (HttpContext.Session.GetString("role") == "Admin")
 {
     <a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Xin chào tớ là Admin nè cậu</a>
