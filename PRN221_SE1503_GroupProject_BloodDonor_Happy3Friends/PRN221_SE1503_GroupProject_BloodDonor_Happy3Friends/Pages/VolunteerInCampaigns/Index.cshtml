@@ -6,7 +6,7 @@
     ViewData["Title"] = "History";
 }
 
-<p>
+@*<p>
 Đây là trang lịch sử đăng ký hiến máu (Đừng xóa note này, hãy comment lại nhé bạn Phượng)
     Hiển thị:
         - Role volunteer: hiện lịch sử đăng ký hiến máu của tất cả các chiến dịch [Done]
@@ -14,13 +14,13 @@
         - Role Admin hoặc không đăng nhập: không có quyền truy cập trang này [Done]
 
     Action trong trang này:
-    1. Detail: 
+    1. Detail:
         - Role volunteer: Xem thông tin sức khỏe, chiến dịch nào đã tham gia, lượng máu, nhóm máu
         - Role organization: Xem thông tin sức khỏe của volunteer đó, edit được nhóm máu, sức khỏe của volunteer
 
     2. Edit:
         - Role volunteer: Không có quyền này
-        - Role organization: 
+        - Role organization:
             + Edit status của tình nguyện viên [Done]
             + Edit nhóm máu của tình nguyện viên [Done]
             + Edit lượng máu hiến
@@ -50,103 +50,293 @@
     2. JOINED: Đã tham gia
     3. CANCEL: Hủy đăng ký
     4. OVERDUE: Quá hạn đăng ký(Đã đăng ký nhưng đến ngày không tham gia)
-</p>
+</p>*@
 
-@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin") {
-    <form method="post" asp-page-handler="Logout">
-        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
-    </form>
-    @if (HttpContext.Session.GetString("role") == "Volunteer") {
-        <p>
-            <a asp-page="/Campaigns/Index">Tìm và đăng ký một chiến dịch mới</a>
-        </p>
-    } else if (HttpContext.Session.GetString("role") == "Organization") {
-        <p>
-            <a asp-page="" asp-route-campaignId="@Request.Query["campaignId"]">Đăng ký giúp Volunteer chiến dịch này</a>
-        </p>
-        @*<p>
-            Nếu volunteer đã có tài khoản: đăng nhập giúp volunteer => đăng ký chiến dịch này
-            Nếu volunteer chưa có tài khoản: tạo tài khoản giúp volunteer => đăng ký chiến dịch này
-        </p>*@
-    }
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Volunteer)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].BloodType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].BloodAmount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].RegistrationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].DonatedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].RejectedReason)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Campaign)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].VolunteerHealth)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.VolunteerInCampaigns)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Volunteer.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodAmount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RegistrationDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DonatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RejectedReason)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Campaign.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VolunteerHealth.Id)
-                    </td>
-                    <td>
-                        @if (HttpContext.Session.GetString("role") == "Organization") {
-                            <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Edit</a> <span>|</span>
-                        }
-                        <a asp-page="./Details" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Delete</a>
-                    </td>
-                </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Vendor CSS Files -->
+    @*<link href="~/lib/aos/dist/aos.css" rel="stylesheet">*@
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/lib/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+            #table-container {
+                height: 300px;
+                overflow-y: scroll;
+                margin-top: 24px;
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
-}
+
+            #table-container::-webkit-scrollbar {
+                width: 6px;
+                background-color: #F5F5F5;
+            }
+
+            #table-container::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+            }
+
+            #table-container::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                background-color: #F5F5F5;
+                border-radius: 10px;
+            }
+
+            .header-row {
+                color: #FFF;
+                font-weight: 500;
+            }
+
+            .btn-action {
+                text-decoration: none;
+            }
+
+            .btn-edit {
+                color: #f2da02;
+                padding: 8px;
+                border-radius: 16px;
+                font-size: 16px;
+            }
+
+            .btn-details {
+                color: #37517e;
+                padding: 4px 16px;
+                border-radius: 16px;
+            }
+
+            .btn-delete {
+                color: #f50707;
+                padding: 8px;
+                border-radius: 16px;
+                font-size: 16px;
+            }
+
+                    .btn-register {
+                        text-decoration: none;
+                        background-color: #37517E;
+                        color: #FFF;
+                        padding: 12px 16px;
+                        border-radius: 12px;
+                        margin-bottom: 24px;
+                    }
+
+                    .btn-register:hover {
+                        background-color: #4b6797;
+                        color: #FFF;
+                    }
+
+                    .body-row {
+                        vertical-align: middle;
+                    }
+                    .header-btn-back {
+                        display: inline-flex;
+                        margin-bottom: 40px;
+                    }
+
+                    .header-back {
+                        margin-left: 24px;
+                        color: #37517e;
+                    }
+
+                    .btn-back {
+                        font-size: 24px;
+                        color: #375e7e;
+                    }
+
+                    .btn-back:hover {
+                        color: #37517e;
+                    }
+                    .btn-find-register {
+                        text-decoration: none;
+                        background-color: #37517E;
+                        color: #FFF;
+                        padding: 12px 16px;
+                        border-radius: 12px;
+                        font-weight: 500;
+                    }
+                    .btn-find-register:hover {
+                        background-color: #4b6797;
+                        color: #FFF;
+                    }
+
+    </style>
+    <header id="header" class="fixed-top " style="background-color: #37517e;">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <nav id="navbar" class="navbar">
+                <ul>
+                    @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
+                    {
+                        <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
+                    }
+
+                    @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin")
+                    {
+                        <li>
+                            <div class="form-group">
+                                <div class="dropdown">
+                                    <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
+                                        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+                                        {
+                                            <li><button class="dropdown-item btn-action" type="submit">Thông tin cá nhân</button></li>
+                                            <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
+                                        }
+                                        <form method="post" asp-page-handler="Logout">
+                                        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                        </form>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("action", "RegisterCampaignsList");
+                        <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
+                    }
+                </ul>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
+
+    <div style="margin-top: 108px; padding: 24px 48px">
+        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin")
+        {
+        <div class="header-btn-back">
+            <a asp-page="/Campaigns/Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
+            <h3 class="header-back">Thông tin đăng ký chiến dịch</h3>
+        </div>
+        <br />
+        }
+        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin")
+        {
+            @if (HttpContext.Session.GetString("role") == "Volunteer")
+            {
+                <a class="btn-find-register" asp-page="/Campaigns/Index">Tìm và đăng ký một chiến dịch mới</a>
+            }
+            else if (HttpContext.Session.GetString("role") == "Organization")
+            {
+
+                <a class="btn-register" asp-page="" asp-route-campaignId="@Request.Query["campaignId"]">Đăng ký giúp Volunteer chiến dịch này</a>
+
+                @*<p>
+        Nếu volunteer đã có tài khoản: đăng nhập giúp volunteer => đăng ký chiến dịch này
+        Nếu volunteer chưa có tài khoản: tạo tài khoản giúp volunteer => đăng ký chiến dịch này
+        </p>*@
+            }
+            <div id="table-container">
+                <table class="table table-bordered table-striped rounded-3 w-100">
+                    <thead style="background-color: #37517e; color: #FFF;">
+                        <tr>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Volunteer)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].BloodType)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].RegistrationDate)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Status)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].Campaign)
+                            </th>
+                            <th class="header-row">
+                                @Html.DisplayNameFor(model => model.VolunteerInCampaigns[0].VolunteerHealth)
+                            </th>
+                            <th></th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.VolunteerInCampaigns)
+                        {
+                            <tr>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Volunteer.Name)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.BloodType)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.Campaign.Name)
+                                </td>
+                                <td class="body-row">
+                                    @Html.DisplayFor(modelItem => item.VolunteerHealth.Id)
+                                </td>
+                                <td class="body-row">
+                                    <a asp-page="./Details" style="text-decoration: none;" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId">Thông tin</a>
+                                </td>
+                                <td class="body-row" style="width: 90px">
+
+                                    @if (HttpContext.Session.GetString("role") == "Organization")
+                                    {
+                                        <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-pencil-square"></i></a>
+                                    }
+                                    <a class="btn-action btn-delete" asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <h6 style="margin-top: 120px">Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+        }
+    </div>
+
+    <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>BloodDonor</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; Copyright <strong><a href="https://github.com/HAPPY-3-FRIENDS">Happy 3 Friends</a></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by Happy 3 Friends
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+</body>
+</html>

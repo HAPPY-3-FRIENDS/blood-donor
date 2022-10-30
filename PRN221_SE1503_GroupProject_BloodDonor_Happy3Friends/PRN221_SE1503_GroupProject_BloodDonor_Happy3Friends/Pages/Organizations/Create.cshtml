@@ -43,21 +43,21 @@
             margin-top: 24px;
         }
 
-        #table-container::-webkit-scrollbar {
-            width: 6px;
-            background-color: #F5F5F5;
-        }
+            #table-container::-webkit-scrollbar {
+                width: 6px;
+                background-color: #F5F5F5;
+            }
 
-        #table-container::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-        }
+            #table-container::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+            }
 
-        #table-container::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            background-color: #F5F5F5;
-            border-radius: 10px;
-        }
+            #table-container::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                background-color: #F5F5F5;
+                border-radius: 10px;
+            }
 
         .header-row {
             color: #FFF;
@@ -103,17 +103,17 @@
             color: #375e7e;
         }
 
-        .btn-back:hover {
-            color: #37517e;
-        }
+            .btn-back:hover {
+                color: #37517e;
+            }
 
         .btn-save {
             background-color: #375e7e;
         }
 
-        .btn-save:hover {
-            background-color: #37517e;
-        }
+            .btn-save:hover {
+                background-color: #37517e;
+            }
     </style>
 
     <nav class="navbar" style="position: relative; background-color: #37517e;">
@@ -136,58 +136,84 @@
 
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
     {
-        <div class="header-btn-back" >
+        <div class="header-btn-back">
             <a asp-page="./Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
-            <h3 class="header-back">Create Organization</h3>
+            <h3 class="header-back">Tạo mới tổ chức</h3>
         </div>
         <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
-                <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.Username" class="control-label"></label>
-                        <input asp-for="Organization.Username" class="form-control" />
-                        <span asp-validation-for="Organization.Username" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.Password" class="control-label"></label>
-                        <input asp-for="Organization.Password" class="form-control" />
-                        <span asp-validation-for="Organization.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.Name" class="control-label"></label>
-                        <input asp-for="Organization.Name" class="form-control" />
-                        <span asp-validation-for="Organization.Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.Description" class="control-label"></label>
-                        <input asp-for="Organization.Description" class="form-control" />
-                        <span asp-validation-for="Organization.Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.AddressDetails" class="control-label"></label>
-                        <input asp-for="Organization.AddressDetails" class="form-control" />
-                        <span asp-validation-for="Organization.AddressDetails" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.District" class="control-label"></label>
-                        <input asp-for="Organization.District" class="form-control" />
-                        <span asp-validation-for="Organization.District" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="Organization.City" class="control-label"></label>
-                        <input asp-for="Organization.City" class="form-control" />
-                        <span asp-validation-for="Organization.City" class="text-danger"></span>
-                    </div>
-                    <div style="margin-left: 8px" class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Organization.IsRedCross" /> @Html.DisplayNameFor(model => model.Organization.IsRedCross)
-                        </label>
-                    </div>
-                    <div class="form-group" style="text-align: center; margin-bottom: 16px">
-                        <input style="padding: 8px 24px" type="submit" value="Tạo" class="btn btn-primary btn-save" />
-                    </div>
-                </form>
-            </div>
+            <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Username" class="control-label"></label>
+                    <input asp-for="Organization.Username" class="form-control" />
+                    <span asp-validation-for="Organization.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Password" class="control-label"></label>
+                    <input asp-for="Organization.Password" class="form-control" />
+                    <span asp-validation-for="Organization.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.Name" class="control-label"></label>
+                    <input asp-for="Organization.Name" class="form-control" />
+                    <span asp-validation-for="Organization.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Organization.Description" class="control-label"></label>
+                    <input asp-for="Organization.Description" class="form-control" />
+                    <span asp-validation-for="Organization.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Organization.AddressDetails" class="control-label"></label>
+                    <input asp-for="Organization.AddressDetails" class="form-control" />
+                    <span asp-validation-for="Organization.AddressDetails" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Organization.District" class="control-label"></label>
+                    <select asp-for="Organization.District" class="form-select" aria-label="Default select example">
+                        <option asp-for="Organization.District" value="Quận 1">Quận 1</option>
+                        <option asp-for="Organization.District" value="Quận 2">Quận 2</option>
+                        <option asp-for="Organization.District" value="Quận 3">Quận 3</option>
+                        <option asp-for="Organization.District" value="Quận 4">Quận 4</option>
+                        <option asp-for="Organization.District" value="Quận 5">Quận 5</option>
+                        <option asp-for="Organization.District" value="Quận 6">Quận 6</option>
+                        <option asp-for="Organization.District" value="Quận 7">Quận 7</option>
+                        <option asp-for="Organization.District" value="Quận 8">Quận 8</option>
+                        <option asp-for="Organization.District" value="Quận 9">Quận 9</option>
+                        <option asp-for="Organization.District" value="Quận 10">Quận 10</option>
+                        <option asp-for="Organization.District" value="Quận 11">Quận 11</option>
+                        <option asp-for="Organization.District" value="Quận 12">Quận 12</option>
+                        <option asp-for="Organization.District" value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                        <option asp-for="Organization.District" value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                        <option asp-for="Organization.District" value="Quận Tân Phú">Quận Tân Phú</option>
+                        <option asp-for="Organization.District" value="Quận Tân Bình">Quận Tân Bình</option>
+                        <option asp-for="Organization.District" value="Quận Gò Vấp">Quận Gò Vấp</option>
+                        <option asp-for="Organization.District" value="Quận Bình Tân">Quận Bình Tân</option>
+                        <option asp-for="Organization.District" value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                        <option asp-for="Organization.District" value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                        <option asp-for="Organization.District" value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                        <option asp-for="Organization.District" value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                        <option asp-for="Organization.District" value="Huyện Củ Chi">Huyện Củ Chi</option>
+                    </select>
+                    <span asp-validation-for="Organization.District" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="Organization.City" class="control-label"></label>
+                    <select asp-for="Organization.City" class="form-select" aria-label="Default select example">
+                        <option asp-for="Organization.City" value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                    </select>
+                    <span asp-validation-for="Organization.City" class="text-danger"></span>
+                </div>
+                <div style="margin-left: 8px" class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Organization.IsRedCross" /> @Html.DisplayNameFor(model => model.Organization.IsRedCross)
+                    </label>
+                </div>
+                <div class="form-group" style="text-align: center; margin-bottom: 16px">
+                    <input style="padding: 8px 24px" type="submit" value="Tạo" class="btn btn-primary btn-save" />
+                </div>
+            </form>
+        </div>
     }
     else
     {
@@ -218,4 +244,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }

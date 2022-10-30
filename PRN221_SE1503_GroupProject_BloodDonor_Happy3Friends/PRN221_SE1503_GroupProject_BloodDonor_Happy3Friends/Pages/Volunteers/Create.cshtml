@@ -51,7 +51,7 @@
             }
         </style>
 
-        <div class="container px-4 px-md-5 text-center text-lg-start my-4" >
+        <div class="container px-4 px-md-5 text-center text-lg-start my-4">
             <div class="row gx-lg-12 align-items-center mb-4">
 
                 <div class="col-lg-12 mb-5 mb-lg-0 position-relative">
@@ -88,7 +88,7 @@
                                     <label asp-for="Volunteer.IdentityNumber" style="color: hsl(218, 41%, 24%);" class="control-label"></label>
                                     <input asp-for="Volunteer.IdentityNumber" style="color: hsl(218, 41%, 24%);" class="form-control" />
                                     <span asp-validation-for="Volunteer.IdentityNumber" class="text-danger"></span>
-                                </div> 
+                                </div>
                                 <div class="form-outline m-4 col-6" style="display: inline-table">
                                     <label asp-for="Volunteer.Email" class="control-label"></label>
                                     <input asp-for="Volunteer.Email" class="form-control" />
@@ -106,21 +106,47 @@
                                 </div>
                                 <div class="form-outline col-3 " style="margin-left: -8px; display: inline-table">
                                     <label asp-for="Volunteer.District" class="control-label"></label>
-                                    <input asp-for="Volunteer.District" class="form-control" />
+                                    <select asp-for="Volunteer.District" class="form-select" aria-label="Default select example">
+                                        <option asp-for="Volunteer.District" value="Quận 1">Quận 1</option>
+                                        <option asp-for="Volunteer.District" value="Quận 2">Quận 2</option>
+                                        <option asp-for="Volunteer.District" value="Quận 3">Quận 3</option>
+                                        <option asp-for="Volunteer.District" value="Quận 4">Quận 4</option>
+                                        <option asp-for="Volunteer.District" value="Quận 5">Quận 5</option>
+                                        <option asp-for="Volunteer.District" value="Quận 6">Quận 6</option>
+                                        <option asp-for="Volunteer.District" value="Quận 7">Quận 7</option>
+                                        <option asp-for="Volunteer.District" value="Quận 8">Quận 8</option>
+                                        <option asp-for="Volunteer.District" value="Quận 9">Quận 9</option>
+                                        <option asp-for="Volunteer.District" value="Quận 10">Quận 10</option>
+                                        <option asp-for="Volunteer.District" value="Quận 11">Quận 11</option>
+                                        <option asp-for="Volunteer.District" value="Quận 12">Quận 12</option>
+                                        <option asp-for="Volunteer.District" value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                                        <option asp-for="Volunteer.District" value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                                        <option asp-for="Volunteer.District" value="Quận Tân Phú">Quận Tân Phú</option>
+                                        <option asp-for="Volunteer.District" value="Quận Tân Bình">Quận Tân Bình</option>
+                                        <option asp-for="Volunteer.District" value="Quận Gò Vấp">Quận Gò Vấp</option>
+                                        <option asp-for="Volunteer.District" value="Quận Bình Tân">Quận Bình Tân</option>
+                                        <option asp-for="Volunteer.District" value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                                        <option asp-for="Volunteer.District" value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                                        <option asp-for="Volunteer.District" value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                                        <option asp-for="Volunteer.District" value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                                        <option asp-for="Volunteer.District" value="Huyện Củ Chi">Huyện Củ Chi</option>
+                                    </select>
                                     <span asp-validation-for="Volunteer.District" class="text-danger"></span>
                                 </div>
                                 <div class="form-outline col-3" style="margin-left: 12px;display: inline-table">
                                     <label asp-for="Volunteer.City" class="control-label"></label>
-                                    <input asp-for="Volunteer.City" class="form-control" />
+                                    <select asp-for="Volunteer.City" class="form-select" aria-label="Default select example">
+                                        <option asp-for="Volunteer.City" value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                                    </select>
                                     <span asp-validation-for="Volunteer.City" class="text-danger"></span>
                                 </div>
-                                <input asp-for="Volunteer.BloodType" type="hidden" value="B+" class="form-outline m-4" />
+                                <input asp-for="Volunteer.BloodType" type="hidden" value="A" class="form-outline m-4" />
                                 @*<div class="form-group">
                             <label asp-for="Volunteer.BloodType" class="control-label"></label>
                             <input asp-for="Volunteer.BloodType" class="form-control" />
                             <span asp-validation-for="Volunteer.BloodType" class="text-danger"></span>
                             </div>*@
-                                <div  class="btn btn-block btn-login w-100">
+                                <div class="btn btn-block btn-login w-100">
                                     <input type="submit" value="Tạo tài khoản" class="btn btn-outline" style="padding: 8px 24px ;margin-top: 18px;margin-bottom: 16px; background-color: hsl(218, 41%, 24%); color: #FFF" />
                                 </div>
                                 @if (HttpContext.Session.GetString("role") == null)

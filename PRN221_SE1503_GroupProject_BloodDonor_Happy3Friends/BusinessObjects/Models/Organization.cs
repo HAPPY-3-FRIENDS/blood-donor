@@ -44,6 +44,7 @@ namespace BusinessObjects.Models
         [Display(Name = "Tỉnh, Thành phố")]
         public string City { get; set; }
 
+        [Display(Name = "Hội chữ thập đỏ")]
         public bool IsRedCross { get; set; }
 
         public virtual ICollection<BloodRequest> BloodRequests { get; set; }

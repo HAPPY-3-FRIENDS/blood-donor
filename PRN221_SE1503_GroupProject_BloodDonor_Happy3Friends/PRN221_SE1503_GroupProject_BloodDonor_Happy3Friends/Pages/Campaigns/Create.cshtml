@@ -184,7 +184,12 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Campaign.BloodTypeRequired" class="control-label"></label>
-                    <input asp-for="Campaign.BloodTypeRequired" class="form-control" />
+                    <select asp-for="Campaign.BloodTypeRequired" class="form-select" aria-label="Default select example">
+                        <option asp-for="Campaign.BloodTypeRequired" value="A">A</option>
+                        <option asp-for="Campaign.BloodTypeRequired" value="B">B</option>
+                        <option asp-for="Campaign.BloodTypeRequired" value="AB">AB</option>
+                        <option asp-for="Campaign.BloodTypeRequired" value="O">O</option>
+                    </select>
                     <span asp-validation-for="Campaign.BloodTypeRequired" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4">
@@ -194,12 +199,40 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Campaign.District" class="control-label"></label>
-                    <input asp-for="Campaign.District" class="form-control" />
+                    <select asp-for="Campaign.District" class="form-select" aria-label="Default select example">
+                        <option asp-for="Campaign.District" value="Quận 1">Quận 1</option>
+                        <option asp-for="Campaign.District" value="Quận 2">Quận 2</option>
+                        <option asp-for="Campaign.District" value="Quận 3">Quận 3</option>
+                        <option asp-for="Campaign.District" value="Quận 4">Quận 4</option>
+                        <option asp-for="Campaign.District" value="Quận 5">Quận 5</option>
+                        <option asp-for="Campaign.District" value="Quận 6">Quận 6</option>
+                        <option asp-for="Campaign.District" value="Quận 7">Quận 7</option>
+                        <option asp-for="Campaign.District" value="Quận 8">Quận 8</option>
+                        <option asp-for="Campaign.District" value="Quận 9">Quận 9</option>
+                        <option asp-for="Campaign.District" value="Quận 10">Quận 10</option>
+                        <option asp-for="Campaign.District" value="Quận 11">Quận 11</option>
+                        <option asp-for="Campaign.District" value="Quận 12">Quận 12</option>
+                        <option asp-for="Campaign.District" value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                        <option asp-for="Campaign.District" value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                        <option asp-for="Campaign.District" value="Quận Tân Phú">Quận Tân Phú</option>
+                        <option asp-for="Campaign.District" value="Quận Tân Bình">Quận Tân Bình</option>
+                        <option asp-for="Campaign.District" value="Quận Gò Vấp">Quận Gò Vấp</option>
+                        <option asp-for="Campaign.District" value="Quận Bình Tân">Quận Bình Tân</option>
+                        <option asp-for="Campaign.District" value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                        <option asp-for="Campaign.District" value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                        <option asp-for="Campaign.District" value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                        <option asp-for="Campaign.District" value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                        <option asp-for="Campaign.District" value="Huyện Củ Chi">Huyện Củ Chi</option>
+                    </select>
+                    @*<input asp-for="Campaign.District" class="form-control" />*@
                     <span asp-validation-for="Campaign.District" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Campaign.City" class="control-label"></label>
-                    <input asp-for="Campaign.City" class="form-control" />
+                    <select asp-for="Campaign.City" class="form-select" aria-label="Default select example">
+                        <option asp-for="VolunteerInCampaign.City" value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                    </select>
+@*                    <input asp-for="Campaign.City" class="form-control"/>*@
                     <span asp-validation-for="Campaign.City" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">

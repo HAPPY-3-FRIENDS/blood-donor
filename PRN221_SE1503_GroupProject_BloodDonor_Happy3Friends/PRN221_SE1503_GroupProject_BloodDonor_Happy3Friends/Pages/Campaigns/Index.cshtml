@@ -33,10 +33,10 @@
             font-weight: 500;
         }
 
-        .btn-action:hover {
-            background-color: #31a9e1 !important;
-            color: #FFF !important;
-        }
+            .btn-action:hover {
+                background-color: #31a9e1 !important;
+                color: #FFF !important;
+            }
 
         .btn-details {
             text-decoration: none;
@@ -60,10 +60,10 @@
             width: 80px;
         }
 
-        .btn-edit:hover {
-            color: #FFF !important;
-            background-color: #ffcd36;
-        }
+            .btn-edit:hover {
+                color: #FFF !important;
+                background-color: #ffcd36;
+            }
 
         .btn-delete {
             text-decoration: none;
@@ -78,10 +78,10 @@
             width: 80px;
         }
 
-        .btn-delete:hover {
-            color: #FFF !important;
-            background-color: #f7374a;
-        }
+            .btn-delete:hover {
+                color: #FFF !important;
+                background-color: #f7374a;
+            }
 
         .btn-create {
             text-decoration: none;
@@ -92,10 +92,10 @@
             border-radius: 12px;
         }
 
-        .btn-create:hover {
-            background: #37517E;
-            color: #fff;
-        }
+            .btn-create:hover {
+                background: #37517E;
+                color: #fff;
+            }
 
         .btn-booking {
             text-decoration: none;
@@ -109,10 +109,10 @@
             font-weight: 500;
         }
 
-        .btn-booking:hover {
-            background-color: #37517E;
-            color: #FFF;
-        }
+            .btn-booking:hover {
+                background-color: #37517E;
+                color: #FFF;
+            }
     </style>
     <header id="header" class="fixed-top " style="background-color: #37517e;">
         <div class="container d-flex align-items-center">
@@ -141,7 +141,7 @@
                                             <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
-                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
                                         </form>
                                     </ul>
                                 </div>
@@ -168,6 +168,12 @@
                 <a class="btn-create" asp-page="Create"><i class="bi bi-plus-lg"></i> Tạo mới</a>
             </p>
         }
+        @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+        {
+            <p style="margin-top: 24px">
+                <a class="btn-create" asp-page="/VolunteerInCampaigns/Index">Lịch sử đăng ký hiến máu</a>
+            </p>
+        }
 
         <section style="padding: 0">
             @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") != "Admin")
@@ -183,10 +189,10 @@
                                 <div class="card-body">
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                                     <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Loại máu cần: @Html.DisplayFor(modelItem => item.BloodTypeRequired)</p>
-                                    <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Địa chỉ: @Html.DisplayFor(modelItem => item.AddressDetails), Quận @Html.DisplayFor(modelItem => item.District), Thành phố/Tỉnh @Html.DisplayFor(modelItem => item.City)</p>
+                                    <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Địa chỉ: @Html.DisplayFor(modelItem => item.AddressDetails), @Html.DisplayFor(modelItem => item.District), @Html.DisplayFor(modelItem => item.City)</p>
                                     @if (HttpContext.Session.GetString("role") != "Organization")
                                     {
-                                        <p class="card-text"  style="margin-bottom: 8px; font-size: 14px">
+                                        <p class="card-text" style="margin-bottom: 8px; font-size: 14px">
                                             Tên tổ chức: @Html.DisplayFor(modelItem => item.Organization.Name)
                                         </p>
                                     }
@@ -196,14 +202,14 @@
                             <div style="margin: auto;" class="col-md-2 d-block">
                                 @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
                                 {
-                                    <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Details ></a>
+                                    <a class="btn-details" asp-page="./Details" asp-route-id="@item.Id">Thông tin</a>
                                     <a class="btn-booking" asp-page="./Register" asp-route-campaignId="@item.Id">Đặt lịch</a>
                                 }
                                 @if (HttpContext.Session.GetString("role") == "Organization")
                                 {
-                                    <a class="btn-details" asp-page="/VolunteerInCampaigns/Index" asp-route-campaignId="@item.Id">Details</a>
-                                    <a class="btn-edit" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                                    <a class="btn-delete" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                    <a class="btn-details" asp-page="/VolunteerInCampaigns/Index" asp-route-campaignId="@item.Id">Thông tin</a>
+                                    <a class="btn-edit" asp-page="./Edit" asp-route-id="@item.Id">Sửa</a>
+                                    <a class="btn-delete" asp-page="./Delete" asp-route-id="@item.Id">Xóa</a>
                                 }
                             </div>
                         </div>
