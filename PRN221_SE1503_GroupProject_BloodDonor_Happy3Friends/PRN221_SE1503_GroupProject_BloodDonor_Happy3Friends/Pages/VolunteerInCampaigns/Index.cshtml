@@ -72,8 +72,20 @@
 </head>
 <body>
     <style>
+        .btn-action {
+            color: #31a9e1 !important;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+            .btn-action:hover {
+                background-color: #31a9e1 !important;
+                color: #FFF !important;
+            }
+
         #table-container {
-            height: 300px;
+            height: 220px;
             overflow-y: scroll;
             margin-top: 24px;
         }
@@ -99,7 +111,7 @@
             font-weight: 500;
         }
 
-        .btn-action {
+        .btn-action-control {
             text-decoration: none;
         }
 
@@ -316,9 +328,9 @@
 
                                     @if (HttpContext.Session.GetString("role") == "Organization")
                                     {
-                                        <a class="btn-action btn-edit" asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-pencil-square"></i></a>
+                                        <a class="btn-action-control btn-edit" asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-pencil-square"></i></a>
                                     }
-                                    <a class="btn-action btn-delete" asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-trash-fill"></i></a>
+                                    <a class="btn-action-control btn-delete" asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
                         }

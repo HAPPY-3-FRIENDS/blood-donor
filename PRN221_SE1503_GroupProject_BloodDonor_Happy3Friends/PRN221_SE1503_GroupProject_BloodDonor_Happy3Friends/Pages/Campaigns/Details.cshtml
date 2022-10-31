@@ -27,6 +27,27 @@
 </head>
 <body id="body-container" style="position: relative">
     <style>
+        .btn-action {
+            color: #31a9e1 !important;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+            .btn-action:hover {
+                background-color: #31a9e1 !important;
+                color: #FFF !important;
+            }
+
+        .btn-details {
+            text-decoration: none;
+            color: #31a9e1;
+            padding: 8px 12px;
+            display: block;
+            text-align: center;
+            margin-right: 16px;
+            border-radius: 16px;
+        }
         #body-container::-webkit-scrollbar {
             width: 12px;
             background-color: #F5F5F5;
@@ -128,7 +149,7 @@
         .btn-register {
             text-decoration: none;
             position: absolute;
-            left: 50%;
+            left: 46%;
             margin-top: 24px;
             background: #37517E;
             color: #FFF;
@@ -166,7 +187,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><a class="dropdown-item btn-action" >Thông tin cá nhân</a></li>
+                                            <li><a class="dropdown-item btn-action" asp-page="">Thông tin cá nhân</a></li>
                                             <li><a class="dropdown-item btn-action" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
