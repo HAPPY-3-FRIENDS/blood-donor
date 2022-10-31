@@ -110,6 +110,13 @@
         "lib/noframework.waypoints.min.js",
         "src/waypoint.js"
       ]
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/lib/sweetalert/",
+      "files": [
+        "dist/sweetalert.min.js"
+      ]
     }
   ]
 }

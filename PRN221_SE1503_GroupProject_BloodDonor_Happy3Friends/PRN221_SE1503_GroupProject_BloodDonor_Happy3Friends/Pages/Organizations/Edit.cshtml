@@ -145,42 +145,40 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Organization.Id" />
                 <div class="form-group col-md-4">
-                    <label asp-for="Organization.Username" class="control-label">Tên đăng nhập</label>
+                    <label asp-for="Organization.Username" class="control-label"></label>
                     <input asp-for="Organization.Username" class="form-control" />
                     <span asp-validation-for="Organization.Username" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label asp-for="Organization.Password" class="control-label">Mật khẩu</label>
+                    <label asp-for="Organization.Password" class="control-label"></label>
                     <input asp-for="Organization.Password" class="form-control" />
                     <span asp-validation-for="Organization.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label asp-for="Organization.Name" class="control-label">Họ tên</label>
+                    <label asp-for="Organization.Name" class="control-label"></label>
                     <input asp-for="Organization.Name" class="form-control" />
                     <span asp-validation-for="Organization.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="Organization.Description" class="control-label">Mô tả</label>
+                    <label asp-for="Organization.Description" class="control-label"></label>
                     <input asp-for="Organization.Description" class="form-control" />
                     <span asp-validation-for="Organization.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="Organization.AddressDetails" class="control-label">Địa chỉ</label>
+                    <label asp-for="Organization.AddressDetails" class="control-label"></label>
                     <input asp-for="Organization.AddressDetails" class="form-control" />
                     <span asp-validation-for="Organization.AddressDetails" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label asp-for="Organization.District" class="control-label">Quận</label>
+                    <label asp-for="Organization.District" class="control-label"></label>
                     <select asp-for="Organization.District" class="form-select" aria-label="Default select example">
                         <option asp-for="Organization.District" value="Quận 1">Quận 1</option>
-                        <option asp-for="Organization.District" value="Quận 2">Quận 2</option>
                         <option asp-for="Organization.District" value="Quận 3">Quận 3</option>
                         <option asp-for="Organization.District" value="Quận 4">Quận 4</option>
                         <option asp-for="Organization.District" value="Quận 5">Quận 5</option>
                         <option asp-for="Organization.District" value="Quận 6">Quận 6</option>
                         <option asp-for="Organization.District" value="Quận 7">Quận 7</option>
                         <option asp-for="Organization.District" value="Quận 8">Quận 8</option>
-                        <option asp-for="Organization.District" value="Quận 9">Quận 9</option>
                         <option asp-for="Organization.District" value="Quận 10">Quận 10</option>
                         <option asp-for="Organization.District" value="Quận 11">Quận 11</option>
                         <option asp-for="Organization.District" value="Quận 12">Quận 12</option>
@@ -199,7 +197,7 @@
                     <span asp-validation-for="Organization.District" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-8">
-                    <label asp-for="Organization.City" class="control-label">Thành phố</label>
+                    <label asp-for="Organization.City" class="control-label"></label>
                     <select asp-for="Organization.City" class="form-select" aria-label="Default select example">
                         <option asp-for="Organization.City" value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
                     </select>

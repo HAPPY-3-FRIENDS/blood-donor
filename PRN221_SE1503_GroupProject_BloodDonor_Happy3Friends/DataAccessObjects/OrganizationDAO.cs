@@ -142,7 +142,7 @@ namespace DataAccessObjects
                     }
                     else
                     {
-                        throw new Exception("Can not remove organization which have campaigns");
+                        throw new Exception("Không thể xóa tổ chức có chiến dịch");
                     }
                 }
                 else
