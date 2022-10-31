@@ -104,14 +104,17 @@
 
         .btn-booking {
             text-decoration: none;
-            color: #FFF;
+            color: #FFF !important;
             background-color: #37517E;
-            padding: 8px 12px;
+            padding: 10px 12px;
             display: block;
+            top: 10%;
             text-align: center;
-            margin-right: 16px;
+            margin-left: 8px;
             border-radius: 16px;
+            width: 80px;
             font-weight: 500;
+            position: absolute;
         }
 
             .btn-booking:hover {
@@ -213,6 +216,7 @@
                                 }
                                 @if (HttpContext.Session.GetString("role") == "Organization")
                                 {
+                                    <a class="btn-action btn-booking" asp-page="/VolunteerInCampaigns/Index" asp-route-campaignId="@item.Id">Đặt hộ</a>
                                     <a class="btn-edit" asp-page="./Edit" asp-route-id="@item.Id">Sửa</a>
                                     <a class="btn-action btn-delete" data-id=@item.Id data-bs-toggle="modal" data-bs-target="#deleteModel">Xóa</a>
                                 }
