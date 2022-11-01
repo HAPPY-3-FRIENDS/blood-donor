@@ -43,21 +43,21 @@
             margin-top: 24px;
         }
 
-            #table-container::-webkit-scrollbar {
-                width: 6px;
-                background-color: #F5F5F5;
-            }
+        #table-container::-webkit-scrollbar {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
 
-            #table-container::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-            }
+        #table-container::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+        }
 
-            #table-container::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                background-color: #F5F5F5;
-                border-radius: 10px;
-            }
+        #table-container::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+            border-radius: 10px;
+        }
 
         .header-row {
             color: #FFF;
@@ -103,17 +103,17 @@
             color: #375e7e;
         }
 
-            .btn-back:hover {
-                color: #37517e;
-            }
+        .btn-back:hover {
+            color: #37517e;
+        }
 
         .btn-save {
             background-color: #375e7e;
         }
 
-            .btn-save:hover {
-                background-color: #37517e;
-            }
+        .btn-save:hover {
+            background-color: #37517e;
+        }
     </style>
 
     <header id="header" class="fixed-top " style="background-color: #37517e;">
@@ -167,26 +167,80 @@
     {
         <div class="header-btn-back" style="margin-top: 120px;">
             <a asp-page="./Index" asp-route-campaignId="@Request.Query["campaignId"]"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
-            <h3 class="header-back">Chỉnh sửa tình nguyện viên</h3>
+            <h3 class="header-back">Chỉnh sửa hồ sơ sức khỏe tình nguyện viên</h3>
         </div>
+
+        <div>
+            <h4>Volunteer</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.District)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.District)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.City)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.City)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                </dd>
+            </dl>
+        </div>
+
         <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
 
             <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="VolunteerInCampaign.Id" />
-                <div class="form-group col-md-4">
+                <input type="hidden" asp-for="VolunteerInCampaign.VolunteerId" />
+                <input type="hidden" asp-for="VolunteerInCampaign.VolunteerHealthId" />
+                <input type="hidden" asp-for="VolunteerInCampaign.CampaignId" />
+
+                @*<div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.Volunteer.Name" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.Volunteer.Name" disabled class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.VolunteerId" class="text-danger"></span>
-                </div>
-                <input asp-for="VolunteerInCampaign.CampaignId" class="form-control" hidden/>
-                @*<p>
-            Blood Type xổ dropdown gồm 5 values: A, B, O, AB, Chưa xác định
-            </p>*@
+                </div>*@
+                
                 <div class="form-group col-md-4">
-                    @*<label asp-for="VolunteerInCampaign.BloodType" class="control-label"></label>
-                <input asp-for="VolunteerInCampaign.BloodType" class="form-control" />
-                <span asp-validation-for="VolunteerInCampaign.BloodType" class="text-danger"></span>*@
                     <label asp-for="VolunteerInCampaign.BloodType" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.BloodType" asp-items="ViewBag.VolunteerBloodType" class="form-select" aria-label="Default select example">
                         <option asp-for="VolunteerInCampaign.BloodType" value="Chưa xác định">Chưa xác định</option>
@@ -197,9 +251,7 @@
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.BloodType" class="text-danger"></span>
                 </div>
-                @*<p>
-            Blood Amount xổ dropdown gồm 3 value: 250 ml, 350 ml, 450 ml (Ghi đúng cú pháp)
-            </p>*@
+
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.BloodAmount" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.BloodAmount" asp-items="ViewBag.VolunteerBloodAmount" class="form-select" aria-label="Default select example">
@@ -209,24 +261,20 @@
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.BloodAmount" class="text-danger"></span>
                 </div>
-                <div class="form-group col-md-4">
-                    <label asp-for="VolunteerInCampaign.VolunteerHealthId" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.VolunteerHealthId" class="form-control" />
-                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealthId" class="text-danger"></span>
-                </div>
+
+                <input type="hidden" asp-for="VolunteerInCampaign.RegistrationDate" />
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.RegistrationDate" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.RegistrationDate" class="form-control" />
+                    <input data="VolunteerInCampaign.RegistrationDate" asp-for="VolunteerInCampaign.RegistrationDate" class="form-control" disabled />
                     <span asp-validation-for="VolunteerInCampaign.RegistrationDate" class="text-danger"></span>
                 </div>
+
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.DonatedDate" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.DonatedDate" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.DonatedDate" class="text-danger"></span>
                 </div>
-                @*<p>
-            Status xổ drop down gồm 4 values: Đã đăng ký, Đã tham gia, Hủy đăng ký, Quá hạn đăng ký (đúng chính tả và không có khoảng trắng)
-            </p>*@
+
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.Status" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.Status" asp-items="ViewBag.Status" class="form-select" aria-label="Default select example">
@@ -237,13 +285,43 @@
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.Status" class="text-danger"></span>
                 </div>
+
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.RejectedReason" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.RejectedReason" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.RejectedReason" class="text-danger"></span>
                 </div>
+
                 <div class="form-group" style="text-align: center; margin-bottom: 16px; margin-top: 24px">
                     <input style="padding: 8px 24px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
+                </div>
+
+                <input type="hidden" asp-for="VolunteerInCampaign.VolunteerHealth.Id" />
+
+                <div class="form-group">
+                    <label asp-for="VolunteerInCampaign.VolunteerHealth.Height" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.VolunteerHealth.Height" class="form-control" />
+                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.Height" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VolunteerInCampaign.VolunteerHealth.Weight" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.VolunteerHealth.Weight" class="form-control" />
+                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.Weight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="form-control" />
+                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="form-control" />
+                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="control-label"></label>
+                    <input asp-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="form-control" />
+                    <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="text-danger"></span>
                 </div>
             </form>
         </div>
@@ -260,5 +338,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
-
+}

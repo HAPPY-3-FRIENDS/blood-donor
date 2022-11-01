@@ -1,0 +1,60 @@
+﻿@page
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerHealths.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerHealth[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerHealth[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerHealth[0].HaveHepatitisBvirus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerHealth[0].HaveHivvirus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerHealth[0].OtherDiseases)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.VolunteerHealth) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaveHepatitisBvirus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaveHivvirus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherDiseases)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

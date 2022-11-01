@@ -35,6 +35,7 @@ namespace DataAccessObjects
                 volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns
                     .Include(v => v.Campaign)
                     .Include(v => v.Volunteer)
+                    .Include(v => v.VolunteerHealth)
                     .ToList();
                 if (volunteerInCampaigns.Count > 0)
                 {
@@ -62,6 +63,7 @@ namespace DataAccessObjects
                 volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns
                     .Include(v => v.Campaign)
                     .Include(v => v.Volunteer)
+                    .Include(v => v.VolunteerHealth)
                     .Where(v => v.CampaignId == campaignId)
                     .OrderByDescending(v => v.DonatedDate)
                     .ThenByDescending(v => v.RegistrationDate)
@@ -92,6 +94,7 @@ namespace DataAccessObjects
                 volunteerInCampaigns = bloodDonorContext.VolunteerInCampaigns
                     .Include(v => v.Campaign)
                     .Include(v => v.Volunteer)
+                    .Include(v => v.VolunteerHealth)
                     .Where(v => v.VolunteerId == volunteerId)
                     .OrderByDescending(v => v.DonatedDate)
                     .ThenByDescending(v => v.RegistrationDate)
@@ -119,7 +122,11 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                volunteerInCampaign = bloodDonorContext.VolunteerInCampaigns.Include(v => v.Campaign).Include(v => v.Volunteer).SingleOrDefault(v => v.Id == volunteerInCampaignId);
+                volunteerInCampaign = bloodDonorContext.VolunteerInCampaigns
+                    .Include(v => v.Campaign)
+                    .Include(v => v.Volunteer)
+                    .Include(v => v.VolunteerHealth)
+                    .SingleOrDefault(v => v.Id == volunteerInCampaignId);
                 if (volunteerInCampaign != null)
                 {
                     volunteerInCampaign.Status = EnumExtensions.GetDisplayName(volunteerInCampaign.Status.ToEnum<VolunteerInCampaignStatus>());
@@ -140,7 +147,9 @@ namespace DataAccessObjects
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
 
-                volunteerInCampaign.BloodType = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId).BloodType;
+                Volunteer _volunteer = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId);
+
+                volunteerInCampaign.BloodType = _volunteer.BloodType;
                 volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
 
                 DateTime registrationDate = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"));
@@ -148,8 +157,23 @@ namespace DataAccessObjects
 
                 volunteerInCampaign.Status = VolunteerInCampaignStatus.NEW.ToString();
 
-                bloodDonorContext.VolunteerInCampaigns.Add(volunteerInCampaign);
-                bloodDonorContext.SaveChanges();
+                var today = DateTime.Today;
+                var age = today.Year - _volunteer.DateOfBirth.Year;
+
+                if (_volunteer.DateOfBirth.Date > today.AddYears(-age)) age--;
+
+                VolunteerHealth volunteerHealth = new VolunteerHealth();
+                volunteerInCampaign.VolunteerHealth = volunteerHealth;
+
+                if (age >= 18)
+                {
+                    bloodDonorContext.VolunteerInCampaigns.Add(volunteerInCampaign);
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("You are under 18 years old, so you cannot register to participate in the campaign!");
+                }
             }
             catch (Exception ex)
             {
@@ -165,8 +189,15 @@ namespace DataAccessObjects
                 if (_volunteerInCampaign != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+
                     volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
                     volunteerInCampaign.Status = volunteerInCampaign.Status.GetValueFromName<VolunteerInCampaignStatus>().ToString();
+
+                    Volunteer _volunteer = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId);
+                    _volunteer.BloodType = volunteerInCampaign.BloodType;
+
+                    bloodDonorContext.Entry<Volunteer>(_volunteer).State = EntityState.Modified;
+                    bloodDonorContext.Entry<VolunteerHealth>(volunteerInCampaign.VolunteerHealth).State = EntityState.Modified;
                     bloodDonorContext.Entry<VolunteerInCampaign>(volunteerInCampaign).State = EntityState.Modified;
                     bloodDonorContext.SaveChanges();
                 }

@@ -171,9 +171,6 @@
         </div>
     </header>
     
-
-    
-
 @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin") {
     <div class="header-btn-back" style="margin-top: 120px;">
         <a href="javascript: history.go(-1)"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
@@ -229,12 +226,6 @@
             <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.VolunteerInCampaign.RejectedReason)
             </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Id)
-            </dd>
         </dl>
     </div>
     <div>
@@ -242,6 +233,92 @@
             <a class="btn-edit-details" asp-page="./Edit" asp-route-id="@Model.VolunteerInCampaign.Id" asp-route-campaignId="@Model.VolunteerInCampaign.CampaignId">Edit</a> <span>|</span>
         }
     </div>
+
+        <div>
+            <h4>VolunteerHealth</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.Height)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Height)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.Weight)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Weight)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.OtherDiseases)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.OtherDiseases)
+                </dd>
+            </dl>
+        </div>
+
+        <div>
+            <h4>Volunteer</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.District)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.District)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.City)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.City)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                </dd>
+            </dl>
+        </div>
 }
 else
 {

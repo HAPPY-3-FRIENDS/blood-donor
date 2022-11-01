@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Repositories.IRepositories;
+using System;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns
 {
@@ -31,14 +31,20 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
                 return NotFound();
             }
 
-            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "Id", "Name");
-            ViewData["VolunteerId"] = new SelectList(_context.Volunteers, "Phone", "Name");
-            ViewData["VolunteerHealthId"] = new SelectList(_context.VolunteerHealths, "Id", "Id");
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            if (VolunteerInCampaign.DonatedDate != null)
+            {
+                if (DateTime.Compare(VolunteerInCampaign.RegistrationDate, VolunteerInCampaign.DonatedDate ?? (DateTime)VolunteerInCampaign.DonatedDate) > 0)
+                {
+                    ModelState.AddModelError("VolunteerInCampaign.RegistrationDate", "Ngày đăng ký không được đến sau ngày tham gia hiến máu!");
+                    ModelState.AddModelError("VolunteerInCampaign.DonatedDate", "Ngày tham gia hiến máu không được đến trước ngày đăng ký!");
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

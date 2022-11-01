@@ -36,7 +36,7 @@ namespace BusinessObjects.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Ngày sinh là bắt buộc!\nNếu không có ngày sinh thì chọn mặc định là ngày 01 tháng 01!")]
+        [Required(ErrorMessage = "Ngày sinh là bắt buộc! Nếu không có ngày sinh thì chọn mặc định là ngày 01 tháng 01!")]
         [DataType(DataType.Date)]
         [Display(Name = "Ngày sinh")]
         public DateTime DateOfBirth { get; set; }
