@@ -32,7 +32,10 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                campaigns = bloodDonorContext.Campaigns.Include(c => c.Organization).ToList();
+                campaigns = bloodDonorContext.Campaigns
+                    .Include(c => c.Organization)
+                    .Where(c => DateTime.Compare(c.EndDate, DateTime.Now) > 0)
+                    .ToList();
             }
             catch (Exception ex)
             {

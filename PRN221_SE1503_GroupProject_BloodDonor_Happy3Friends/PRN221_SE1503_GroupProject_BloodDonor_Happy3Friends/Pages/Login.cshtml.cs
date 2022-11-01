@@ -42,6 +42,9 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
             string roleAdmin = adminAccount.Role;
 
             bool isAdmin = false;
+            bool isVolunteer = false;
+            bool isOrganization = false;
+
             if (phoneAdmin.Equals(Phone) && passwordAdmin.Equals(Password))
             {
                 HttpContext.Session.SetString("phone", phoneAdmin);
@@ -53,7 +56,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
 
             if (!isAdmin)
             {
-                bool isVolunteer = _volunteerRepository.CheckLogin(Phone, Password);
+                isVolunteer = _volunteerRepository.CheckLogin(Phone, Password);
                 if (isVolunteer)
                 {
                     Volunteer volunteer = _volunteerRepository.GetVolunteerByPhone(Phone);
@@ -74,7 +77,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                 }
                 else
                 {
-                    bool isOrganization = _organizationRepository.CheckLogin(Phone, Password);
+                    isOrganization = _organizationRepository.CheckLogin(Phone, Password);
                     if (isOrganization)
                     {
                         Organization organization = _organizationRepository.GetOrganizationByUserName(Phone);
@@ -84,6 +87,12 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                         return RedirectToPage("/Campaigns/Index");
                     }
                 }
+            }
+
+            if (!isAdmin && !isVolunteer && !isOrganization)
+            {
+                TempData["Error"] = "Invalid username/phone and password!";
+                return Page();
             }
 
             return RedirectToPage("/Index");
