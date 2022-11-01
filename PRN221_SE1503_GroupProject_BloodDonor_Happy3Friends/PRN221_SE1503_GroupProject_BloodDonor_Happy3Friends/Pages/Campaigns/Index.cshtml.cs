@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessObjects.Models;
 using Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
+using Repositories;
+using System;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
@@ -30,6 +32,19 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
             {
                 Campaigns = _campaignRepository.GetCampaigns();
             }
+        }
+
+        public IActionResult OnPostDelete(int itemId)
+        {
+            try
+            {
+                _campaignRepository.DeleteCampaignById(itemId);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToPage("./Index");
         }
 
         public IActionResult OnPostLogout()

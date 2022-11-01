@@ -159,7 +159,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><button class="dropdown-item btn-action" type="submit">Thông tin cá nhân</button></li>
+                                            <li><button class="dropdown-item btn-action" asp-page="/Volunteers/Details">Thông tin cá nhân</button></li>
                                             <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">

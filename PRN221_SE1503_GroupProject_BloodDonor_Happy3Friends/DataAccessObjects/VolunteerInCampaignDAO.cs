@@ -65,8 +65,7 @@ namespace DataAccessObjects
                     .Include(v => v.Volunteer)
                     .Include(v => v.VolunteerHealth)
                     .Where(v => v.CampaignId == campaignId)
-                    .OrderByDescending(v => v.DonatedDate)
-                    .ThenByDescending(v => v.RegistrationDate)
+                    .OrderByDescending(v => v.RegistrationDate)
                     .ToList();
                 if (volunteerInCampaigns.Count > 0)
                 {
@@ -96,8 +95,7 @@ namespace DataAccessObjects
                     .Include(v => v.Volunteer)
                     .Include(v => v.VolunteerHealth)
                     .Where(v => v.VolunteerId == volunteerId)
-                    .OrderByDescending(v => v.DonatedDate)
-                    .ThenByDescending(v => v.RegistrationDate)
+                    .OrderByDescending(v => v.RegistrationDate)
                     .ToList();
                 if (volunteerInCampaigns.Count > 0)
                 {
@@ -148,6 +146,15 @@ namespace DataAccessObjects
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
 
                 Volunteer _volunteer = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId);
+                Campaign _campaign = CampaignDAO.Instance.GetCampaignById(volunteerInCampaign.CampaignId);
+
+                if (!_volunteer.BloodType.Equals(EnumExtensions.GetDisplayName(BloodType.UNDEFINED)))
+                {
+                    if (!_volunteer.BloodType.Equals(_campaign.BloodTypeRequired))
+                    {
+                        throw new Exception("Your blood type is not suitable in this campaign!");
+                    }
+                }
 
                 volunteerInCampaign.BloodType = _volunteer.BloodType;
                 volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
