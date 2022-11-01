@@ -6,17 +6,73 @@
     ViewData["Title"] = "Sign Up";
 }
 
+<style>
+    #header {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+    }
+    .btn-action {
+            color: #31a9e1;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .btn-action:hover {
+            background-color: #37517E;
+            color: #FFF;
+        }
+</style>
+
 @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Organization")
 {
     @if (HttpContext.Session.GetString("role") != null)
     {
-        <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
+        @*<li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="">Tên tao là: @HttpContext.Session.GetString("name")</a></li>
         <form method="post" asp-page-handler="Logout">
             <div class="form-group">
                 <button class="btn btn-outline getstarted scrollto" type="submit">Đăng xuất</button>
             </div>
-        </form>
+        </form>*@
+        <header id="header">
+            <div class="container d-flex align-items-center">
+                <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        @if (HttpContext.Session.GetString("role") != null)
+                        {
+                            <li>
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <a style="text-decoration: none" class="getstarted scrollto dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-page="">Hi, @HttpContext.Session.GetString("name")</a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;">
+                                            @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
+                                            {
+                                                <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="">Thông tin cá nhân</a></li>
+                                                <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
+                                            }
+                                            <form method="post" asp-page-handler="Logout">
+                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
+                        }
+                    </ul>
+                </nav><!-- .navbar -->
+            </div>
+        </header>
+
+        <!-- End Header -->
     }
+
 
     <section style="padding: 0; margin: 0" class="background-radial-gradient overflow-hidden">
         <style>
