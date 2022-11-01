@@ -63,7 +63,7 @@ namespace DataAccessObjects
             try
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                campaign = bloodDonorContext.Campaigns.Include(c => c.Organization).SingleOrDefault(x => x.Id == campaignId);
+                campaign = bloodDonorContext.Campaigns.Include(c => c.Organization).Include(c => c.VolunteerInCampaigns).SingleOrDefault(x => x.Id == campaignId);
             }
             catch (Exception ex)
             {
@@ -117,8 +117,15 @@ namespace DataAccessObjects
                 if (_campaign != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                    bloodDonorContext.Campaigns.Remove(_campaign);
-                    bloodDonorContext.SaveChanges();
+                    if (_campaign.VolunteerInCampaigns.Count == 0)
+                    {
+                        bloodDonorContext.Campaigns.Remove(_campaign);
+                        bloodDonorContext.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Can not remove campaign which have volunteer registered in its");
+                    }
                 }
                 else
                 {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Repositories.IRepositories;
+using System;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 {
@@ -34,6 +35,12 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
 
         public IActionResult OnPost()
         {
+            if (DateTime.Compare(Campaign.StartDate, Campaign.EndDate) > 0)
+            {
+                ModelState.AddModelError("Campaign.StartDate", "Ngày bắt đầu không được đến sau ngày kết thúc!");
+                ModelState.AddModelError("Campaign.EndDate", "Ngày kết thúc không được đến trước ngày bắt đầu!");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -53,7 +53,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
                     return NotFound();
                 }
             }
-            else
+            else if (HttpContext.Session.GetString("role") == "Volunteer")
             {
                 Volunteer = _volunteerRepository.GetVolunteerByPhone(HttpContext.Session.GetString("phone"));
 
@@ -66,28 +66,41 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
             return Page();
         }
 
-        public IActionResult OnPostCampaignRegister(int campaignId)
-        {
-            string volunteerId = "";
-            if (HttpContext.Session.GetString("role") == "Organization")
+        public IActionResult OnPostCampaignRegister()
+        { 
+            try
             {
-                volunteerId = HttpContext.Session.GetString("volunteerPhone");
-            } else if (HttpContext.Session.GetString("role") == "Volunteer")
-            {
-                volunteerId = HttpContext.Session.GetString("phone");
+                string volunteerId = "";
+                if (HttpContext.Session.GetString("role") == "Organization")
+                {
+                    volunteerId = HttpContext.Session.GetString("volunteerPhone");
+                }
+                else if (HttpContext.Session.GetString("role") == "Volunteer")
+                {
+                    volunteerId = HttpContext.Session.GetString("phone");
+                }
+
+                VolunteerInCampaign volunteerInCampaign = new VolunteerInCampaign
+                {
+                    VolunteerId = volunteerId,
+                    CampaignId = Campaign.Id,
+                };
+
+                _volunteerInCampaignRepository.CreateVolunteerInCampaign(volunteerInCampaign);
             }
-
-            VolunteerInCampaign volunteerInCampaign = new VolunteerInCampaign
+            catch (Exception ex)
             {
-                VolunteerId = volunteerId,
-                CampaignId = Campaign.Id,
-            };
-
-            _volunteerInCampaignRepository.CreateVolunteerInCampaign(volunteerInCampaign);
+                TempData["Error"] = ex.Message;
+                return RedirectToPage("/Campaigns/Register", new
+                {
+                    campaignId = Campaign.Id
+                });
+            }
+            
 
             return RedirectToPage("/VolunteerInCampaigns/Index", new
             {
-                campaignId = volunteerInCampaign.CampaignId,
+                campaignId = Campaign.Id
             });
         }
 

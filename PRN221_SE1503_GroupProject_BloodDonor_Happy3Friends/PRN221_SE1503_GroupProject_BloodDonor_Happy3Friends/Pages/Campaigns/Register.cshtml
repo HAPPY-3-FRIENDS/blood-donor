@@ -102,7 +102,7 @@
             <!-- .navbar -->
         </div>
     </header>
-
+    
     <section style="margin-top: 48px">
         @if (HttpContext.Session.GetString("role") == "Volunteer" || HttpContext.Session.GetString("role") == "Organization")
         {
@@ -193,6 +193,8 @@
             <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
         }
     </section>
+
+    <p>@TempData["Error"]</p>
 
      <!-- ======= Footer ======= -->
     <footer id="footer">
