@@ -196,7 +196,13 @@
                             <div class="col-md-6">
                                 <div class="card-body">
                                     @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>*@
-                                    <h5 class="card-title btn-title"><a title="@Html.DisplayFor(modelItem => item.Name)" class="btn-details" asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a></h5>
+                                    
+                                    @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Organization") {
+                                        <h5 class="card-title btn-title"><a title="@Html.DisplayFor(modelItem => item.Name)" class="btn-details" asp-page="/VolunteerInCampaigns/Index" asp-route-campaignId="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a></h5>
+                                    } else if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer") {
+                                        <h5 class="card-title btn-title"><a title="@Html.DisplayFor(modelItem => item.Name)" class="btn-details" asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a></h5>
+                                    }
+
                                     <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Loại máu cần: @Html.DisplayFor(modelItem => item.BloodTypeRequired)</p>
                                     <p class="card-text" style="margin-bottom: 8px; font-size: 14px">Địa chỉ: @Html.DisplayFor(modelItem => item.AddressDetails), @Html.DisplayFor(modelItem => item.District), @Html.DisplayFor(modelItem => item.City)</p>
                                     @if (HttpContext.Session.GetString("role") != "Organization")

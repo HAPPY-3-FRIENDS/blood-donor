@@ -280,12 +280,11 @@
 
     </dl>
     <div>
-        @if (HttpContext.Session.GetString("role") == "Organization")
-        {
-            <a asp-page="./Edit" asp-route-id="@Model.Campaign.Id">Edit</a> <span> | </span>
-        } else if (HttpContext.Session.GetString("role") == "Volunteer") {
+        @if (HttpContext.Session.GetString("role") == "Volunteer") {
             <a class="btn-register" asp-page="./Register" asp-route-campaignId="@Model.Campaign.Id">Đặt lịch</a>
+            HttpContext.Session.SetString("action", "RegisterCampaign");
         } else if (HttpContext.Session.GetString("role") == null) {
+            HttpContext.Session.SetString("action", "RegisterCampaign");
             <a class="btn-register" asp-page="/Login" asp-route-campaignId="@Model.Campaign.Id" style="left: 44%;">Đăng nhập để đặt lịch</a>
         }
     </div>
