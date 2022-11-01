@@ -66,6 +66,8 @@
         .header-row {
             color: #FFF;
             font-weight: 500;
+            vertical-align: middle;
+            text-align: center;
         }
 
         .btn-action-control {
@@ -101,7 +103,7 @@
     {
         <script type="text/javascript">
             window.onload = function() {
-                swal("Lỗi", "Không thể xóa tổ chức có chiến dịch", "error");
+                swal("Lỗi", "Không thể xóa tổ chức này", "error");
             };
         </script>
     }
@@ -126,7 +128,7 @@
 
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Admin")
     {
-        <div class="container">
+        <div class="container" style="max-width: 1400px;">
             <div class="row">
                 <div style="margin: auto" class="col-12 mt-5">
                     <a class="btn-create" style="text-decoration: none; background-color: #37517e; color: #FFF; padding: 8px 16px; border-radius: 12px" asp-page="Create">Tạo mới</a>
@@ -135,28 +137,29 @@
                         <table class="table table-bordered table-striped rounded-3 w-100 ">
                             <thead style="background-color: #37517e; color: #FFF;">
                                 <tr>
-                                    <th class="header-row">
-                                        @Html.DisplayNameFor(model => model.Organizations[0].Username)
-                                    </th>
-                                    <th class="header-row">
-                                        @Html.DisplayNameFor(model => model.Organizations[0].Password)
-                                    </th>
-                                    <th class="header-row">
+                                    <th class="header-row" >
                                         @Html.DisplayNameFor(model => model.Organizations[0].Name)
                                     </th>
-                                    <th class="header-row">
-                                        @Html.DisplayNameFor(model => model.Organizations[0].Description)
+                                    <th class="header-row" >
+                                        @Html.DisplayNameFor(model => model.Organizations[0].Username)
                                     </th>
-                                    <th class="header-row">
+                                    @*                                    <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organizations[0].Password)
+                                </th>*@
+
+                                    @*                                    <th class="header-row">
+                                @Html.DisplayNameFor(model => model.Organizations[0].Description)
+                                </th>*@
+                                    <th class="header-row" style="width: 30%">
                                         @Html.DisplayNameFor(model => model.Organizations[0].AddressDetails)
                                     </th>
-                                    <th class="header-row">
+                                    <th class="header-row" style="width: 12%;">
                                         @Html.DisplayNameFor(model => model.Organizations[0].District)
                                     </th>
                                     <th class="header-row">
                                         @Html.DisplayNameFor(model => model.Organizations[0].City)
                                     </th>
-                                    <th class="header-row">
+                                    <th class="header-row" style="width: 8%;">
                                         @Html.DisplayNameFor(model => model.Organizations[0].IsRedCross)
                                     </th>
                                     <th colspan="2"></th>
@@ -166,28 +169,29 @@
                                 @foreach (var item in Model.Organizations)
                                 {
                                     <tr>
-                                        <td class="body-row">
-                                            @Html.DisplayFor(modelItem => item.Username)
-                                        </td>
-                                        <td class="body-row">
-                                            @Html.DisplayFor(modelItem => item.Password)
-                                        </td>
-                                        <td class="body-row">
+                                        <td class="body-row" style="max-width: 212px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
-                                        <td class="body-row">
-                                            @Html.DisplayFor(modelItem => item.Description)
+                                        <td class="body-row" style="max-width: 150px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                                            @Html.DisplayFor(modelItem => item.Username)
                                         </td>
-                                        <td class="body-row">
+                                        @*                                      <td class="body-row">
+                                @Html.DisplayFor(modelItem => item.Password)
+                                </td>*@
+
+                                        @*<td class="body-row">
+                                @Html.DisplayFor(modelItem => item.Description)
+                                </td>*@
+                                        <td class="body-row" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap; max-width: 300px;">
                                             @Html.DisplayFor(modelItem => item.AddressDetails)
                                         </td>
-                                        <td class="body-row">
+                                        <td class="body-row"> 
                                             @Html.DisplayFor(modelItem => item.District)
                                         </td>
                                         <td class="body-row">
                                             @Html.DisplayFor(modelItem => item.City)
                                         </td>
-                                        <td>
+                                        <td style="text-align: center">
                                             @Html.DisplayFor(modelItem => item.IsRedCross)
                                         </td>
                                         <td>

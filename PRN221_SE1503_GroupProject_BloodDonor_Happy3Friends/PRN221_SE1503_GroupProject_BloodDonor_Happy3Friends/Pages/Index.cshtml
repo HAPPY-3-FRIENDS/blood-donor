@@ -27,16 +27,16 @@
 <body>
     <style>
         .btn-action {
-            color: #FFF;
+            color: #FFF !important;
             padding: 10px 20px;
             font-size: 14px;
             font-weight: 500;
         }
-        
-        .btn-action:hover {
-            background-color: #37517E;
-            color: #FFF;
-        }
+
+            .btn-action:hover {
+                color: #31a9e1 !important;
+                background: none;
+            }
     </style>
 
     <!-- ======= Header ======= -->
@@ -62,17 +62,70 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: none;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="">Thông tin cá nhân</a></li>
-                                            <li><a class="btn-action dropdown-item" style="color: #FFF" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
+                                            <li><a class="btn-action dropdown-item" asp-page="">Thông tin cá nhân</a></li>
+                                            <li><a class="btn-action dropdown-item" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
-                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
                                         </form>
                                     </ul>
                                 </div>
                             </div>
                         </li>
                     }
+                    @*@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin")
+                    {
+                        <li class="dropdown">
+                            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+                                <i class="glyphicon glyphicon-bell"></i>
+                            </a>
+
+                            <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+
+                                <div class="notification-heading">
+                                    <h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                </div>
+                                <div class="notifications-wrapper">
+                                    <a class="content" href="#">
+                                        <div class="notification-item">
+                                            <img src="http://www.leapcms.com/images/100pixels1.gif">
+                                            <h4 class="item-title">Evaluation Deadline  <small> 1 day ago</small></h4>
+                                            <p class="item-info">Mr hassan has followed you!</p>
+                                        </div>
+                                    </a>
+
+                                    <a class="content" href="#">
+                                        <div class="notification-item">
+                                            <img src="http://www.leapcms.com/images/100pixels1.gif">
+                                            <h4 class="item-title">Evaluation Deadline  <small> 1 day ago</small></h4>
+                                            <p class="item-info">Marketing 101, Video Assignment</p>
+                                        </div>
+                                    </a>
+                                    <a class="content" href="#">
+                                        <div class="notification-item">
+                                            <img src="http://www.leapcms.com/images/100pixels1.gif">
+                                            <h4 class="item-title">Evaluation Deadline  <small> 1 day ago</small></h4>
+                                            <p class="item-info">Mr hassan has followed you!</p>
+                                        </div>
+                                    </a>
+                                    <a class="content" href="#">
+                                        <div class="notification-item">
+                                            <img src="http://www.leapcms.com/images/100pixels1.gif">
+                                            <h4 class="item-title">Evaluation Deadline  <small> 1 day ago</small></h4>
+                                            <p class="item-info">Mr hassan has followed you!</p>
+                                        </div>
+                                    </a>
+                                    <a class="content" href="#">
+                                        <div class="notification-item">
+                                            <img src="http://www.leapcms.com/images/100pixels1.gif">
+                                            <h4 class="item-title">Evaluation Deadline  <small> 1 day ago</small></h4>
+                                            <p class="item-info">Mr hassan has followed you!</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ul>
+                        </li>
+                    }*@
                     else
                     {
                         <li><a style="text-decoration: none" class="getstarted scrollto" asp-area="" asp-page="/Login">Đăng nhập</a></li>
@@ -82,7 +135,6 @@
             </nav><!-- .navbar -->
         </div>
     </header><!-- End Header -->
-
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
         <div class="container">
@@ -133,7 +185,6 @@
 
             </div>
         </section><!-- End About Us Section -->
-
         <!-- ======= Services Section ======= -->
         <section id="benefit" class="services section-bg">
             <div class="container" data-aos="fade-up">
@@ -179,7 +230,6 @@
                 </div>
             </div>
         </section><!-- End Services Section -->
-
         <!-- ======= Skills Section ======= -->
         <section id="about" class="skills">
             <div class="container">
@@ -225,7 +275,6 @@
             </div>
         </section><!-- End Skills Section -->
     </main><!-- End #main -->
-
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-newsletter">
