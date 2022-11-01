@@ -12,11 +12,13 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
     {
         private readonly IVolunteerRepository _volunteerRepository;
         private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
+        private readonly ICampaignRepository _campaignRepository;
 
-        public RegisterModel(IVolunteerRepository volunteerRepository, IVolunteerInCampaignRepository volunteerInCampaignRepository)
+        public RegisterModel(IVolunteerRepository volunteerRepository, IVolunteerInCampaignRepository volunteerInCampaignRepository, ICampaignRepository campaignRepository)
         {
             _volunteerRepository = volunteerRepository;
             _volunteerInCampaignRepository = volunteerInCampaignRepository;
+            _campaignRepository = campaignRepository;
         }
 
         [BindProperty, Required]
@@ -62,6 +64,8 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns
                     return NotFound();
                 }
             }
+
+            Campaign = _campaignRepository.GetCampaignById(campaignId);
 
             return Page();
         }

@@ -7,5 +7,6 @@ namespace Repositories.IRepositories
         public bool CheckLogin(string phone, string password);
         public Volunteer GetVolunteerByPhone(string phone);
         public void CreateVolunteer(Volunteer volunteer);
+        public void UpdateVolunteer(Volunteer volunteer);
     }
 }

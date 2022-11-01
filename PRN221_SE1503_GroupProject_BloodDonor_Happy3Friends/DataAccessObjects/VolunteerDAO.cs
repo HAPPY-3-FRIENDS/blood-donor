@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -78,6 +79,28 @@ namespace DataAccessObjects
                 else
                 {
                     throw new Exception("The Volunteer is already exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void UpdateVolunteer(Volunteer volunteer)
+        {
+            try
+            {
+                Volunteer _volunteer = GetVolunteerByPhone(volunteer.Phone);
+                if (_volunteer != null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    bloodDonorContext.Entry<Volunteer>(volunteer).State = EntityState.Modified;
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("The volunteer does not exist!");
                 }
             }
             catch (Exception ex)

@@ -11,5 +11,7 @@ namespace Repositories
         Volunteer IVolunteerRepository.GetVolunteerByPhone(string phone) => VolunteerDAO.Instance.GetVolunteerByPhone(phone);
 
         public void CreateVolunteer(Volunteer volunteer) => VolunteerDAO.Instance.CreateVolunteer(volunteer);
+
+        public void UpdateVolunteer(Volunteer volunteer) => VolunteerDAO.Instance.UpdateVolunteer(volunteer);
     }
 }

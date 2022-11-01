@@ -122,6 +122,16 @@
                 color: #FFF;
             }
     </style>
+
+    @if (TempData["Error"] != null)
+    {
+        <script type="text/javascript">
+            window.onload = function() {
+                swal("Lỗi", "Không thể xóa chiến dịch có tình nguyện viên đăng kí", "error");
+            };
+        </script>
+    }
+
     <header id="header" class="fixed-top " style="background-color: #37517e;">
         <div class="container d-flex align-items-center">
             <h1 class="logo me-auto"><a style="text-decoration: none" asp-area="" asp-page="/Index">BloodDonor</a></h1>
@@ -145,7 +155,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><a class="dropdown-item btn-action" asp-page="">Thông tin cá nhân</a></li>
+                                            <li><a class="dropdown-item btn-action" asp-page="/Volunteers/Details">Thông tin cá nhân</a></li>
                                             <li><a class="btn-action dropdown-item" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
                                         <form method="post" asp-page-handler="Logout">
@@ -237,7 +247,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                                     </div>
                                     <div class="modal-body" style="padding: 24px 24px;">
-                                        Bạn có chắc chắn xóa tổ chức này?<br />
+                                        Bạn có chắc chắn xóa chiến dịch này?<br />
                                         Hành động này sẽ không thể hoàn tác!
                                     </div>
                                     <div class="modal-footer">

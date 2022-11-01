@@ -1,30 +1,26 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
+using Microsoft.AspNetCore.Http;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
 {
     public class DetailsModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly IVolunteerRepository _volunteerRepository;
 
-        public DetailsModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public DetailsModel(IVolunteerRepository volunteerRepository)
         {
-            _context = context;
+            _volunteerRepository = volunteerRepository;
         }
 
         public Volunteer Volunteer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public IActionResult OnGet()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Volunteer = await _context.Volunteers.FirstOrDefaultAsync(m => m.Phone == id);
+            string phone = HttpContext.Session.GetString("phone");
+            Volunteer = _volunteerRepository.GetVolunteerByPhone(phone);
 
             if (Volunteer == null)
             {

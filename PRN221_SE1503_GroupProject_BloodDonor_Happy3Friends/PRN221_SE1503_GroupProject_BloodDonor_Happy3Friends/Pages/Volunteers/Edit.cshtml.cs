@@ -4,29 +4,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
+using Microsoft.AspNetCore.Http;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
 {
     public class EditModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly IVolunteerRepository _volunteerRepository;
 
-        public EditModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public EditModel(IVolunteerRepository volunteerRepository)
         {
-            _context = context;
+            _volunteerRepository = volunteerRepository;
         }
 
         [BindProperty]
         public Volunteer Volunteer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public IActionResult OnGet()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Volunteer = await _context.Volunteers.FirstOrDefaultAsync(m => m.Phone == id);
+            string phone = HttpContext.Session.GetString("phone");
+            Volunteer = _volunteerRepository.GetVolunteerByPhone(phone);
 
             if (Volunteer == null)
             {
@@ -35,18 +33,16 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Volunteer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _volunteerRepository.UpdateVolunteer(Volunteer);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -65,7 +61,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
 
         private bool VolunteerExists(string id)
         {
-            return _context.Volunteers.Any(e => e.Phone == id);
+            return _volunteerRepository.GetVolunteerByPhone(id) != null;
         }
 
         public IActionResult OnPostLogout()
