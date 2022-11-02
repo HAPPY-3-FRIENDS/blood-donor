@@ -156,6 +156,16 @@ namespace DataAccessObjects
                     }
                 }
 
+                if(_volunteer.LastDonatedDate != null)
+                {
+                    DateTime acceptedDate = (DateTime) _volunteer.LastDonatedDate;
+                    acceptedDate = acceptedDate.AddDays(84);
+                    if (acceptedDate > DateTime.Now)
+                    {
+                        throw new Exception("Bạn không thể đăng ký hiến máu ngay thời điểm này! Thời gian tối thiểu giữa hai lần hiến máu là 12 tuần!");
+                    }
+                }
+
                 volunteerInCampaign.BloodType = _volunteer.BloodType;
                 volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
 
