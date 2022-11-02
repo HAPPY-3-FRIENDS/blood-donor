@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace DataAccessObjects
 {
@@ -95,6 +96,7 @@ namespace DataAccessObjects
                 if (_volunteer != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    volunteer.BloodType = volunteer.BloodType.GetValueFromName<BloodType>().ToString();
                     bloodDonorContext.Entry<Volunteer>(volunteer).State = EntityState.Modified;
                     bloodDonorContext.SaveChanges();
                 }

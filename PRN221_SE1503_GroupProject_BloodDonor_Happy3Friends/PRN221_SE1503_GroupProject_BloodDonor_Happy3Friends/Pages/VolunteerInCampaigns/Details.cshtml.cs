@@ -9,12 +9,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
 {
     public class DetailsModel : PageModel
     {
-        private readonly BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
         private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public DetailsModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IVolunteerInCampaignRepository volunteerInCampaignRepository)
+        public DetailsModel(IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
-            _context = context;
             _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 

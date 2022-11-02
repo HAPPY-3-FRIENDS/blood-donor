@@ -10,12 +10,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
 {
     public class EditModel : PageModel
     {
-        private readonly PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
         private readonly IVolunteerInCampaignRepository _volunteerInCampaignRepository;
 
-        public EditModel(PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IVolunteerInCampaignRepository volunteerInCampaignRepository)
+        public EditModel(IVolunteerInCampaignRepository volunteerInCampaignRepository)
         {
-            _context = context;
             _volunteerInCampaignRepository = volunteerInCampaignRepository;
         }
 

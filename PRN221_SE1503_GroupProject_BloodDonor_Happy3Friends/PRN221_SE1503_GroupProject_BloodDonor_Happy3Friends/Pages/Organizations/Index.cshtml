@@ -122,9 +122,9 @@
     <nav class="navbar" style="position: relative; background-color: #37517e;">
         <div class="container-fluid justify-content-start">
             <h3 style="color: #fff;margin: 0; padding-left: 4%">BloodDonor</h3>
-            <form style="padding-left: 4%" class="d-flex">
+            @*<form style="padding-left: 4%" class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
+            </form>*@
             <p style="text-decoration: none; margin: 0; margin-left: 48%; color: #fff">Xin chào, @HttpContext.Session.GetString("name")</p>
             @if (HttpContext.Session.GetString("role") != null)
             {

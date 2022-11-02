@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages;
 using Repositories;
 using Repositories.IRepositories;
-using SignalRChat.Hubs;
 using System;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
@@ -36,7 +34,6 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
             services.AddRazorPages();
-            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,7 +58,6 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapHub<SignalrServer>("/signalrServer");
             });
         }
     }
