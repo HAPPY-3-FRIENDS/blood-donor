@@ -1,5 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Http
+@using System.Web
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInCampaigns.EditModel
 
 @{
@@ -15,6 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
 
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" integrity="sha512-fRVSQp1g2M/EqDBL+UFSams+aw2qk12Pl/REApotuUVK1qEXERk3nrCFChouag/PdDsPk387HJuetJ1HBx8qAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Vendor CSS Files -->
     @*<link href="~/lib/aos/dist/aos.css" rel="stylesheet">*@
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +29,15 @@
     <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 </head>
-<body id="body-container">
+<body id="body-container" style="overflow-x: hidden"> 
+    @if (TempData["Error"] != null)
+    {
+        <script type="text/javascript">
+            window.onload = function() {
+                swal("Lỗi", "@Html.Raw(HttpUtility.HtmlDecode(TempData["Error"].ToString()))", "error");
+            };
+        </script>
+    }
     <style>
 
         #body-container::-webkit-scrollbar {
@@ -133,7 +145,8 @@
 
                     @if (HttpContext.Session.GetString("role") == "Organization")
                     {
-                        <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Quản lý chiến dịch</a></li>
+                        <li><a class="nav-link scrollto " asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
                     }
 
                     @if (HttpContext.Session.GetString("role") != null)
@@ -176,64 +189,64 @@
             <h3 class="header-back">Chỉnh sửa hồ sơ sức khỏe tình nguyện viên</h3>
         </div>
             
-        <div>
-            <h4>Volunteer</h4>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-2">
+        <div class="row col-12" style="padding: 0px 24px; margin: 8px 48px;">
+        <div class="row col-5" style="align-content: flex-start;">
+            <dl class="row g-2 col-md-8 vw-25" style="padding: 12px 36px; margin: auto; border: 4px solid #37517e; border-radius: 8px; width: 100%;">
+                <h1 style="padding: 8px 0px; border-bottom: 1px solid;">Thông tin đăng ký</h1>
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.Name)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.Name)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.IdentityNumber)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.IdentityNumber)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.Email)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.Email)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.DateOfBirth)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.DateOfBirth)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.AddressDetails)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.AddressDetails)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.District)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.District)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.City)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.City)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.Volunteer.LastDonatedDate)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Volunteer.LastDonatedDate)
                 </dd>
             </dl>
         </div>
 
-        <div class="row" style="--bs-gutter-x: 0; justify-content: center;">
-
-            <form method="post" class="row g-3 col-md-8" style="padding: 16px 36px; margin: 0 24px; border: 4px solid #37517e; border-radius: 8px;">
+        <div class="row col-5" style="padding: 12px 36px; margin-left: 48px; border: 4px solid #37517e; border-radius: 8px;">
+            <h1 style="padding: 8px 0px; border-bottom: 1px solid;">Thông tin cá nhân</h1>
+            <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="VolunteerInCampaign.Id" />
                 <input type="hidden" asp-for="VolunteerInCampaign.VolunteerId" />
@@ -250,7 +263,7 @@
                 <input type="hidden" asp-for="Volunteer.City" />
                 <input type="hidden" asp-for="Volunteer.LastDonatedDate" />
                 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.BloodType" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.BloodType" asp-items="ViewBag.VolunteerBloodType" class="form-select" aria-label="Default select example">
                         <option asp-for="VolunteerInCampaign.BloodType" value="Chưa xác định">Chưa xác định</option>
@@ -262,7 +275,7 @@
                     <span asp-validation-for="VolunteerInCampaign.BloodType" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.BloodAmount" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.BloodAmount" asp-items="ViewBag.VolunteerBloodAmount" class="form-select" aria-label="Default select example">
                         <option asp-for="VolunteerInCampaign.BloodAmount" value="250">250 ml</option>
@@ -272,19 +285,19 @@
                     <span asp-validation-for="VolunteerInCampaign.BloodAmount" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.RegistrationDate" class="control-label"></label>
                     <input value="@Model.VolunteerInCampaign.RegistrationDate" class="form-control" disabled />
                     <span asp-validation-for="VolunteerInCampaign.RegistrationDate" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.DonatedDate" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.DonatedDate" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.DonatedDate" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.Status" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.Status" asp-items="ViewBag.Status" class="form-select" aria-label="Default select example">
                         <option value="Đã đăng ký">Đã đăng ký</option>
@@ -295,15 +308,13 @@
                     <span asp-validation-for="VolunteerInCampaign.Status" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group">
                     <label asp-for="VolunteerInCampaign.RejectedReason" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.RejectedReason" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.RejectedReason" class="text-danger"></span>
                 </div>
 
-                <div class="form-group" style="text-align: center; margin-bottom: 16px; margin-top: 24px">
-                    <input style="padding: 8px 24px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
-                </div>
+                <h1 style="padding: 8px 0px; border-bottom: 1px solid;">Phiếu sức khỏe</h1>
 
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.Height" class="control-label"></label>
@@ -342,7 +353,12 @@
                     <input asp-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="text-danger"></span>
                 </div>
+
+                <div class="form-group" style="text-align: center; margin-bottom: 16px; margin-top: 24px">
+                    <input style="padding: 8px 24px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
+                </div>
             </form>
+        </div>
         </div>
     }
     else
