@@ -166,6 +166,12 @@ namespace DataAccessObjects
                     }
                 }
 
+                VolunteerInCampaign volInCam = bloodDonorContext.VolunteerInCampaigns.FirstOrDefault(v => v.VolunteerId == _volunteer.Phone && v.Status.CompareTo("NEW") == 0);
+                if (volInCam != null)
+                {
+                    throw new Exception("Bạn không thể đăng ký hiến máu cho 2 chiến dịch trong cùng một thời điểm!");
+                }
+
                 volunteerInCampaign.BloodType = _volunteer.BloodType;
                 volunteerInCampaign.BloodType = volunteerInCampaign.BloodType.GetValueFromName<BloodType>().ToString();
 

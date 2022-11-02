@@ -155,7 +155,7 @@ namespace DataAccessObjects
                 if (_bloodRequest != null)
                 {
                     var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
-                    if (_bloodRequest.Status.Equals(BloodRequestStatus.NEW.ToString()))
+                    if (_bloodRequest.Status.Equals("Đã yêu cầu"))
                     {
                         bloodDonorContext.BloodRequests.Remove(_bloodRequest);
                         bloodDonorContext.SaveChanges();
