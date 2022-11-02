@@ -12,6 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends</title>
+    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -24,8 +25,17 @@
     <link href="~/lib/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+@*    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">*@
+
 </head>
 <body id="body-container">
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('select').multipleSelect()
+      })
+    </script>
     <style>
         .btn-action {
             color: #31a9e1 !important;
@@ -38,6 +48,7 @@
                 background-color: #31a9e1 !important;
                 color: #FFF !important;
             }
+
         #body-container::-webkit-scrollbar {
             width: 12px;
             background-color: #F5F5F5;
@@ -54,21 +65,21 @@
             margin-top: 24px;
         }
 
-        #table-container::-webkit-scrollbar {
-            width: 6px;
-            background-color: #F5F5F5;
-        }
+            #table-container::-webkit-scrollbar {
+                width: 6px;
+                background-color: #F5F5F5;
+            }
 
-        #table-container::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
-        }
+            #table-container::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122,153,217)), color-stop(0.72, rgb(73,125,189)), color-stop(0.86, rgb(28,58,148)));
+            }
 
-        #table-container::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            background-color: #F5F5F5;
-            border-radius: 10px;
-        }
+            #table-container::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                background-color: #F5F5F5;
+                border-radius: 10px;
+            }
 
         .header-row {
             color: #FFF;
@@ -114,17 +125,17 @@
             color: #375e7e;
         }
 
-        .btn-back:hover {
-            color: #37517e;
-        }
+            .btn-back:hover {
+                color: #37517e;
+            }
 
         .btn-save {
             background-color: #375e7e;
         }
 
-        .btn-save:hover {
-            background-color: #37517e;
-        }
+            .btn-save:hover {
+                background-color: #37517e;
+            }
     </style>
 
     <header id="header" class="fixed-top " style="background-color: #37517e;">
@@ -150,12 +161,12 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: 80%; margin-left: 10%; padding: 8px; border: 1px solid #31a9e1; background: #FFF;;">
                                         @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
                                         {
-                                            <li><button class="dropdown-item btn-action" asp-page="/Volunteers/Details">Thông tin cá nhân</button></li>
-                                            <li><button class="dropdown-item btn-action" type="submit">Lịch sử hiến máu</button></li>
+                                            <li><a class="dropdown-item btn-action" asp-page="/Volunteers/Details">Thông tin cá nhân</a></li>
+                                            <li><a class="btn-action dropdown-item" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
 
                                         <form method="post" asp-page-handler="Logout">
-                                            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+                                        <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
                                         </form>
                                     </ul>
                                 </div>
@@ -203,6 +214,20 @@
                     </select>
                     <span asp-validation-for="Campaign.BloodTypeRequired" class="text-danger"></span>
                 </div>
+                @*<select multiple="multiple">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>*@
                 <div class="form-group col-md-4">
                     <label asp-for="Campaign.AddressDetails" class="control-label"></label>
                     <input asp-for="Campaign.AddressDetails" class="form-control" />
@@ -232,6 +257,7 @@
                         <option asp-for="Campaign.District" value="Huyện Cần Giờ">Huyện Cần Giờ</option>
                         <option asp-for="Campaign.District" value="Huyện Hóc Môn">Huyện Hóc Môn</option>
                         <option asp-for="Campaign.District" value="Huyện Củ Chi">Huyện Củ Chi</option>
+                        <option asp-for="Campaign.District" value="Thành phố Thủ Đức">Thành phố Thủ Đức</option>
                     </select>
                     @*<input asp-for="Campaign.District" class="form-control" />*@
                     <span asp-validation-for="Campaign.District" class="text-danger"></span>
@@ -241,7 +267,7 @@
                     <select asp-for="Campaign.City" class="form-select" aria-label="Default select example">
                         <option asp-for="VolunteerInCampaign.City" value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
                     </select>
-@*                    <input asp-for="Campaign.City" class="form-control"/>*@
+                    @*                    <input asp-for="Campaign.City" class="form-control"/>*@
                     <span asp-validation-for="Campaign.City" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
@@ -263,7 +289,7 @@
     }
     else
     {
-        <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+        <h6 style="margin-top: 120px; margin-left: 48px;">Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
     }
 
     <footer id="footer" style="position: absolute;bottom: 0;width: 100%;">
@@ -283,6 +309,8 @@
             </div>
         </div>
     </footer><!-- End Footer -->
+    
+    
 </body>
 </html>
 
@@ -290,4 +318,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }

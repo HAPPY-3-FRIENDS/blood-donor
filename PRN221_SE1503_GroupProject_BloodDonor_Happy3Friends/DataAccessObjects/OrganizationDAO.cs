@@ -118,7 +118,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The organization does not exist!");
+                    throw new Exception("Tổ chức không tồn tại.");
                 }
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The organization does not exist.");
+                    throw new Exception("Tổ chức không tồn tại.");
                 }
             }
             catch (Exception ex)

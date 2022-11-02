@@ -1,4 +1,4 @@
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -91,7 +91,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
 
             if (!isAdmin && !isVolunteer && !isOrganization)
             {
-                TempData["Error"] = "Invalid username/phone and password!";
+                TempData["Error"] = "Tên người dùng / điện thoại và mật khẩu không hợp lệ!";
                 return Page();
             }
 

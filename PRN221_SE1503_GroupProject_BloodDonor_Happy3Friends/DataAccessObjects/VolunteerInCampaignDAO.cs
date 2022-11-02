@@ -152,7 +152,7 @@ namespace DataAccessObjects
                 {
                     if (!_volunteer.BloodType.Equals(_campaign.BloodTypeRequired))
                     {
-                        throw new Exception("Your blood type is not suitable in this campaign!");
+                        throw new Exception("Nhóm máu của bạn không phù hợp trong chiến dịch này!");
                     }
                 }
 
@@ -179,7 +179,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("You are under 18 years old, so you cannot register to participate in the campaign!");
+                    throw new Exception("Bạn chưa đủ 18 tuổi nên không được đăng ký tham gia chiến dịch!");
                 }
             }
             catch (Exception ex)
@@ -210,7 +210,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The volunteerInCampaign does not exist!");
+                    throw new Exception("Tình nguyện viên trong chiến dịch này không tồn tại!");
                 }
             }
             catch (Exception ex)
