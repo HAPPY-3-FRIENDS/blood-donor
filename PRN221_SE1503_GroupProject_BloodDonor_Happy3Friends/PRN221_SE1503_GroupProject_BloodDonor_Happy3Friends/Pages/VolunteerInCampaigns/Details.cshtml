@@ -146,12 +146,13 @@
                     @if (HttpContext.Session.GetString("role") == null || HttpContext.Session.GetString("role") == "Volunteer")
                     {
                         <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
-                        <li><a class="nav-link scrollto " asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
                     }
 
-                    @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "Organization")
+                    @if (HttpContext.Session.GetString("role") == "Organization")
                     {
-                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
                     }
 
                     @if (HttpContext.Session.GetString("role") != null)
@@ -219,7 +220,7 @@
                         @Html.DisplayNameFor(model => model.VolunteerInCampaign.BloodAmount)
                     </dt>
                     <dd class="col-sm-8" style="text-overflow: ellipsis; overflow: hidden;">
-                        @Html.DisplayFor(model => model.VolunteerInCampaign.BloodAmount)
+                        @Html.DisplayFor(model => model.VolunteerInCampaign.BloodAmount) ml
                     </dd>
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.VolunteerInCampaign.RegistrationDate)
@@ -248,7 +249,7 @@
                 </dl>
             </div>
             <div class="row col-5" style="padding: 12px 36px; margin-left: 48px; border: 4px solid #37517e; border-radius: 8px;">
-                <h1 style="padding: 8px 0px; border-bottom: 1px solid; margin: 8px 0px; height: 64px;">Volunteer</h1>
+                <h1 style="padding: 8px 0px; border-bottom: 1px solid; margin: 8px 0px; height: 64px;">Thông tin cá nhân</h1>
                 <dl class="row">
                     <dt class="col-sm-6" style="text-overflow: ellipsis; overflow: hidden;">
                         @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
@@ -294,20 +295,19 @@
                     </dd>
                 </dl>
                 <div>
-                    <h4>VolunteerHealth</h4>
-                    <hr />
+                    <h1 style="padding: 8px 0px; border-bottom: 1px solid;">Phiếu sức khỏe</h1>
                     <dl class="row">
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.Height)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Height)
+                                @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Height) cm;
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.Weight)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Weight)
+                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.Weight) kg
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
