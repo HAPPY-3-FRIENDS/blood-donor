@@ -198,6 +198,11 @@
                         <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
                     }
 
+                    @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "Organization")
+                    {
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
+                    }
+
                     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin")
                     {
                         <li>
@@ -330,7 +335,6 @@
                                     {
                                         <a class="btn-action-control btn-edit" asp-page="./Edit" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-pencil-square"></i></a>
                                     }
-                                    <a class="btn-action-control btn-delete" asp-page="./Delete" asp-route-id="@item.Id" asp-route-campaignId="@item.CampaignId"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
                         }

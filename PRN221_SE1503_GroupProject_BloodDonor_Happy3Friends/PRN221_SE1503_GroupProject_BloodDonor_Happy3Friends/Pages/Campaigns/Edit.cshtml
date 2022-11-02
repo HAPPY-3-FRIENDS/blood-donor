@@ -141,6 +141,11 @@
                         <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
                     }
 
+                    @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "Organization")
+                    {
+                        <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
+                    }
+
                     @if (HttpContext.Session.GetString("role") != null)
                     {
                         <li>
@@ -153,6 +158,7 @@
                                             <li><a class="dropdown-item btn-action" asp-page="/Volunteers/Details">Thông tin cá nhân</a></li>
                                             <li><a class="btn-action dropdown-item" asp-page="/VolunteerInCampaigns/Index">Lịch sử hiến máu</a></li>
                                         }
+
 
                                         <form method="post" asp-page-handler="Logout">
                                             <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
