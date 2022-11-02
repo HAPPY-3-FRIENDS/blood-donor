@@ -314,14 +314,15 @@
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
                         </dt>
                         <dd class="col-sm-6">
-                            <input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" id="flexCheckDisabled" disabled>
+                            @*<input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" id="flexCheckDisabled" disabled>*@
+                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
                         </dt>
                         <dd class="col-sm-6">
-                            @*@Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)*@
-                            <input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus" id="flexCheckDisabled" disabled>
+                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
+                            @*<input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus" id="flexCheckDisabled" disabled>*@
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.OtherDiseases)

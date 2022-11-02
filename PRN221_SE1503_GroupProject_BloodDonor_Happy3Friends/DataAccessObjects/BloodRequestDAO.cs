@@ -112,6 +112,7 @@ namespace DataAccessObjects
             {
                 var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
                 DateTime requestDate = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"));
+                bloodRequest.RequestDate = requestDate;
                 bloodRequest.Status = BloodRequestStatus.NEW.ToString();
 
                 bloodDonorContext.BloodRequests.Add(bloodRequest);
