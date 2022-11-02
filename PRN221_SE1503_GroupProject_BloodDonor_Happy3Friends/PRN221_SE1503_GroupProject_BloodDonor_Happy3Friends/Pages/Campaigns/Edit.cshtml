@@ -141,7 +141,7 @@
                         <li><a class="nav-link scrollto" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
                     }
 
-                    @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "Organization")
+                    @if (HttpContext.Session.GetString("role") == "Organization")
                     {
                         <li><a class="nav-link scrollto" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
                     }

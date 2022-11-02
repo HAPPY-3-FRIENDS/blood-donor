@@ -115,10 +115,10 @@
                     {
                         <li><a class="nav-link scrollto" asp-page="/Index">Trang chủ</a></li>
                         <li><a class="nav-link scrollto " asp-area="" asp-page="/Campaigns/Index">Đặt lịch hiến máu</a></li>
-                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-page="/Request">Yêu cầu máu</a></li>
                     }
 
-                    @if (HttpContext.Session.GetString("role") != null || HttpContext.Session.GetString("role") == "Organization")
+                    @if (HttpContext.Session.GetString("role") == "Organization")
                     {
                         <li><a class="nav-link scrollto active" asp-area="" asp-page="/BloodRequests/Index">Yêu cầu máu</a></li>
                     }
@@ -192,7 +192,10 @@
                                 @Html.DisplayNameFor(model => model.BloodRequests[0].Volunteer)
                             </th>
                             <th class="header-row"></th>
-                            @*<th class="header-row"></th>*@
+                            @if (HttpContext.Session.GetString("role") == "Volunteer")
+                            {
+                                <th class="header-row"></th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -224,12 +227,15 @@
                                     @Html.DisplayFor(modelItem => item.Volunteer.Name)
                                 </td>
                                 <td class="body-row">
-                                    <a style="text-decoration: none" asp-page="./Details" asp-route-id="@item.Id">Thông tin</a> 
+                                    <a style="text-decoration: none" asp-page="./Details" asp-route-id="@item.Id">Thông tin</a>
                                 </td>
-@*                                <td class="body-row">
-                                    <a asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                    <a asp-page="./Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
-                                </td>*@
+                                @if (HttpContext.Session.GetString("role") == "Volunteer")
+                                {
+                                    <td class="body-row">
+                                        <a class="btn-action-control btn-edit" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                        <a class="btn-action-control btn-delete" asp-page="./Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>
