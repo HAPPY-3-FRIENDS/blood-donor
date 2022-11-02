@@ -1,0 +1,80 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequests.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer") {
+
+    @if (HttpContext.Session.GetString("role") != null) {
+        <form method="post" asp-page-handler="Logout">
+            <li><button class="dropdown-item btn-action" type="submit">Đăng xuất</button></li>
+        </form>
+    }
+
+    <h1>Create</h1>
+
+    <h4>BloodRequest</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="BloodRequest.VolunteerId" class="form-control" type="hidden"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BloodRequest.OrganizationId" class="control-label"></label>
+                    <select asp-for="BloodRequest.OrganizationId" class="form-control" asp-items="ViewBag.OrganizationId"></select>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="BloodRequest.RequestDate" class="control-label"></label>
+                    <input asp-for="BloodRequest.RequestDate" class="form-control" />
+                    <span asp-validation-for="BloodRequest.RequestDate" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <label asp-for="BloodRequest.Description" class="control-label"></label>
+                    <input asp-for="BloodRequest.Description" class="form-control" />
+                    <span asp-validation-for="BloodRequest.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BloodRequest.ReceiverName" class="control-label"></label>
+                    <input asp-for="BloodRequest.ReceiverName" class="form-control" />
+                    <span asp-validation-for="BloodRequest.ReceiverName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BloodRequest.ReceiverIdentityNumber" class="control-label"></label>
+                    <input asp-for="BloodRequest.ReceiverIdentityNumber" class="form-control" />
+                    <span asp-validation-for="BloodRequest.ReceiverIdentityNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BloodRequest.ReceiverPhone" class="control-label"></label>
+                    <input asp-for="BloodRequest.ReceiverPhone" class="form-control" />
+                    <span asp-validation-for="BloodRequest.ReceiverPhone" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="BloodRequest.Status" class="control-label"></label>
+                    <input asp-for="BloodRequest.Status" class="form-control" />
+                    <span asp-validation-for="BloodRequest.Status" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+}
+else
+{
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
