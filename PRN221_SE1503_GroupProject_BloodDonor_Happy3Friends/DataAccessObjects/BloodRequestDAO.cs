@@ -167,7 +167,53 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("Yêu cầu máu không tồn tại!");
+                    throw new Exception("Yêu cầu không tồn tại!");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ApproveBloodRequestById(int id)
+        {
+            try
+            {
+                BloodRequest _bloodRequest = GetBloodRequestById(id);
+                if (_bloodRequest != null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    _bloodRequest.Status = BloodRequestStatus.ACCEPTED.ToString();
+                    bloodDonorContext.Entry<BloodRequest>(_bloodRequest).State = EntityState.Modified;
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Yêu cầu không tồn tại!");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void RejectBloodRequestById(int id)
+        {
+            try
+            {
+                BloodRequest _bloodRequest = GetBloodRequestById(id);
+                if (_bloodRequest != null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    _bloodRequest.Status = BloodRequestStatus.REJECTED.ToString();
+                    bloodDonorContext.Entry<BloodRequest>(_bloodRequest).State = EntityState.Modified;
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Yêu cầu không tồn tại!");
                 }
             }
             catch (Exception ex)
