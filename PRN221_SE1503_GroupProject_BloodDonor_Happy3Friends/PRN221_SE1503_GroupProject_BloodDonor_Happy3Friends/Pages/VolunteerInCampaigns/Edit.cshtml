@@ -316,12 +316,20 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="form-control" />
+                    <select class="form-select" aria-label="Default select example" asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" >
+                        <option value="">Chưa có thông tin</option>
+                        <option value="true">Có</option>
+                        <option value="false">Không</option>
+                    </select>
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="form-control" />
+                    <select class="form-select" aria-label="Default select example" asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus">
+                        <option value="">Chưa có thông tin</option>
+                        <option value="true">Có</option>
+                        <option value="false">Không</option>
+                    </select>
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="text-danger"></span>
                 </div>
                 <div class="form-group">
