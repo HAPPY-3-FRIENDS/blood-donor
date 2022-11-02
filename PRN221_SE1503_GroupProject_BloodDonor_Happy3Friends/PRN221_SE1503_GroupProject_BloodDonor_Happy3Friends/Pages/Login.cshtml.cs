@@ -73,6 +73,10 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                     else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "RegisterCampaignsList")
                     {
                         return RedirectToPage("/Campaigns/Index");
+                    } 
+                    else if (HttpContext.Session.GetString("action") != null && HttpContext.Session.GetString("action") == "BloodRequest")
+                    {
+                        return RedirectToPage("/BloodRequests/Index");
                     }
                 }
                 else
@@ -84,6 +88,12 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages
                         HttpContext.Session.SetString("phone", organization.Id.ToString());
                         HttpContext.Session.SetString("role", "Organization");
                         HttpContext.Session.SetString("name", organization.Name);
+
+                        if (HttpContext.Session.GetString("action") == "BloodRequest")
+                        {
+                            return RedirectToPage("/BloodRequests/Index");
+                        }
+
                         return RedirectToPage("/Campaigns/Index");
                     }
                 }

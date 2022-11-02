@@ -1,0 +1,93 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequests.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    Volunteer tạo yêu cầu rồi thì không thể chỉnh sửa. Chỉ có thể xóa (Change status => đã hủy)
+    Organization nhận yêu cầu => Có nút chấp nhận yêu cầu or từ chối yêu cầu => change status
+</p>
+
+@if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") != "Admin") {
+    <h1>Index</h1>
+
+    @if (HttpContext.Session.GetString("role") == "Volunteer") {
+        <p>
+            <a asp-page="Create">Create New</a>
+        </p>
+    }
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].RequestDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].ReceiverName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].ReceiverIdentityNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].ReceiverPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].Organization)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodRequests[0].Volunteer)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BloodRequests)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiverName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiverIdentityNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiverPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Organization.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Volunteer.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h6>Bạn không có quyền truy cập trang này! <a asp-page="/Login">Đăng nhập để tiếp tục</a> Hoặc trở về <a asp-page="/Index">Trang chủ</a></h6>
+}
