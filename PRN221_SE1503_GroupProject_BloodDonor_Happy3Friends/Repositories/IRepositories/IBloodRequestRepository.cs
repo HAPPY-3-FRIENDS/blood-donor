@@ -13,6 +13,7 @@ namespace Repositories.IRepositories
         public List<BloodRequest> GetBloodRequestsByOrganizationId(int organizationId);
         public BloodRequest GetBloodRequestById(int id);
         public void CreateBloodRequest(BloodRequest bloodRequest);
+        public void UpdateBloodRequest(BloodRequest bloodRequest);
         public void DeleteBloodRequest(int id);
     }
 }

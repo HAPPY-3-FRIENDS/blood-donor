@@ -7,55 +7,49 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories.IRepositories;
 
 namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequests
 {
     public class EditModel : PageModel
     {
         private readonly BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
+        private readonly IBloodRequestRepository _bloodRequestRepository;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public EditModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context)
+        public EditModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IBloodRequestRepository bloodRequestRepository, IOrganizationRepository organizationRepository)
         {
             _context = context;
+            _bloodRequestRepository = bloodRequestRepository;
+            _organizationRepository = organizationRepository;
         }
 
         [BindProperty]
         public BloodRequest BloodRequest { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            BloodRequest = await _context.BloodRequests
-                .Include(b => b.Organization)
-                .Include(b => b.Volunteer).FirstOrDefaultAsync(m => m.Id == id);
+            BloodRequest = _bloodRequestRepository.GetBloodRequestById(id);
 
             if (BloodRequest == null)
             {
                 return NotFound();
             }
-           ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "City");
-           ViewData["VolunteerId"] = new SelectList(_context.Volunteers, "Phone", "Phone");
+
+           ViewData["OrganizationId"] = new SelectList(_organizationRepository.GetOrganizations(), "Id", "Name");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(BloodRequest).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _bloodRequestRepository.UpdateBloodRequest(BloodRequest);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -74,7 +68,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequest
 
         private bool BloodRequestExists(int id)
         {
-            return _context.BloodRequests.Any(e => e.Id == id);
+            return _bloodRequestRepository.GetBloodRequestById(id) != null;
         }
 
         public IActionResult OnPostLogout()

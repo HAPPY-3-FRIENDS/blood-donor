@@ -15,16 +15,18 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequest
     {
         private readonly BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext _context;
         private readonly IBloodRequestRepository _bloodRequestRepository;
+        private readonly IOrganizationRepository _organizationRepository;
 
-        public CreateModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IBloodRequestRepository bloodRequestRepository)
+        public CreateModel(BusinessObjects.Models.PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext context, IBloodRequestRepository bloodRequestRepository, IOrganizationRepository organizationRepository)
         {
             _context = context;
             _bloodRequestRepository = bloodRequestRepository;
+            _organizationRepository = organizationRepository;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Name");
+            ViewData["OrganizationId"] = new SelectList(_organizationRepository.GetOrganizations(), "Id", "Name");
             return Page();
         }
 

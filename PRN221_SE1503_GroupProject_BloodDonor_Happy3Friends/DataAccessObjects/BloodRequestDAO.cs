@@ -123,6 +123,29 @@ namespace DataAccessObjects
             }
         }
 
+        public void UpdateBloodRequest(BloodRequest bloodRequest)
+        {
+            try
+            {
+                BloodRequest _bloodRequest = GetBloodRequestById(bloodRequest.Id);
+                if (_bloodRequest != null)
+                {
+                    var bloodDonorContext = new PRN221_SE1503_GroupProject_BloodDonor_Happy3FriendsContext();
+                    bloodRequest.Status = bloodRequest.Status.GetValueFromName<BloodRequestStatus>().ToString();
+                    bloodDonorContext.Entry<BloodRequest>(bloodRequest).State = EntityState.Modified;
+                    bloodDonorContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Yêu cầu không tồn tại.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void DeleteBloodRequest(int id)
         {
             try
