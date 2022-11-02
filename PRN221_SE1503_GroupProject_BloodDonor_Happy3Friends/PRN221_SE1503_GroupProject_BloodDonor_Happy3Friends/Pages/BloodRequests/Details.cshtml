@@ -311,7 +311,7 @@
                     @Html.DisplayNameFor(model => model.BloodRequest.Volunteer)
                 </dt>
                 <dd class="col-sm-6">
-                    @Html.DisplayFor(model => model.BloodRequest.Volunteer.Phone)
+                    @Html.DisplayFor(model => model.BloodRequest.Volunteer.Name)
                 </dd>
             </dl>
         </div>
@@ -319,14 +319,16 @@
         @if (HttpContext.Session.GetString("role") == "Organization")
         {
             <div style="text-align: center; margin-top: 24px">
-            @*<a asp-page="./Edit" asp-route-id="@Model.BloodRequest.Id">Edit</a> |
-        <a asp-page="./Index">Back to List</a>*@
-            <a class="btn-control btn-approve" asp-page="">Chấp nhận</a>
-            <a class="btn-control btn-deny" asp-page="">Từ chối</a>
-        </div>
+                <form method="post" asp-page-handler="Approve" >
+                    <input type="hidden" asp-for="BloodRequest.Id" />
+                    <button class="btn-control btn-approve" type="submit">Chấp nhận</button>
+                </form>
+                <form method="post" asp-page-handler="Reject" >
+                    <input type="hidden" asp-for="BloodRequest.Id" />
+                    <button class="btn-control btn-deny" type="submit">Từ chối</button>
+                </form>
+            </div>
         }
-        
-
     }
     else
     {
