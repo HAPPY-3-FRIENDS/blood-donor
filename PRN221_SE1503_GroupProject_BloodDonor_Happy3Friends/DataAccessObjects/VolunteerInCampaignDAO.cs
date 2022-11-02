@@ -202,6 +202,10 @@ namespace DataAccessObjects
 
                     Volunteer _volunteer = VolunteerDAO.Instance.GetVolunteerByPhone(volunteerInCampaign.VolunteerId);
                     _volunteer.BloodType = volunteerInCampaign.BloodType;
+                    if (_volunteerInCampaign.Status == EnumExtensions.GetDisplayName(VolunteerInCampaignStatus.JOINED))
+                    {
+                        _volunteer.LastDonatedDate = _volunteerInCampaign.DonatedDate;
+                    }
 
                     bloodDonorContext.Entry<Volunteer>(_volunteer).State = EntityState.Modified;
                     bloodDonorContext.Entry<VolunteerHealth>(volunteerInCampaign.VolunteerHealth).State = EntityState.Modified;

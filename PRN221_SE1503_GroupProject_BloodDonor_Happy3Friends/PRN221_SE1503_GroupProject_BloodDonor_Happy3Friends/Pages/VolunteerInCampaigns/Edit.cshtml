@@ -175,58 +175,58 @@
             <a asp-page="./Index" asp-route-campaignId="@Request.Query["campaignId"]"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
             <h3 class="header-back">Chỉnh sửa hồ sơ sức khỏe tình nguyện viên</h3>
         </div>
-
+            
         <div>
             <h4>Volunteer</h4>
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.Name)
+                    @Html.DisplayNameFor(model => model.Volunteer.Name)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Name)
+                    @Html.DisplayFor(model => model.Volunteer.Name)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                    @Html.DisplayNameFor(model => model.Volunteer.IdentityNumber)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.IdentityNumber)
+                    @Html.DisplayFor(model => model.Volunteer.IdentityNumber)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                    @Html.DisplayNameFor(model => model.Volunteer.Email)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.Email)
+                    @Html.DisplayFor(model => model.Volunteer.Email)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                    @Html.DisplayNameFor(model => model.Volunteer.DateOfBirth)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.DateOfBirth)
+                    @Html.DisplayFor(model => model.Volunteer.DateOfBirth)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                    @Html.DisplayNameFor(model => model.Volunteer.AddressDetails)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.AddressDetails)
+                    @Html.DisplayFor(model => model.Volunteer.AddressDetails)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.District)
+                    @Html.DisplayNameFor(model => model.Volunteer.District)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.District)
+                    @Html.DisplayFor(model => model.Volunteer.District)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.City)
+                    @Html.DisplayNameFor(model => model.Volunteer.City)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.City)
+                    @Html.DisplayFor(model => model.Volunteer.City)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                    @Html.DisplayNameFor(model => model.Volunteer.LastDonatedDate)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.VolunteerInCampaign.Volunteer.LastDonatedDate)
+                    @Html.DisplayFor(model => model.Volunteer.LastDonatedDate)
                 </dd>
             </dl>
         </div>
@@ -238,13 +238,17 @@
                 <input type="hidden" asp-for="VolunteerInCampaign.Id" />
                 <input type="hidden" asp-for="VolunteerInCampaign.VolunteerId" />
                 <input type="hidden" asp-for="VolunteerInCampaign.VolunteerHealthId" />
+                <input type="hidden" asp-for="VolunteerInCampaign.VolunteerHealth.Id" />
                 <input type="hidden" asp-for="VolunteerInCampaign.CampaignId" />
-
-                @*<div class="form-group col-md-4">
-                    <label asp-for="VolunteerInCampaign.Volunteer.Name" class="control-label"></label>
-                    <input asp-for="VolunteerInCampaign.Volunteer.Name" disabled class="form-control" />
-                    <span asp-validation-for="VolunteerInCampaign.VolunteerId" class="text-danger"></span>
-                </div>*@
+                <input type="hidden" asp-for="VolunteerInCampaign.RegistrationDate" />
+                <input type="hidden" asp-for="Volunteer.Name" />
+                <input type="hidden" asp-for="Volunteer.IdentityNumber" />
+                <input type="hidden" asp-for="Volunteer.Email" />
+                <input type="hidden" asp-for="Volunteer.DateOfBirth" />
+                <input type="hidden" asp-for="Volunteer.AddressDetails" />
+                <input type="hidden" asp-for="Volunteer.District" />
+                <input type="hidden" asp-for="Volunteer.City" />
+                <input type="hidden" asp-for="Volunteer.LastDonatedDate" />
                 
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.BloodType" class="control-label"></label>
@@ -268,10 +272,9 @@
                     <span asp-validation-for="VolunteerInCampaign.BloodAmount" class="text-danger"></span>
                 </div>
 
-                <input type="hidden" asp-for="VolunteerInCampaign.RegistrationDate" />
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.RegistrationDate" class="control-label"></label>
-                    <input data="VolunteerInCampaign.RegistrationDate" asp-for="VolunteerInCampaign.RegistrationDate" class="form-control" disabled />
+                    <input value="@Model.VolunteerInCampaign.RegistrationDate" class="form-control" disabled />
                     <span asp-validation-for="VolunteerInCampaign.RegistrationDate" class="text-danger"></span>
                 </div>
 
@@ -284,10 +287,10 @@
                 <div class="form-group col-md-4">
                     <label asp-for="VolunteerInCampaign.Status" class="control-label"></label>
                     <select asp-for="VolunteerInCampaign.Status" asp-items="ViewBag.Status" class="form-select" aria-label="Default select example">
-                        <option asp-for="VolunteerInCampaign.Status" value="Đã đăng ký">Đã đăng ký</option>
-                        <option asp-for="VolunteerInCampaign.Status" value="Hủy đăng ký">Hủy đăng ký</option>
-                        <option asp-for="VolunteerInCampaign.Status" value="Đã tham gia">Đã tham gia</option>
-                        <option asp-for="VolunteerInCampaign.Status" value="Quá hạn đăng ký">Quá hạn đăng ký</option>
+                        <option value="Đã đăng ký">Đã đăng ký</option>
+                        <option value="Hủy đăng ký">Hủy đăng ký</option>
+                        <option value="Đã tham gia">Đã tham gia</option>
+                        <option value="Quá hạn đăng ký">Quá hạn đăng ký</option>
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.Status" class="text-danger"></span>
                 </div>
@@ -302,18 +305,18 @@
                     <input style="padding: 8px 24px" type="submit" value="Lưu" class="btn btn-primary btn-save" />
                 </div>
 
-                <input type="hidden" asp-for="VolunteerInCampaign.VolunteerHealth.Id" />
-
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.Height" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.VolunteerHealth.Height" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.Height" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.Weight" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.VolunteerHealth.Weight" class="form-control" />
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.Weight" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="control-label"></label>
                     <select class="form-select" aria-label="Default select example" asp-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" >
@@ -323,6 +326,7 @@
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="control-label"></label>
                     <select class="form-select" aria-label="Default select example" asp-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus">
@@ -332,6 +336,7 @@
                     </select>
                     <span asp-validation-for="VolunteerInCampaign.VolunteerHealth.HaveHivvirus" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="control-label"></label>
                     <input asp-for="VolunteerInCampaign.VolunteerHealth.OtherDiseases" class="form-control" />
