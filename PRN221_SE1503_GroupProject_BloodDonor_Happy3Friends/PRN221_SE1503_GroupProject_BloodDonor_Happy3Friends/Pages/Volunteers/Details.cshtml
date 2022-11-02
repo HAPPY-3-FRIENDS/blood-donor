@@ -226,7 +226,7 @@
     @if (HttpContext.Session.GetString("role") != null && HttpContext.Session.GetString("role") == "Volunteer")
     {
         <div class="header-btn-back" style="margin-top: 24px;">
-            <a href="javascript: history.go(-1)"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
+            <a asp-page="/Index"><i class="bi bi-arrow-left-circle-fill btn-back"></i></a>
             <h3 class="header-back">Thông tin chiến dịch</h3>
         </div>
         <div class="row col-12" style="padding: 0px 24px; margin: 0 48px;">

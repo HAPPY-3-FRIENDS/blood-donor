@@ -56,7 +56,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Volunteers
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details");
         }
 
         private bool VolunteerExists(string id)
