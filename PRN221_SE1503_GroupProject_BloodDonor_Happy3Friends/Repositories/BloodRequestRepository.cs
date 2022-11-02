@@ -22,5 +22,9 @@ namespace Repositories
         public void UpdateBloodRequest(BloodRequest bloodRequest) => BloodRequestDAO.Instance.UpdateBloodRequest(bloodRequest);
 
         public void DeleteBloodRequest(int id) => BloodRequestDAO.Instance.DeleteBloodRequest(id);
+
+        public void ApproveBloodRequestById(int id) => BloodRequestDAO.Instance.ApproveBloodRequestById(id);
+
+        public void RejectBloodRequestById(int id) => BloodRequestDAO.Instance.RejectBloodRequestById(id);
     }
 }

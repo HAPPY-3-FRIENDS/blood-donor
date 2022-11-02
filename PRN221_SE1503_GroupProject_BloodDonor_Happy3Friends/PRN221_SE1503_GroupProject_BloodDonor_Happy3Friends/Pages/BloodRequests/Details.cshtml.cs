@@ -14,6 +14,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequest
             _bloodRequestRepository = bloodRequestRepository;
         }
 
+        [BindProperty]
         public BloodRequest BloodRequest { get; set; }
 
         public IActionResult OnGet(int id)
@@ -25,6 +26,18 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.BloodRequest
                 return NotFound();
             }
             return Page();
+        }
+
+        public IActionResult OnPostApprove()
+        {
+            _bloodRequestRepository.ApproveBloodRequestById(BloodRequest.Id);
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnPostReject()
+        {
+            _bloodRequestRepository.RejectBloodRequestById(BloodRequest.Id);
+            return RedirectToPage("./Index");
         }
 
         public IActionResult OnPostLogout()

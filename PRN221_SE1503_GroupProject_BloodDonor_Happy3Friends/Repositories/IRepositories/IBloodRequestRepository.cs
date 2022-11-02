@@ -15,5 +15,7 @@ namespace Repositories.IRepositories
         public void CreateBloodRequest(BloodRequest bloodRequest);
         public void UpdateBloodRequest(BloodRequest bloodRequest);
         public void DeleteBloodRequest(int id);
+        public void ApproveBloodRequestById(int id);
+        public void RejectBloodRequestById(int id);
     }
 }
