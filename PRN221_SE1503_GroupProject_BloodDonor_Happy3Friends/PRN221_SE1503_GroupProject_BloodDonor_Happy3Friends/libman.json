@@ -117,6 +117,16 @@
         "dist/browser/signalr.js",
         "dist/browser/signalr.min.js"
       ]
+    },
+    {
+      "library": "bootstrap-select@1.13.18",
+      "destination": "wwwroot/lib/bootstrap-select/",
+      "files": [
+        "dist/js/bootstrap-select.js",
+        "dist/css/bootstrap-select.css",
+        "dist/css/bootstrap-select.css.map",
+        "dist/css/bootstrap-select.min.css"
+      ]
     }
   ]
 }

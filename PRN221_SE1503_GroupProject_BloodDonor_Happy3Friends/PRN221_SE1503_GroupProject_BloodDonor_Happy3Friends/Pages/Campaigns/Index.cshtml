@@ -1,5 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Http
+@using System.Web
 @model PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.Campaigns.IndexModel
 
 @{
@@ -127,7 +128,7 @@
     {
         <script type="text/javascript">
             window.onload = function() {
-                swal("Lỗi", "Không thể xóa chiến dịch có tình nguyện viên đăng kí", "error");
+                swal("Lỗi", "@Html.Raw(HttpUtility.HtmlDecode(TempData["Error"].ToString()))", "error");
             };
         </script>
     }

@@ -103,7 +103,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The campaign does not exist!");
+                    throw new Exception("Chiến dịch không tồn tại.");
                 }
             }
             catch (Exception ex)
@@ -127,12 +127,12 @@ namespace DataAccessObjects
                     }
                     else
                     {
-                        throw new Exception("Can not remove campaign which have volunteer registered in its");
+                        throw new Exception("Không thể xóa chiến dịch có tình nguyện viên");
                     }
                 }
                 else
                 {
-                    throw new Exception("The campaign does not exist.");
+                    throw new Exception("Chiến dịch không tồn tại.");
                 }
             }
             catch (Exception ex)

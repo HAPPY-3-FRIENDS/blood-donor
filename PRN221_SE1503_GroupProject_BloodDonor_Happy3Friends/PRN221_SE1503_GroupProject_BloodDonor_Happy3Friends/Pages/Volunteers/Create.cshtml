@@ -11,13 +11,14 @@
         background-color: hsl(218, 41%, 15%);
         background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
     }
+
     .btn-action {
-            color: #31a9e1;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
+        color: #31a9e1;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
         .btn-action:hover {
             background-color: #37517E;
             color: #FFF;
@@ -191,6 +192,7 @@
                                         <option asp-for="Volunteer.District" value="Huyện Cần Giờ">Huyện Cần Giờ</option>
                                         <option asp-for="Volunteer.District" value="Huyện Hóc Môn">Huyện Hóc Môn</option>
                                         <option asp-for="Volunteer.District" value="Huyện Củ Chi">Huyện Củ Chi</option>
+                                        <option asp-for="Volunteer.District" value="Thành phố Thủ Đức">Thành phố Thủ Đức</option>
                                     </select>
                                     <span asp-validation-for="Volunteer.District" class="text-danger"></span>
                                 </div>
@@ -230,4 +232,4 @@ else
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }

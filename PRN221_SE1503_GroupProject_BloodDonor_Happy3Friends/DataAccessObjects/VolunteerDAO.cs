@@ -78,7 +78,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The Volunteer is already exist.");
+                    throw new Exception("Tình nguyện viên này không tồn tại.");
                 }
             }
             catch (Exception ex)
@@ -100,7 +100,7 @@ namespace DataAccessObjects
                 }
                 else
                 {
-                    throw new Exception("The volunteer does not exist!");
+                    throw new Exception("Tình nguyện viên này không tồn tại.");
                 }
             }
             catch (Exception ex)
