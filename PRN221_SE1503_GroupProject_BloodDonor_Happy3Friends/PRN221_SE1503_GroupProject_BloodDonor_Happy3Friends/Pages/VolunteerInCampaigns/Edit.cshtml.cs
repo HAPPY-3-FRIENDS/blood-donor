@@ -22,6 +22,7 @@ namespace PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends.Pages.VolunteerInC
         [BindProperty]
         public VolunteerInCampaign VolunteerInCampaign { get; set; }
 
+
         public IActionResult OnGet(int id)
         {
             VolunteerInCampaign = _volunteerInCampaignRepository.GetVolunteerInCampaignById(id);

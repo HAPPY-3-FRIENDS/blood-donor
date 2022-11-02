@@ -314,15 +314,41 @@
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
                         </dt>
                         <dd class="col-sm-6">
-                            @*<input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" id="flexCheckDisabled" disabled>*@
-                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus)
+                            @if (Model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus == null)
+                            {
+                                
+                            }
+                            else
+                            {
+                                if (Model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus.Value)
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@Model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" checked disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@Model.VolunteerInCampaign.VolunteerHealth.HaveHepatitisBvirus" disabled>
+                                }
+                            }
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus)
-                            @*<input class="form-check-input" type="checkbox" value="model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus" id="flexCheckDisabled" disabled>*@
+                            @if (Model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus == null)
+                            {
+                                
+                            }
+                            else
+                            {
+                                if (Model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus.Value)
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@Model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus" checked disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" value="@Model.VolunteerInCampaign.VolunteerHealth.HaveHivvirus" disabled>
+                                }
+                            }
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.VolunteerInCampaign.VolunteerHealth.OtherDiseases)
