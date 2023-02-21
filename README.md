@@ -21,14 +21,8 @@
 **1. Website for Volunteer**
 
 **2. Website for Organization**
-<div align="center">
-  <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/customer_mobile_login.png" alt="Customer Mobile Login" width="25%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/customer_mobile_home.png" alt="Customer Mobile Home" width="25%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/customer_mobile_order_history.png" alt="Customer Mobile Order History" width="25%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/customer_mobile_order_rating.png" alt="Customer Mobile Order Rating" width="25%"></img>
-</div>
 
 **3. Website for Admin**
-<div align="center">
-  <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/houseworker_mobile_login.png" alt="Houseworker Mobile Login" width="25%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/houseworker_mobile_home.png" alt="Houseworker Mobile Home" width="25%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/houseworker_mobile_order_receiving.png" alt="Houseworker Mobile Order Receiving" width="25%"></img> 
-</div>
   
 ## Technology
 **1. Frontend**
