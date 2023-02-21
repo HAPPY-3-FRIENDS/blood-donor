@@ -79,7 +79,7 @@
 1| -| [Main Project Folder](https://github.com/HAPPY-3-FRIENDS/blood-donor/tree/main/PRN221_SE1503_GroupProject_BloodDonor_Happy3Friends) | Main source code
 2| -| Database | Database Information
 -| 2.1| [Database Script](https://github.com/HAPPY-3-FRIENDS/blood-donor/blob/main/BloodDonorDB.sql) | SQL Scipt
--| 2.2| [Database Entity Relationship Diagram](https://raw.githubusercontent.com/fptu-team-404-not-found/co_tam_houseworker_mobile/main/document/imgs/ERD-PhysicalERD.png) | Database ERD
+-| 2.2| [Database Entity Relationship Diagram](https://github.com/HAPPY-3-FRIENDS/blood-donor/blob/main/BloodDonor-Document.pdf)) | Database ERD
 3| -| [Main Project Document](https://github.com/HAPPY-3-FRIENDS/blood-donor/blob/main/BloodDonor-Document.pdf) | Main source code
 
 ## Contributors
