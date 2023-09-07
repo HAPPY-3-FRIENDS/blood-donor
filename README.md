@@ -22,9 +22,21 @@
 
 **1. Website for Volunteer**
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/HAPPY-3-FRIENDS/blood-donor/main/UI/user-home.png" alt="User Home" width="48%"></img> &nbsp;&nbsp; <img src="https://raw.githubusercontent.com/HAPPY-3-FRIENDS/blood-donor/main/UI/user-booking.png" alt="User Booking" width="48%"></img> &nbsp;&nbsp; 
+</div>
+
 **2. Website for Organization**
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/HAPPY-3-FRIENDS/blood-donor/main/UI/hospital.png" alt="Hospital" width="98%"></img> &nbsp;&nbsp; 
+</div>
+
 **3. Website for Admin**
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/HAPPY-3-FRIENDS/blood-donor/main/UI/admin.png" alt="Admin" width="98%"></img> &nbsp;&nbsp; 
+</div>
   
 ## Technology
 **1. Frontend**
